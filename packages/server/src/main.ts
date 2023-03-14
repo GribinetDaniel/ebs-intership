@@ -16,6 +16,6 @@ server.use('/auth', auth);
 server.use('/account', account);
 server.use(middlewares);
 server.use(router);
-server.listen(3002, () => {
+server.listen(3003, () => {
   console.log('JSON Server is running');
 });

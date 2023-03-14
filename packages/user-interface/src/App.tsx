@@ -6,8 +6,7 @@ import {Routes, Route} from 'react-router-dom';
 import { UserContext } from './context/myContext';
 
 function App() {
-  const {isAuth, setIsAuth} = useContext(UserContext)
-  console.log(isAuth)
+  const {isAuth, setIsAuth, user} = useContext(UserContext)
   if (!isAuth)
     return (
       <div className="container">

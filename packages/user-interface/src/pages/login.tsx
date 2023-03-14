@@ -7,23 +7,30 @@ import { UserContext } from "../context/myContext";
 function Login(){
     
     const navigate = useNavigate();
-    const {isAuth, setIsAuth} = useContext(UserContext)
-    const [user, setUser] = useState({
+    const {isAuth, setIsAuth, user, setUser} = useContext(UserContext)
+    const [newUser, setNewUser] = useState({
         username: '',
         password: ''
     })
 
 
     const handleInput = (event: any) => {
-        setUser({...user, [event.target.name]: event.target.value})
+        setNewUser({...newUser, [event.target.name]: event.target.value})
     }
 
     async function handleSubmit (event: any){
         event.preventDefault();
         
-        mainAxios.post('/auth/login', user)
+        mainAxios.post('/auth/login', newUser)
         .then(response => {
             localStorage.setItem("token", response.data.token)
+        })
+        .then(() => {
+            mainAxios.get('/account', {headers: {
+                Authorization: localStorage.getItem("token")
+            }})
+            .then(response => setUser(response.data))
+            .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
         setIsAuth(true)

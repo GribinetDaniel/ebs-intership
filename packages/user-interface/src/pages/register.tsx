@@ -6,8 +6,8 @@ import { UserContext } from '../context/myContext';
 function Register() {
 
     const navigate = useNavigate();
-    const {isAuth, setIsAuth} = React.useContext(UserContext);
-    const [user, setUser] = useState({
+    const {isAuth, setIsAuth, user, setUser} = React.useContext(UserContext);
+    const [newUser, setNewUser] = useState({
         name: "",
         username: "",
         email: "",
@@ -16,13 +16,20 @@ function Register() {
     })
 
     const handleInput = (event: any) => {
-        setUser({...user, [event.target.name]: event.target.value})
+        setNewUser({...newUser, [event.target.name]: event.target.value})
     }
 
     async function handleSubmit(event: any) {
         event.preventDefault();
-        mainAxios.post('/auth/register', user)
+        mainAxios.post('/auth/register', newUser)
         .then(response => localStorage.setItem("token", response.data.token))
+        .then(() => {
+            mainAxios.get('/account', {headers: {
+                Authorization: localStorage.getItem("token")
+            }})
+            .then((response) => setUser(response.data))
+            .catch(err => console.log(err))
+        })
         .catch(err => console.log(err))
         setIsAuth(true);
         navigate('/')
