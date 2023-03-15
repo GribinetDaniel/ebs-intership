@@ -1,10 +1,7 @@
 import axios from 'axios';
-// import dotenv from 'dotenv';
-
-// dotenv.config();
 
 export const mainAxios = axios.create({
-  baseURL: 'http://localhost:3002/',
+  baseURL: process.env.REACT_APP_URL,
 });
 
 mainAxios.interceptors.request.use(function (config) {
