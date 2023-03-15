@@ -14,11 +14,11 @@ function Login(){
     })
 
 
-    const handleInput = (event: any) => {
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewUser({...newUser, [event.target.name]: event.target.value})
     }
 
-    async function handleSubmit (event: any){
+    async function handleSubmit (event: React.SyntheticEvent){
         event.preventDefault();
         try{
             const loginResponse = await (mainAxios.post('/auth/login', newUser))
