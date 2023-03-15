@@ -8,12 +8,12 @@ dotenv.config();
 const secret = process.env.SECRET!;
 const router = express.Router();
 
-router.use('/users', (req, res, next) => {
-  let token = req.headers.authorization!;
-  let decoded = jwt.verify(token, secret) as Token;
-  if (decoded.permission == 'admin') next();
-  else res.status(403).json({ message: 'Acces denied' });
-});
+// router.use('/users', (req, res, next) => {
+//   let token = req.headers.authorization!;
+//   let decoded = jwt.verify(token, secret) as Token;
+//   if (decoded.permission == 'admin') next();
+//   else res.status(403).json({ message: 'Acces denied' });
+// });
 
 router.post('/posts', async (req, res, next) => {
   let token = req.headers.authorization!;

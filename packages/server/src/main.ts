@@ -19,6 +19,6 @@ server.use('/account', account);
 server.use('/', perms);
 server.use(middlewares);
 server.use(router);
-server.listen(3003, () => {
+server.listen(port, () => {
   console.log('JSON Server is running');
 });

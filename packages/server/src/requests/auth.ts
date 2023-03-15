@@ -23,8 +23,8 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   let user: User = req.body;
-  await mainAxios.post('users', user);
-  let token = createToken(user);
+  let response = (await mainAxios.post('users', user)).data;
+  let token = createToken(response);
   res.json({ token });
 });
 

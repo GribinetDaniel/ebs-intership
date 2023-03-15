@@ -21,16 +21,15 @@ function Register() {
 
     async function handleSubmit(event: any) {
         event.preventDefault();
-        mainAxios.post('/auth/register', newUser)
-        .then(response => localStorage.setItem("token", response.data.token))
-        .then(() => {
-            mainAxios.get('/account', {headers: {
-                Authorization: localStorage.getItem("token")
-            }})
-            .then((response) => setUser(response.data))
-            .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err))
+        try {
+            const registerResponse = await mainAxios.post('/auth/register', newUser)
+            localStorage.setItem("token", registerResponse.data.token);
+            const accountResponse = await mainAxios.get('/account')
+            setUser(accountResponse.data);
+        }
+        catch(err) {
+            console.log(err)
+        }
         setIsAuth(true);
         navigate('/')
     }

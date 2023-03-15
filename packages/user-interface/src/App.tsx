@@ -7,23 +7,20 @@ import { UserContext } from './context/myContext';
 
 function App() {
   const {isAuth, setIsAuth, user} = useContext(UserContext)
-  if (!isAuth)
-    return (
-      <div className="container">
-        <Routes>
-          <Route path='/login' element = {<Login/>}></Route>
-          <Route path='/register' element = {<Register/>} ></Route>
-        </Routes>
-      </div>
-    );
-  else
-      return (
-        <div className="container">
-          <Routes>
-            <Route path = '/' element = {<Homepage/>}></Route>
-          </Routes>
-        </div>
-      )
+  return(
+    <div className='container'>
+    {isAuth ? (
+      <Routes>
+        <Route path='/' element={<Homepage/>}/>
+      </Routes>
+    ) : (
+      <Routes>
+        <Route path='/login' element = {<Login/>}/>
+        <Route path='/register' element = {<Register/>}/>
+      </Routes>
+    )}
+    </div>
+  )
 }
 
 export default App;

@@ -20,19 +20,15 @@ function Login(){
 
     async function handleSubmit (event: any){
         event.preventDefault();
-        
-        mainAxios.post('/auth/login', newUser)
-        .then(response => {
-            localStorage.setItem("token", response.data.token)
-        })
-        .then(() => {
-            mainAxios.get('/account', {headers: {
-                Authorization: localStorage.getItem("token")
-            }})
-            .then(response => setUser(response.data))
-            .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err))
+        try{
+            const loginResponse = await (mainAxios.post('/auth/login', newUser))
+            localStorage.setItem("token", loginResponse.data.token)
+            const accountResponse = await mainAxios.get('/account')
+            setUser(accountResponse.data)
+        }
+        catch(err) {
+            console.log(err)
+        }
         setIsAuth(true)
         navigate('/');
         
