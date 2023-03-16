@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import { mainAxios } from '../utils/mainAxios'
+import { mainAxios } from '../utils/main-axios'
 import {useNavigate, Link} from 'react-router-dom'
-import { UserContext } from '../context/myContext';
+import { UserContext } from '../context/user-context';
 
 function Register() {
 

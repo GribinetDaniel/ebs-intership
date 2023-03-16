@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserContext } from '../context/user-context'
+import { UserContext } from '../context/myContext'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'

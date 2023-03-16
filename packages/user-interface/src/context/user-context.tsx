@@ -1,7 +1,7 @@
 import React from 'react'
 import {User} from '../types/user'
 import { Post } from '../types/post';
-import { mainAxios } from '../utils/mainAxios';
+import { mainAxios } from '../utils/main-axios';
 
 export interface ContextInterface {
     isAuth: boolean,
@@ -76,7 +76,7 @@ export function UserContextProvider({children}: UserContextProviderProps){
             }
         }
         getUsers();
-    })
+    }, [])
 
     return <UserContext.Provider value={{isAuth, setIsAuth, user, setUser, posts, setPosts, users, setUsers}}>{children}</UserContext.Provider>
 }

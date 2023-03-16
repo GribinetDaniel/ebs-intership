@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import Login from './pages/login'
-import Register from './pages/register';
-import Homepage from './pages/homepage';
+import Login from './pages/Login'
+import Register from './pages/Register';
+import Homepage from './pages/HomePage';
 import { Routes, Route } from 'react-router-dom';
-import { UserContext } from './context/myContext';
-import { UserPosts } from './pages/userPosts'
-import {Users} from './pages/users'
+import { UserContext } from './context/user-context';
+import { UserPosts } from './pages/UserPosts'
+import {Users} from './pages/Users'
 
 function App() {
   const { isAuth, user } = useContext(UserContext)

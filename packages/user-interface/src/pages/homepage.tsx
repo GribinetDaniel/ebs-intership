@@ -1,8 +1,8 @@
 import React from 'react'
-import { UserContext } from '../context/myContext';
+import { UserContext } from '../context/user-context';
 import { Post } from '../types/post';
-import {Header} from '../components/header'
-import {PostCard} from '../components/postCard'
+import {Header} from '../components/Header'
+import {PostCard} from '../components/PostCard'
 import Container from 'react-bootstrap/Container'
 import CardGroup from 'react-bootstrap/CardGroup'
 

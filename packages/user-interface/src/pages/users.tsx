@@ -1,9 +1,9 @@
 import React from 'react'
-import { UserContext } from '../context/myContext'
-import { Header } from '../components/header'
+import { UserContext } from '../context/user-context'
+import { Header } from '../components/Header'
 import { Container } from 'react-bootstrap';
 import {User} from '../types/user'
-import { UserCard } from '../components/userCard'
+import { UserCard } from '../components/UserCard'
 
 export function Users() {
 
