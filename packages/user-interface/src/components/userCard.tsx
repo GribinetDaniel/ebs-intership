@@ -15,8 +15,10 @@ export function UserCard(props: User) {
                     Phone: {props.phone}<br/>
                     Permission: {props.permission}
                 </Card.Text>
-                <Button variant='primary'>Edit</Button>
             </Card.Body>
+            <Card.Footer>
+                <Button variant='primary'>Edit</Button>
+            </Card.Footer>
         </Card>
     )
 }
