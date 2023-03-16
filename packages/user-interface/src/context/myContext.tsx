@@ -6,18 +6,22 @@ import { mainAxios } from '../utils/mainAxios';
 export interface ContextInterface {
     isAuth: boolean,
     user: User | undefined,
+    users: User[] | undefined
     posts: Post[] | undefined,
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>,
     setUser: React.Dispatch<React.SetStateAction<User | undefined>>,
+    setUsers: React.Dispatch<React.SetStateAction<User[] | undefined>>,
     setPosts: React.Dispatch<React.SetStateAction<Post[] | undefined>>
 }
 
 export const userContextDefault: ContextInterface = {
     isAuth: false,
     user: undefined,
+    users: undefined,
     posts: [],
     setIsAuth: () => {},
     setUser: () => {},
+    setUsers: () => {},
     setPosts: () => {}
 }
 
@@ -31,6 +35,8 @@ export function UserContextProvider({children}: UserContextProviderProps){
     const [isAuth, setIsAuth] = React.useState(localStorage.getItem("token") != null)
     const [user, setUser] = React.useState<User>()
     const [posts, setPosts] = React.useState<Post[]>()
+    const [users, setUsers] = React.useState<User[]>()
+
 
     React.useEffect(() => {
         async function getUser() {
@@ -59,5 +65,18 @@ export function UserContextProvider({children}: UserContextProviderProps){
         getPosts();
     }, [])
 
-    return <UserContext.Provider value={{isAuth, setIsAuth, user, setUser, posts, setPosts}}>{children}</UserContext.Provider>
+    React.useEffect(() => {
+        async function getUsers() {
+            try {
+                const response = await mainAxios.get('/users')
+                setUsers(response.data)
+            }
+            catch(err) {
+                console.log(err)
+            }
+        }
+        getUsers();
+    })
+
+    return <UserContext.Provider value={{isAuth, setIsAuth, user, setUser, posts, setPosts, users, setUsers}}>{children}</UserContext.Provider>
 }

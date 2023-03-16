@@ -22,7 +22,7 @@ export function Header() {
                                 <NavDropdown.Item href='/'>All</NavDropdown.Item>
                                 <NavDropdown.Item href='/own-posts'>Own</NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link href="#">Users</Nav.Link>
+                            <Nav.Link href="/users">Users</Nav.Link>
                         </Nav>
                     )}
 
