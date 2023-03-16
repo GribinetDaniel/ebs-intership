@@ -4,11 +4,13 @@ import  Register  from './pages/register';
 import Homepage from './pages/homepage';
 import {Routes, Route} from 'react-router-dom';
 import { UserContext } from './context/myContext';
+import Container from 'react-bootstrap/Container'
 
 function App() {
   const {isAuth, setIsAuth, user} = useContext(UserContext)
   return(
-    <div className='container'>
+    // <Container>
+    <>
     {isAuth ? (
       <Routes>
         <Route path='/' element={<Homepage/>}/>
@@ -19,7 +21,8 @@ function App() {
         <Route path='/register' element = {<Register/>}/>
       </Routes>
     )}
-    </div>
+    {/* </Container> */}
+    </>
   )
 }
 

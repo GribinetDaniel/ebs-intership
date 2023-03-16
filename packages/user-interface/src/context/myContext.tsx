@@ -3,7 +3,7 @@ import {User} from '../types/user'
 import { Post } from '../types/post';
 import { mainAxios } from '../utils/mainAxios';
 
-export interface IUserInterface {
+export interface ContextInterface {
     isAuth: boolean,
     user: User | undefined,
     posts: Post[] | undefined,
@@ -12,7 +12,7 @@ export interface IUserInterface {
     setPosts: React.Dispatch<React.SetStateAction<Post[] | undefined>>
 }
 
-export const userContextDefault: IUserInterface = {
+export const userContextDefault: ContextInterface = {
     isAuth: false,
     user: undefined,
     posts: [],
@@ -21,7 +21,7 @@ export const userContextDefault: IUserInterface = {
     setPosts: () => {}
 }
 
-export const UserContext = React.createContext<IUserInterface>(userContextDefault);
+export const UserContext = React.createContext<ContextInterface>(userContextDefault);
 
 export interface UserContextProviderProps {
     children: React.ReactNode
@@ -35,9 +35,7 @@ export function UserContextProvider({children}: UserContextProviderProps){
     React.useEffect(() => {
         async function getUser() {
             try{
-                const response = await mainAxios.get('/account', {headers: {
-                    Authorization: localStorage.getItem("token")
-                }})
+                const response = await mainAxios.get('/account')
                 setUser(response.data)
             }
             catch(err){
@@ -51,9 +49,7 @@ export function UserContextProvider({children}: UserContextProviderProps){
     React.useEffect(() => {
         async function getPosts() {
             try{
-                const response = await mainAxios.get('/posts', {headers: {
-                    Authorization: localStorage.getItem("token")
-                }})
+                const response = await mainAxios.get('/posts')
                 setPosts(response.data)
             }
             catch(err){
