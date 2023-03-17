@@ -1,8 +1,6 @@
-import axios from 'axios';
 import { faker } from '@faker-js/faker';
-import { delay } from '../utils/delay';
-import { mainAxios } from '../utils/axios-instance';
-import { User } from '../types/user';
+import { mainAxios, delay } from '../../utils';
+import { User } from '../../types';
 main();
 
 async function main() {

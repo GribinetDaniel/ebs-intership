@@ -1,7 +1,6 @@
 import express from 'express';
-import { mainAxios } from '../utils/axios-instance';
-import { createToken } from '../utils/create-token';
-import { User } from '../types/user';
+import { mainAxios, createToken } from '../utils';
+import { User } from '../types';
 
 const router = express.Router();
 

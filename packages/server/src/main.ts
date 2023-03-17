@@ -1,9 +1,9 @@
 import jsonServer from 'json-server';
 import bodyParser from 'body-parser';
-import auth from './requests/auth';
-import account from './requests/account';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import auth from './requests/auth';
+import account from './requests/account';
 import perms from './requests/permission';
 
 dotenv.config();

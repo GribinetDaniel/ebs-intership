@@ -1,6 +1,6 @@
 export interface Token {
-    id: number,
-    permission: string,
-    iat: number,
-    exp: number
+  id: number;
+  permission: string;
+  iat: number;
+  exp: number;
 }

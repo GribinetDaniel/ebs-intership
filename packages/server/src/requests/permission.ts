@@ -1,10 +1,8 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import { Token } from '../types/token';
-import { mainAxios } from '../utils/axios-instance';
+import { Token } from '../types';
+import { mainAxios } from '../utils';
 
-dotenv.config();
 const secret = process.env.SECRET!;
 const router = express.Router();
 
