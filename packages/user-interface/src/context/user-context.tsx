@@ -37,7 +37,7 @@ export function UserContextProvider({children}: UserContextProviderProps){
     const [posts, setPosts] = React.useState<Post[]>()
     const [users, setUsers] = React.useState<User[]>()
 
-
+    
     React.useEffect(() => {
         async function getUser() {
             try{
