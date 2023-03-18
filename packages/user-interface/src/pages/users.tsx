@@ -1,24 +1,35 @@
 import React from 'react';
-import { UserContext } from '../context/user-context';
 import { Header } from '../components/Header';
 import { Container } from 'react-bootstrap';
 import { User } from '../types';
 import { UserCard } from '../components/UserCard';
+import { useQuery } from 'react-query';
+import { mainAxios } from '../utils';
+import { Loading } from '../components/Loading';
+import { ErrorPage } from '../components/ErrorPage';
 
 export function Users() {
-  const { users } = React.useContext(UserContext);
+  const { isLoading, error, data } = useQuery('users', () => {
+    return mainAxios.get('/users');
+  });
 
   return (
     <>
-      <Header />
-      <Container>
-        <h2>Users</h2>
-        <div className='row justify-content-center' style={{ gap: '80px' }}>
-          {users?.map((user: User, index) => (
-            <UserCard {...user} />
-          ))}
-        </div>
-      </Container>
+      {isLoading && <Loading />}
+      {error && <ErrorPage />}
+      {data && (
+        <>
+          <Header />
+          <Container>
+            <h2>Users</h2>
+            <div className='row justify-content-center' style={{ gap: '80px' }}>
+              {data?.data.map((user: User) => (
+                <UserCard {...user} />
+              ))}
+            </div>
+          </Container>
+        </>
+      )}
     </>
   );
 }
