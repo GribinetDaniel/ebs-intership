@@ -1,33 +1,25 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-page .error-image {
+  height: 700px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
-li {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: gray;
-}
-
-.lds-dual-ring {
+.loading .loading-element {
   display: inline-block;
   width: 80px;
   height: 80px;
 }
-.lds-dual-ring:after {
-  content: ' ';
+.loading .loading-element:after {
+  content: " ";
   display: block;
   width: 64px;
   height: 64px;
@@ -35,9 +27,9 @@ a {
   border-radius: 50%;
   border: 6px solid #000;
   border-color: #000 transparent #000 transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+  animation: loading-element 1.2s linear infinite;
 }
-@keyframes lds-dual-ring {
+@keyframes loading-element {
   0% {
     transform: rotate(0deg);
   }
@@ -45,3 +37,206 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #d2d0dd;
+}
+.login .left {
+  margin: 80px 0px 80px 50px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .left .items p {
+  color: gray;
+}
+.login .left .items label {
+  font-size: 15px;
+  margin-top: 10px;
+}
+.login .left .items input[type=text],
+.login .left .items input[type=password] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.login .left .items input[type=submit] {
+  width: 100%;
+  background-color: #7e56da;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px 0px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.login .left .items input[type=submit]:hover {
+  background-color: #764ed4;
+}
+.login .left .items a {
+  text-decoration: none;
+  color: #7e56da;
+}
+.login .left .items a:hover {
+  color: #3f0db4;
+}
+.login .right {
+  float: right;
+  width: 30%;
+  background-color: #f3f5f9;
+  margin: 80px 50px 80px 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.login .right .up {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.login .right .up .half-circle {
+  width: 250px;
+  height: 125px;
+  background-color: #7e56da;
+  align-self: flex-end;
+  border-top-left-radius: 125px;
+  border-top-right-radius: 125px;
+}
+.login .right .down {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.login .right .down .half-circle {
+  width: 250px;
+  height: 125px;
+  background-color: #7e56da;
+  border-bottom-left-radius: 125px;
+  border-bottom-right-radius: 125px;
+  filter: blur(15px);
+  -webkit-filter: blur(15px);
+}
+
+.register {
+  height: 100vh;
+  width: 100vw;
+  background-color: #d2d0dd;
+  display: flex;
+  justify-content: center;
+  float: left;
+}
+.register .left {
+  width: 30%;
+  margin: 80px 0px 80px 50px;
+  background-color: #f3f5f9;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.register .left .up {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+}
+.register .left .up .half-circle {
+  width: 250px;
+  height: 125px;
+  background-color: #7e56da;
+  align-self: flex-end;
+  border-top-left-radius: 125px;
+  border-top-right-radius: 125px;
+}
+.register .left .bottom {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+}
+.register .left .bottom .half-circle {
+  width: 250px;
+  height: 125px;
+  background-color: #7e56da;
+  border-bottom-left-radius: 125px;
+  border-bottom-right-radius: 125px;
+  filter: blur(15px);
+  -webkit-filter: blur(15px);
+}
+.register .right {
+  width: 70%;
+  margin: 80px 50px 80px 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register .right .items {
+  width: 100%;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+.register .right .items p {
+  color: gray;
+}
+.register .right .items .right-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  margin-left: 30px;
+  width: 30%;
+}
+.register .right .items .right-right {
+  width: 50%;
+  margin-right: 50px;
+}
+.register .right .items .right-right label {
+  font-size: 15px;
+  margin-top: 10px;
+}
+.register .right .items .right-right input[type=text],
+.register .right .items .right-right input[type=password] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.register .right .items .right-right input[type=submit] {
+  width: 100%;
+  background-color: #7e56da;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px 0px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.register .right .items .right-right input[type=submit]:hover {
+  background-color: #764ed4;
+}
+.register .right .items .right-right a {
+  text-decoration: none;
+  color: #7e56da;
+}
+.register .right .items .right-right a:hover {
+  color: #3f0db4;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import './styles/auth.css';
 import { mainAxios } from '../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/user-context';
@@ -31,28 +30,44 @@ function Login() {
   }
 
   return (
-    <div id='login'>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username:</label>
-        <input
-          type='text'
-          onChange={handleInput}
-          id='username'
-          name='username'
-          placeholder='Enter your username'
-        />
-        <label htmlFor='password'>Password:</label>
-        <input
-          type='password'
-          onChange={handleInput}
-          id='password'
-          name='password'
-          placeholder='Enter your password'
-        />
-        <span>Don't have an account</span>
-        <Link to='/register'>Sign up</Link>
-        <input type='submit' value='Submit' />
-      </form>
+    <div className='login'>
+      <div className='left'>
+        <div className='items'>
+          <h2>Welcome back</h2>
+          <p>Welcome back! Please enter our details</p>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor='username'>Username:</label>
+            <input
+              type='text'
+              id='username'
+              name='username'
+              placeholder='Enter your username'
+              onChange={handleInput}
+            />
+            <label htmlFor='password'>Password:</label>
+            <input
+              type='password'
+              id='password'
+              name='password'
+              placeholder='********'
+              onChange={handleInput}
+            />
+            <input type='submit' value='Sign In' />
+            <p className='subtitle'>
+              Don't have an account? <Link to={'/register'}>Sign Up</Link>
+            </p>
+          </form>
+        </div>
+      </div>
+      <div className='right'>
+        <div className='up'>
+          <div className='half-circle'></div>
+        </div>
+        <div className='down'>
+          <div className='half-circle'></div>
+        </div>
+        {/* <div className='circle'></div> */}
+      </div>
     </div>
   );
 }
