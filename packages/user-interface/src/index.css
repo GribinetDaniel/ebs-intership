@@ -239,4 +239,52 @@
   color: #3f0db4;
 }
 
+.navbar {
+  width: 13vw;
+  height: 100vh;
+  background-color: #fff;
+  align-items: flex-start;
+  position: fixed;
+}
+.navbar ul {
+  width: 100%;
+}
+.navbar li {
+  list-style-type: none;
+  margin-top: 50px;
+  width: 100%;
+}
+.navbar li:hover {
+  background-color: #f5f5f5;
+}
+.navbar svg {
+  width: 30px;
+  height: 24px;
+}
+.navbar span,
+.navbar a {
+  font-size: large;
+  padding-left: 10px;
+  text-decoration: none;
+  color: gray;
+}
+
+.content {
+  display: flex;
+  background-color: #f5f5f5;
+}
+
+.home-page {
+  width: 85vw;
+  margin-left: 13vw;
+  margin-top: 5vh;
+  float: right;
+  background-color: #f5f5f5;
+}
+.home-page h2 {
+  text-align: center;
+  margin-left: 5vw;
+  margin-bottom: 30px;
+}
+
 /*# sourceMappingURL=index.css.map */

@@ -18,17 +18,17 @@ export function Users() {
       {isLoading && <Loading />}
       {error && <ErrorPage />}
       {data && (
-        <>
+        <div className='content'>
           <Header />
-          <Container>
+          <div className='home-page'>
             <h2>Users</h2>
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {data?.data.map((user: User) => (
                 <UserCard {...user} />
               ))}
             </div>
-          </Container>
-        </>
+          </div>
+        </div>
       )}
     </>
   );

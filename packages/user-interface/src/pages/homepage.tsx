@@ -12,23 +12,23 @@ function Homepage() {
   const { data, isLoading, error } = useQuery('posts', () => {
     return mainAxios.get('/posts');
   });
-
+  const posts = data?.data;
   return (
     <>
       {isLoading && <Loading />}
       {error && <ErrorPage />}
       {data && (
-        <>
+        <div className='content'>
           <Header />
-          <Container>
-            <h2>Home page</h2>
+          <div className='home-page'>
+            <h2>{posts.length} posts</h2>
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {data?.data.map((post: Post) => (
                 <PostCard {...post} />
               ))}
             </div>
-          </Container>
-        </>
+          </div>
+        </div>
       )}
     </>
   );

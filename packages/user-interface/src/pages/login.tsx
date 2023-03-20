@@ -22,11 +22,13 @@ function Login() {
       localStorage.setItem('token', loginResponse.data.token);
       const accountResponse = await mainAxios.get('/account');
       setUser(accountResponse.data);
+      setIsAuth(true);
+      navigate('/');
     } catch (err) {
       console.log(err);
+      let inputs = document.querySelectorAll('input');
+      for (let i = 0; i < inputs.length; i++) inputs[i].value = '';
     }
-    setIsAuth(true);
-    navigate('/');
   }
 
   return (
@@ -66,7 +68,6 @@ function Login() {
         <div className='down'>
           <div className='half-circle'></div>
         </div>
-        {/* <div className='circle'></div> */}
       </div>
     </div>
   );

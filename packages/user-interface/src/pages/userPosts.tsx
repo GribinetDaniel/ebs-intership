@@ -22,17 +22,17 @@ export function UserPosts() {
       {isLoading && <Loading />}
       {error && <ErrorPage />}
       {data && (
-        <>
+        <div className='content'>
           <Header />
-          <Container>
-            <h2>Home page</h2>
+          <div className='home-page'>
+            <h2>{userPosts.length} Posts</h2>
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {userPosts?.map((post: Post) => (
                 <PostCard {...post} />
               ))}
             </div>
-          </Container>
-        </>
+          </div>
+        </div>
       )}
     </>
   );
