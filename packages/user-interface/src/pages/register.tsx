@@ -73,6 +73,13 @@ function Register() {
             )}
           </div>
           <div className='right-right'>
+            <div className='progress-bar'>
+              {currentStep === 0 ? (
+                <div className='progress-done' style={{ width: '55%' }}></div>
+              ) : (
+                <div className='progress-done' style={{ width: '100%' }}></div>
+              )}
+            </div>
             {currentStep === 0 && (
               <SignUp {...newUser} handleInput={handleInput} />
             )}
@@ -80,8 +87,12 @@ function Register() {
               <PersonalInfo {...newUser} handleInput={handleInput} />
             )}
             <div className='buttons'>
-              {currentStep === 1 && <button onClick={back}>Back</button>}
-              <button onClick={handleSubmit}>
+              {currentStep === 1 && (
+                <button className='button--secondary' onClick={back}>
+                  Back
+                </button>
+              )}
+              <button className='button--primary' onClick={handleSubmit}>
                 {currentStep === 0 ? 'Next' : 'Submit'}
               </button>
             </div>
