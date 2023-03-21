@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 export function PersonalInfo({ phone, city, street, suite, handleInput }: any) {
   return (
