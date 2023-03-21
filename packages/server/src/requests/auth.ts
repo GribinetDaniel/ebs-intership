@@ -1,7 +1,6 @@
 import express from 'express';
-import { mainAxios } from '../utils/axios-instance';
-import { createToken } from '../utils/create-token';
-import { User } from '../types/user';
+import { mainAxios, createToken } from '../utils';
+import { User } from '../types';
 
 const router = express.Router();
 
@@ -23,8 +22,8 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   let user: User = req.body;
-  await mainAxios.post('users', user);
-  let token = createToken(user);
+  let response = (await mainAxios.post('users', user)).data;
+  let token = createToken(response);
   res.json({ token });
 });
 

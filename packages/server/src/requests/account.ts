@@ -1,19 +1,21 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import { Token } from '../types/token';
-import { mainAxios } from '../utils/axios-instance';
+import { Token } from '../types';
+import { mainAxios } from '../utils';
 
-dotenv.config();
 const router = express.Router();
 const secret = process.env.SECRET!;
 
 router.get('/', async (req, res) => {
-  let token = req.headers.authorization!;
-  let decoded = jwt.verify(token, secret) as Token;
-  let id = decoded.id;
-  let user = (await mainAxios.get(`users/${id}`)).data;
-  res.json(user);
+  if (req.headers.authorization == null)
+    res.status(401).json({ message: 'Unauthenticated' });
+  else {
+    let token = req.headers.authorization;
+    let decoded = jwt.verify(token, secret) as Token;
+    let id = decoded.id;
+    let user = (await mainAxios.get(`users/${id}`)).data;
+    res.json(user);
+  }
 });
 
 router.patch('/', async (req, res) => {

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { User } from '../types/user';
+import { User } from '../types';
 
 dotenv.config();
 let secret = process.env.SECRET!;

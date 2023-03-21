@@ -1,8 +1,9 @@
 import jsonServer from 'json-server';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import cors from 'cors';
 import auth from './requests/auth';
 import account from './requests/account';
-import dotenv from 'dotenv';
 import perms from './requests/permission';
 
 dotenv.config();
@@ -11,6 +12,7 @@ const server = jsonServer.create();
 const router = jsonServer.router('src/db.json');
 const middlewares = jsonServer.defaults();
 
+server.use(cors());
 server.use(bodyParser.json());
 server.use('/auth', auth);
 server.use('/account', account);
