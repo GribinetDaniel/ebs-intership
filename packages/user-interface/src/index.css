@@ -137,6 +137,35 @@
   justify-content: center;
   float: left;
 }
+.register form {
+  width: 50%;
+}
+.register label {
+  font-size: 15px;
+  margin-top: 10px;
+}
+.register input[type=text],
+.register input[type=password] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.register input[type=submit] {
+  width: 100%;
+  background-color: #7e56da;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px 0px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.register input[type=submit]:hover {
+  background-color: #764ed4;
+}
 .register .left {
   width: 30%;
   margin: 80px 0px 80px 50px;
@@ -184,6 +213,22 @@
   align-items: center;
   justify-content: center;
 }
+.register .right .buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+}
+.register .right .buttons button {
+  width: 100%;
+  background-color: #7e56da;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px 0px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
 .register .right .items {
   width: 100%;
   display: flex;
@@ -205,31 +250,8 @@
   width: 50%;
   margin-right: 50px;
 }
-.register .right .items .right-right label {
-  font-size: 15px;
-  margin-top: 10px;
-}
-.register .right .items .right-right input[type=text],
-.register .right .items .right-right input[type=password] {
-  display: block;
+.register .right .items .right-right form {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.register .right .items .right-right input[type=submit] {
-  width: 100%;
-  background-color: #7e56da;
-  color: white;
-  padding: 10px 20px;
-  margin: 20px 0px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-.register .right .items .right-right input[type=submit]:hover {
-  background-color: #764ed4;
 }
 .register .right .items .right-right a {
   text-decoration: none;

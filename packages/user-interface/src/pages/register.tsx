@@ -2,17 +2,26 @@ import React, { useState } from 'react';
 import { mainAxios } from '../utils';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../context/user-context';
+import { useMultistepForm } from '../hooks/useMultistepForm';
+import { SignUp } from '../components/SignUp';
+import { PersonalInfo } from '../components/PersonalInfo';
 
 function Register() {
   const navigate = useNavigate();
-  const { isAuth, setIsAuth, user, setUser } = React.useContext(UserContext);
+  const { setIsAuth, setUser } = React.useContext(UserContext);
   const [newUser, setNewUser] = useState({
     name: '',
     username: '',
     email: '',
     password: '',
     permission: 'user',
+    city: '',
+    street: '',
+    suite: '',
+    phone: '',
   });
+
+  const { currentStep, next, back } = useMultistepForm();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
@@ -20,16 +29,22 @@ function Register() {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      const registerResponse = await mainAxios.post('/auth/register', newUser);
-      localStorage.setItem('token', registerResponse.data.token);
-      const accountResponse = await mainAxios.get('/account');
-      setUser(accountResponse.data);
-    } catch (err) {
-      console.log(err);
+    if (currentStep === 0) next();
+    else {
+      try {
+        const registerResponse = await mainAxios.post(
+          '/auth/register',
+          newUser
+        );
+        localStorage.setItem('token', registerResponse.data.token);
+        const accountResponse = await mainAxios.get('/account');
+        setUser(accountResponse.data);
+        setIsAuth(true);
+        navigate('/');
+      } catch (err) {
+        console.log(err);
+      }
     }
-    setIsAuth(true);
-    navigate('/');
   }
 
   return (
@@ -45,50 +60,31 @@ function Register() {
       <div className='right'>
         <div className='items'>
           <div className='right-left'>
-            <h2>Hello!</h2> <br />
-            <p>Hi! Please enter information to create an account</p>
+            {currentStep === 0 ? (
+              <>
+                <h2>Hello!</h2>
+                <p>Hi! Please enter information to create an account</p>
+              </>
+            ) : (
+              <>
+                <h2>Adress</h2>
+                <p>Enter some additional information about you</p>
+              </>
+            )}
           </div>
           <div className='right-right'>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor='name'>Name:</label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                placeholder='Enter your name'
-                onChange={handleInput}
-              />
-              <label htmlFor='username'>Username:</label>
-              <input
-                type='text'
-                id='username'
-                name='username'
-                placeholder='Enter your username'
-                onChange={handleInput}
-              />
-              <label htmlFor='email'>Email:</label>
-              <input
-                type='text'
-                name='email'
-                id='email'
-                placeholder='sample@mail.com'
-                onChange={handleInput}
-              />
-              <label htmlFor='password'>Password:</label>
-              <input
-                type='password'
-                id='password'
-                name='password'
-                placeholder='************'
-                onChange={handleInput}
-              />
-              <p>
-                Already have an account?
-                <Link to='/login'> Sign In</Link>
-              </p>
-
-              <input type='submit' value='Sign Up' />
-            </form>
+            {currentStep === 0 && (
+              <SignUp {...newUser} handleInput={handleInput} />
+            )}
+            {currentStep === 1 && (
+              <PersonalInfo {...newUser} handleInput={handleInput} />
+            )}
+            <div className='buttons'>
+              {currentStep === 1 && <button onClick={back}>Back</button>}
+              <button onClick={handleSubmit}>
+                {currentStep === 0 ? 'Next' : 'Submit'}
+              </button>
+            </div>
           </div>
         </div>
       </div>

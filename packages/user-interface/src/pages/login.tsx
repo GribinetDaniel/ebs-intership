@@ -26,8 +26,10 @@ function Login() {
       navigate('/');
     } catch (err) {
       console.log(err);
-      let inputs = document.querySelectorAll('input');
-      for (let i = 0; i < inputs.length; i++) inputs[i].value = '';
+      setNewUser({
+        username: '',
+        password: '',
+      });
     }
   }
 
@@ -44,6 +46,7 @@ function Login() {
               id='username'
               name='username'
               placeholder='Enter your username'
+              value={newUser.username}
               onChange={handleInput}
             />
             <label htmlFor='password'>Password:</label>
@@ -52,6 +55,7 @@ function Login() {
               id='password'
               name='password'
               placeholder='********'
+              value={newUser.password}
               onChange={handleInput}
             />
             <input type='submit' value='Sign In' />
