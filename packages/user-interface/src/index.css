@@ -144,8 +144,7 @@
   font-size: 15px;
   margin-top: 10px;
 }
-.register input[type=text],
-.register input[type=password] {
+.register .input {
   display: block;
   width: 100%;
   padding: 10px;

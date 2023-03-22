@@ -27,6 +27,10 @@ function Register() {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
   };
 
+  const cityInput = (value: any) => {
+    setNewUser({ ...newUser, city: value });
+  };
+
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     if (currentStep === 0) next();
@@ -46,7 +50,6 @@ function Register() {
       }
     }
   }
-
   return (
     <div className='register'>
       <div className='left'>
@@ -84,7 +87,11 @@ function Register() {
               <SignUp {...newUser} handleInput={handleInput} />
             )}
             {currentStep === 1 && (
-              <PersonalInfo {...newUser} handleInput={handleInput} />
+              <PersonalInfo
+                {...newUser}
+                handleInput={handleInput}
+                cityInput={cityInput}
+              />
             )}
             <div className='buttons'>
               {currentStep === 1 && (
