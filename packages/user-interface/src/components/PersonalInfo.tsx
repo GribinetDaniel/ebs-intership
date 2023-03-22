@@ -2,65 +2,66 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from './Input';
 import '../pages/Register/index.scss';
+import { useQuery } from 'react-query';
+import { Autocomplete, TextField } from '@mui/material';
+import { useFetchCities } from '../hooks/useFetchCities';
+export function PersonalInfo({
+  phone,
+  street,
+  suite,
+  handleInput,
+  cityInput,
+}: any) {
+  const { uniqueCities } = useFetchCities();
 
-export function PersonalInfo({ phone, city, street, suite, handleInput }: any) {
   return (
-    <form className='register__form'>
-      <label htmlFor='phone' className='register__label'>
-        Phone:
-      </label>
-      <Input
-        type='text'
-        name='phone'
-        id='phone'
-        placeholder='+1(XXX) XXX-XXXX'
-        className='auth__input'
-        value={phone}
-        onChange={handleInput}
-      />
-      <label htmlFor='city' className='register__label'>
-        City:
-      </label>
-      <Input
-        type='text'
-        name='city'
-        id='city'
-        placeholder='Chisinau'
-        className='auth__input'
-        value={city}
-        onChange={handleInput}
-      />
-      <label htmlFor='street' className='register__label'>
-        Street:
-      </label>
-      <Input
-        type='text'
-        name='street'
-        id='street'
-        placeholder='M. Eminescu 5'
-        className='auth__input'
-        value={street}
-        onChange={handleInput}
-      />
-      <label htmlFor='suite' className='register__label'>
-        Suite:
-      </label>
-      <Input
-        type='text'
-        name='suite'
-        id='suite'
-        placeholder='Apt.48'
-        className='auth__input'
-        value={suite}
-        onChange={handleInput}
-      />
-      <p className='register__text'>
-        Already have an account?
-        <Link to='/login' className='register__link'>
-          {' '}
-          Sign In
-        </Link>
-      </p>
-    </form>
+    <div className='items'>
+      <form>
+        <label htmlFor='phone'>Phone:</label>
+        <input
+          type='text'
+          name='phone'
+          id='phone'
+          className='input'
+          placeholder='+1(XXX) XXX-XXXX'
+          value={phone}
+          onChange={handleInput}
+        />
+        <label htmlFor=''>City</label>
+        <Autocomplete
+          sx={{ width: '100%', height: '70px' }}
+          id='combo-box-demo'
+          options={uniqueCities}
+          onInputChange={(event, value) => {
+            cityInput(value);
+          }}
+          renderInput={(params) => <TextField {...params} variant='outlined' />}
+        />
+        <label htmlFor='street'>Street:</label>
+        <input
+          type='text'
+          name='street'
+          id='street'
+          className='input'
+          placeholder='M. Eminescu 5'
+          value={street}
+          onChange={handleInput}
+        />
+        <label htmlFor='suite'>Suite:</label>
+        <input
+          type='text'
+          name='suite'
+          id='suite'
+          className='input'
+          placeholder='Apt.48'
+          value={suite}
+          onChange={handleInput}
+        />
+        <p>
+          Already have an account?
+          <Link to='/login'> Sign In</Link>
+        </p>
+      </form>
+    </div>
   );
 }

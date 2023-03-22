@@ -13,6 +13,7 @@ export function SignUp({ name, username, email, password, handleInput }: any) {
         type='text'
         id='name'
         name='name'
+        className='input'
         placeholder='Enter your name'
         className='auth__input'
         value={name}
@@ -25,6 +26,7 @@ export function SignUp({ name, username, email, password, handleInput }: any) {
         type='text'
         id='username'
         name='username'
+        className='input'
         placeholder='Enter your username'
         className='auth__input'
         value={username}
@@ -37,6 +39,7 @@ export function SignUp({ name, username, email, password, handleInput }: any) {
         type='text'
         name='email'
         id='email'
+        className='input'
         placeholder='sample@mail.com'
         className='auth__input'
         value={email}
@@ -49,6 +52,7 @@ export function SignUp({ name, username, email, password, handleInput }: any) {
         type='password'
         id='password'
         name='password'
+        className='input'
         placeholder='************'
         className='auth__input'
         value={password}
