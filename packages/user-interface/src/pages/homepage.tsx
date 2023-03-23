@@ -7,7 +7,7 @@ import { mainAxios } from '../utils';
 import { Loading } from '../components/Loading';
 import { ErrorPage } from '../components/ErrorPage';
 
-function Homepage() {
+export function Homepage() {
   const { data, isLoading, error } = useQuery('posts', () => {
     return mainAxios.get('/posts');
   });
@@ -32,5 +32,3 @@ function Homepage() {
     </>
   );
 }
-
-export default Homepage;

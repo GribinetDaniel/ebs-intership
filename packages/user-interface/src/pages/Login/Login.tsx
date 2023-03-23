@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { mainAxios } from '../../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
+import { Input } from '../../components/Input';
 import './index.scss';
 
 export function Login() {
@@ -44,7 +45,7 @@ export function Login() {
             <label htmlFor='username' className='login__label'>
               Username:
             </label>
-            <input
+            <Input
               type='text'
               id='username'
               name='username'
@@ -56,7 +57,7 @@ export function Login() {
             <label htmlFor='password' className='login__label'>
               Password:
             </label>
-            <input
+            <Input
               type='password'
               id='password'
               name='password'
