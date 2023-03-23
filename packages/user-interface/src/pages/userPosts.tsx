@@ -1,12 +1,12 @@
 import React from 'react';
 import { UserContext } from '../context/user-context';
 import { Post } from '../types';
-import { Header } from '../components/Header/Header';
+import { Header } from '../components/Header';
 import { PostCard } from '../components/PostCard';
 import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
-import { Loading } from '../components/Loading/Loading';
-import { ErrorPage } from '../components/ErrorPage/ErrorPage';
+import { Loading } from '../components/Loading';
+import { ErrorPage } from '../components/ErrorPage';
 
 export function UserPosts() {
   const { user } = React.useContext(UserContext);

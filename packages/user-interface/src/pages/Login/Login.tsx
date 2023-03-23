@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import './index.scss';
 
-function Login() {
+export function Login() {
   const navigate = useNavigate();
   const { isAuth, setIsAuth, user, setUser } = useContext(UserContext);
   const [newUser, setNewUser] = useState({
@@ -36,45 +36,57 @@ function Login() {
 
   return (
     <div className='login'>
-      <div className='login--left-part'>
-        <div className='login--items'>
+      <div className='login__left-part'>
+        <div>
           <h2>Welcome back</h2>
-          <p>Welcome back! Please enter our details</p>
+          <p className='login__text'>Welcome back! Please enter our details</p>
           <form onSubmit={handleSubmit}>
-            <label htmlFor='username'>Username:</label>
+            <label htmlFor='username' className='login__label'>
+              Username:
+            </label>
             <input
               type='text'
               id='username'
               name='username'
               placeholder='Enter your username'
+              className='login__input'
               value={newUser.username}
               onChange={handleInput}
             />
-            <label htmlFor='password'>Password:</label>
+            <label htmlFor='password' className='login__label'>
+              Password:
+            </label>
             <input
               type='password'
               id='password'
               name='password'
               placeholder='********'
+              className='login__input'
               value={newUser.password}
               onChange={handleInput}
             />
-            <input type='submit' value='Sign In' />
+            <input
+              type='submit'
+              value='Sign In'
+              className='login__input--submit'
+            />
             <p className='subtitle'>
-              Don't have an account? <Link to={'/register'}>Sign Up</Link>
+              Don't have an account?{' '}
+              <Link to={'/register'} className='login__link'>
+                Sign Up
+              </Link>
             </p>
           </form>
         </div>
       </div>
-      <div className='login--right-part'>
-        <div className='login--upper-half'>
-          <div className='half-circle'></div>
+      <div className='login__right-part'>
+        <div className='login__upper-half'>
+          <div className='login__upper-half--half-circle'></div>
         </div>
-        <div className='login--down-half'>
-          <div className='half-circle'></div>
+        <div className='login__down-half'>
+          <div className='login__down-half--half-circle'></div>
         </div>
       </div>
     </div>
   );
 }
-export default Login;

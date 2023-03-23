@@ -4,98 +4,97 @@
   display: flex;
   justify-content: center;
   background-color: #d2d0dd;
-}
 
-.login--left-part {
-  margin: 80px 0px 80px 50px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  width: 50%;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  &__left-part {
+    margin: 80px 0px 80px 50px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.login--items {
-  p {
+  &__right-part {
+    float: right;
+    width: 30%;
+    background-color: #f3f5f9;
+    margin: 80px 50px 80px 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  &__upper-half {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &--half-circle {
+      width: 250px;
+      height: 125px;
+      background-color: #7e56da;
+      align-self: flex-end;
+      border-top-left-radius: 125px;
+      border-top-right-radius: 125px;
+    }
+  }
+
+  &__down-half {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &--half-circle {
+      width: 250px;
+      height: 125px;
+      background-color: #7e56da;
+      border-bottom-left-radius: 125px;
+      border-bottom-right-radius: 125px;
+      filter: blur(15px);
+      -webkit-filter: blur(15px);
+    }
+  }
+
+  &__text {
     color: gray;
   }
-  label {
-    font-size: 15px;
-    margin-top: 10px;
-  }
-  input[type='text'],
-  input[type='password'] {
+
+  &__input {
     display: block;
     width: 100%;
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-  }
-  input[type='submit'] {
-    width: 100%;
-    background-color: #7e56da;
-    color: white;
-    padding: 10px 20px;
-    margin: 20px 0px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+
+    &--submit {
+      width: 100%;
+      background-color: #7e56da;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px 0px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #764ed4;
+      }
+    }
   }
 
-  input[type='submit']:hover {
-    background-color: #764ed4;
-  }
-
-  a {
+  &__link {
     text-decoration: none;
     color: #7e56da;
+
+    &:hover {
+      color: #3f0db4;
+    }
   }
 
-  a:hover {
-    color: #3f0db4;
-  }
-}
-
-.login--right-part {
-  float: right;
-  width: 30%;
-  background-color: #f3f5f9;
-  margin: 80px 50px 80px 0px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.login--upper-half {
-  height: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .half-circle {
-    width: 250px;
-    height: 125px;
-    background-color: #7e56da;
-    align-self: flex-end;
-    // border-radius: 100%;
-    border-top-left-radius: 125px;
-    border-top-right-radius: 125px;
-  }
-}
-
-.login--down-half {
-  height: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .half-circle {
-    width: 250px;
-    height: 125px;
-    background-color: #7e56da;
-    border-bottom-left-radius: 125px;
-    border-bottom-right-radius: 125px;
-    filter: blur(15px);
-    -webkit-filter: blur(15px);
+  &__label {
+    font-size: 15px;
+    margin-top: 10px;
   }
 }

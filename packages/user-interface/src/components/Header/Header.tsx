@@ -21,28 +21,44 @@ export function Header() {
 
   return (
     <div className='navbar'>
-      <ul>
-        <li>
-          <FontAwesomeIcon icon={faUser} size='xl' />
-          <Link to='/own-posts'>My Posts</Link>
+      <ul className='navbar__list'>
+        <li className='navbar__list-item'>
+          <FontAwesomeIcon icon={faUser} size='xl' className='navbar__icon' />
+          <Link to='/own-posts' className='navbar__text'>
+            My Posts
+          </Link>
         </li>
-        <li>
-          <FontAwesomeIcon icon={faUsers} size='xl' />
-          <Link to='/'>All Posts</Link>
+        <li className='navbar__list-item'>
+          <FontAwesomeIcon icon={faUsers} size='xl' className='navbar__icon' />
+          <Link to='/' className='navbar__text'>
+            All Posts
+          </Link>
         </li>
         {user?.permission === 'admin' && (
-          <li>
-            <FontAwesomeIcon icon={faUserGroup} size='xl' />
-            <Link to='/users'>Users</Link>
+          <li className='navbar__list-item'>
+            <FontAwesomeIcon
+              icon={faUserGroup}
+              size='xl'
+              className='navbar__icon'
+            />
+            <Link to='/users' className='navbar__text'>
+              Users
+            </Link>
           </li>
         )}
-        <li>
-          <FontAwesomeIcon icon={faGears} size='xl' />
-          <Link to='/account'>Settings</Link>{' '}
+        <li className='navbar__list-item'>
+          <FontAwesomeIcon icon={faGears} size='xl' className='navbar__icon' />
+          <Link to='/account' className='navbar__text'>
+            Settings
+          </Link>{' '}
         </li>
-        <li>
-          <FontAwesomeIcon icon={faRightFromBracket} size='xl' />
-          <Link to='/login' onClick={logout}>
+        <li className='navbar__list-item'>
+          <FontAwesomeIcon
+            icon={faRightFromBracket}
+            size='xl'
+            className='navbar__icon'
+          />
+          <Link to='/login' onClick={logout} className='navbar__text'>
             Logout
           </Link>
         </li>

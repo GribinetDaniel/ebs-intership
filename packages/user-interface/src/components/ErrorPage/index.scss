@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.error-page--image {
-  height: 700px;
+  &__image {
+    height: 700px;
+  }
 }

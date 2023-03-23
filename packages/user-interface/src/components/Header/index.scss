@@ -4,26 +4,25 @@
   background-color: #fff;
   align-items: flex-start;
   position: fixed;
-  ul {
+  &__list {
     width: 100%;
   }
-  li {
+  &__list-item {
     list-style-type: none;
     margin-top: 50px;
     width: 100%;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
   }
 
-  li:hover {
-    background-color: #f5f5f5;
-  }
-
-  svg {
+  &__icon {
     width: 30px;
     height: 24px;
   }
 
-  span,
-  a {
+  &__text {
     font-size: large;
     padding-left: 10px;
     text-decoration: none;
