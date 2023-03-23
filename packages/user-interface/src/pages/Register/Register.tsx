@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { mainAxios } from '../utils';
+import { mainAxios } from '../../utils';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserContext } from '../context/user-context';
-import { useMultistepForm } from '../hooks/useMultistepForm';
-import { SignUp } from '../components/SignUp';
-import { PersonalInfo } from '../components/PersonalInfo';
+import { UserContext } from '../../context/user-context';
+import { useMultistepForm } from '../../hooks/useMultistepForm';
+import { SignUp } from '../../components/SignUp';
+import { PersonalInfo } from '../../components/PersonalInfo';
+import './index.scss';
 
 function Register() {
   const navigate = useNavigate();
@@ -49,17 +50,17 @@ function Register() {
 
   return (
     <div className='register'>
-      <div className='left'>
-        <div className='up'>
+      <div className='register--left-part'>
+        <div className='register--upper-half'>
           <div className='half-circle'></div>
         </div>
-        <div className='bottom'>
+        <div className='register--bottom-half'>
           <div className='half-circle'></div>
         </div>
       </div>
-      <div className='right'>
-        <div className='items'>
-          <div className='right-left'>
+      <div className='register--right-part'>
+        <div className='register--items'>
+          <div className='register--right-left-part'>
             {currentStep === 0 ? (
               <>
                 <h2>Hello!</h2>
@@ -72,8 +73,8 @@ function Register() {
               </>
             )}
           </div>
-          <div className='right-right'>
-            <div className='progress-bar'>
+          <div className='register--right-right-part'>
+            <div className='register--progress-bar'>
               {currentStep === 0 ? (
                 <div className='progress-done' style={{ width: '55%' }}></div>
               ) : (
@@ -86,7 +87,7 @@ function Register() {
             {currentStep === 1 && (
               <PersonalInfo {...newUser} handleInput={handleInput} />
             )}
-            <div className='buttons'>
+            <div className='register--buttons'>
               {currentStep === 1 && (
                 <button className='button--secondary' onClick={back}>
                   Back

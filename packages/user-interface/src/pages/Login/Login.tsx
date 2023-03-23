@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { mainAxios } from '../utils/main-axios';
+import { mainAxios } from '../../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/user-context';
+import { UserContext } from '../../context/user-context';
+import './index.scss';
 
 function Login() {
   const navigate = useNavigate();
@@ -35,8 +36,8 @@ function Login() {
 
   return (
     <div className='login'>
-      <div className='left'>
-        <div className='items'>
+      <div className='login--left-part'>
+        <div className='login--items'>
           <h2>Welcome back</h2>
           <p>Welcome back! Please enter our details</p>
           <form onSubmit={handleSubmit}>
@@ -65,11 +66,11 @@ function Login() {
           </form>
         </div>
       </div>
-      <div className='right'>
-        <div className='up'>
+      <div className='login--right-part'>
+        <div className='login--upper-half'>
           <div className='half-circle'></div>
         </div>
-        <div className='down'>
+        <div className='login--down-half'>
           <div className='half-circle'></div>
         </div>
       </div>

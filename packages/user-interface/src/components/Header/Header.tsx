@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserContext } from '../context/user-context';
+import { UserContext } from '../../context/user-context';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,8 +8,8 @@ import {
   faUsers,
   faRightFromBracket,
   faUserGroup,
-  faCircleUser,
 } from '@fortawesome/free-solid-svg-icons';
+import './index.scss';
 export function Header() {
   const { user, setUser, isAuth, setIsAuth } = React.useContext(UserContext);
 
