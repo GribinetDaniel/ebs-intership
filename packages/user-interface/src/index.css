@@ -19,7 +19,7 @@
   height: 80px;
 }
 .loading .loading-element:after {
-  content: " ";
+  content: ' ';
   display: block;
   width: 64px;
   height: 64px;
@@ -46,7 +46,7 @@
   background-color: #d2d0dd;
 }
 .login .left {
-  margin: 80px 0px 80px 50px;
+  margin: 60px 0px 60px 50px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   width: 50%;
@@ -62,8 +62,8 @@
   font-size: 15px;
   margin-top: 10px;
 }
-.login .left .items input[type=text],
-.login .left .items input[type=password] {
+.login .left .items input[type='text'],
+.login .left .items input[type='password'] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -71,7 +71,7 @@
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-.login .left .items input[type=submit] {
+.login .left .items input[type='submit'] {
   width: 100%;
   background-color: #7e56da;
   color: white;
@@ -81,7 +81,7 @@
   border: none;
   cursor: pointer;
 }
-.login .left .items input[type=submit]:hover {
+.login .left .items input[type='submit']:hover {
   background-color: #764ed4;
 }
 .login .left .items a {
@@ -95,7 +95,7 @@
   float: right;
   width: 30%;
   background-color: #f3f5f9;
-  margin: 80px 50px 80px 0px;
+  margin: 60px 50px 60px 0px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -144,8 +144,8 @@
   font-size: 15px;
   margin-top: 10px;
 }
-.register input[type=text],
-.register input[type=password] {
+.register input[type='text'],
+.register input[type='password'] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -153,7 +153,7 @@
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-.register input[type=submit] {
+.register input[type='submit'] {
   width: 100%;
   background-color: #7e56da;
   color: white;
@@ -163,12 +163,12 @@
   border: none;
   cursor: pointer;
 }
-.register input[type=submit]:hover {
+.register input[type='submit']:hover {
   background-color: #764ed4;
 }
 .register .left {
   width: 30%;
-  margin: 80px 0px 80px 50px;
+  margin: 60px 0px 60px 50px;
   background-color: #f3f5f9;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -204,7 +204,7 @@
 }
 .register .right {
   width: 70%;
-  margin: 80px 50px 80px 0px;
+  margin: 60px 50px 60px 0px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   width: 50%;
@@ -241,6 +241,9 @@
   margin-right: 50px;
 }
 .register .right .items .right-right .progress-bar {
+  /* position: absolute; */
+
+  /* justify-content: flex-start; */
   background-color: #d8d8d8;
   border-radius: 20px;
   margin: 15px 0;

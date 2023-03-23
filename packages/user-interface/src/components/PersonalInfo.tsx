@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export function PersonalInfo({ phone, city, street, suite, handleInput }: any) {
+export function PersonalInfo({
+  phone,
+  city,
+  street,
+  suite,
+  handleInput,
+  zipcode,
+}: any) {
   return (
     <div className='items'>
       <form>
@@ -38,6 +45,14 @@ export function PersonalInfo({ phone, city, street, suite, handleInput }: any) {
           name='suite'
           id='suite'
           placeholder='Apt.48'
+          value={suite}
+          onChange={handleInput}
+        />
+        <label htmlFor='zipcode'>Zip Code:</label>
+        <input
+          type='text'
+          name='zipcode'
+          id='zipcode'
           value={suite}
           onChange={handleInput}
         />

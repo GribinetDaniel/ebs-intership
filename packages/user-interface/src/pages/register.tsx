@@ -14,14 +14,15 @@ function Register() {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     permission: 'user',
     city: '',
     street: '',
     suite: '',
+    zipcode: '',
     phone: '',
   });
-
-  const { currentStep, next, back } = useMultistepForm();
+  const { currentStep, next, back, setError } = useMultistepForm();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
@@ -29,8 +30,12 @@ function Register() {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    if (currentStep === 0) next();
-    else {
+    if (currentStep === 0) {
+      newUser.password === newUser.confirmPassword
+        ? next()
+        : setNewUser({ ...newUser, confirmPassword: '' });
+      setError();
+    } else {
       try {
         const registerResponse = await mainAxios.post(
           '/auth/register',
