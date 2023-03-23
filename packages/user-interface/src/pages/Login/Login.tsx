@@ -50,7 +50,7 @@ export function Login() {
               id='username'
               name='username'
               placeholder='Enter your username'
-              className='login__input'
+              className='auth__input'
               value={newUser.username}
               onChange={handleInput}
             />
@@ -62,14 +62,14 @@ export function Login() {
               id='password'
               name='password'
               placeholder='********'
-              className='login__input'
+              className='auth__input'
               value={newUser.password}
               onChange={handleInput}
             />
             <input
               type='submit'
               value='Sign In'
-              className='login__input--submit'
+              className='auth__input--submit'
             />
             <p className='subtitle'>
               Don't have an account?{' '}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Input } from './Input';
 import '../pages/Register/index.scss';
 
 export function SignUp({ name, username, email, password, handleInput }: any) {
@@ -8,48 +9,48 @@ export function SignUp({ name, username, email, password, handleInput }: any) {
       <label htmlFor='name' className='register__label'>
         Name:
       </label>
-      <input
+      <Input
         type='text'
         id='name'
         name='name'
         placeholder='Enter your name'
-        className='register__input'
+        className='auth__input'
         value={name}
         onChange={handleInput}
       />
       <label htmlFor='username' className='register__label'>
         Username:
       </label>
-      <input
+      <Input
         type='text'
         id='username'
         name='username'
         placeholder='Enter your username'
-        className='register__input'
+        className='auth__input'
         value={username}
         onChange={handleInput}
       />
       <label htmlFor='email' className='register__label'>
         Email:
       </label>
-      <input
+      <Input
         type='text'
         name='email'
         id='email'
         placeholder='sample@mail.com'
-        className='register__input'
+        className='auth__input'
         value={email}
         onChange={handleInput}
       />
       <label htmlFor='password' className='register__label'>
         Password:
       </label>
-      <input
+      <Input
         type='password'
         id='password'
         name='password'
         placeholder='************'
-        className='register__input'
+        className='auth__input'
         value={password}
         onChange={handleInput}
       />
