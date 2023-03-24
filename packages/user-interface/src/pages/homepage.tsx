@@ -20,7 +20,6 @@ export function Homepage() {
         <div className='content'>
           <Header />
           <div className='home-page'>
-            <h2>{posts.length} posts</h2>
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {data?.data.map((post: Post) => (
                 <PostCard {...post} />

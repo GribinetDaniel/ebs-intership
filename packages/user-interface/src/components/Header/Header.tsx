@@ -10,6 +10,7 @@ import {
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
+import { UserImage } from '../UserImage';
 export function Header() {
   const { user, setUser, isAuth, setIsAuth } = React.useContext(UserContext);
 
@@ -23,43 +24,62 @@ export function Header() {
     <div className='navbar'>
       <ul className='navbar__list'>
         <li className='navbar__list-item'>
-          <FontAwesomeIcon icon={faUser} size='xl' className='navbar__icon' />
-          <Link to='/own-posts' className='navbar__text'>
-            My Posts
+          <Link to={'/account'} className='navbar__link navbar__link--logo'>
+            <UserImage />
+            <span className='navbar__text--logo'>{user?.username}</span>
           </Link>
         </li>
         <li className='navbar__list-item'>
-          <FontAwesomeIcon icon={faUsers} size='xl' className='navbar__icon' />
-          <Link to='/' className='navbar__text'>
-            All Posts
+          <Link to={'/own-posts'} className='navbar__link'>
+            <FontAwesomeIcon icon={faUser} className='navbar__icon' />
+            <span className='navbar__text'>My Posts</span>
           </Link>
         </li>
-        {user?.permission === 'admin' && (
-          <li className='navbar__list-item'>
+        <li className='navbar__list-item'>
+          <Link to={'/'} className='navbar__link'>
             <FontAwesomeIcon
-              icon={faUserGroup}
+              icon={faUsers}
               size='xl'
               className='navbar__icon'
             />
-            <Link to='/users' className='navbar__text'>
-              Users
+            <span className='navbar__text'>All Posts</span>
+          </Link>
+        </li>
+        <li className='navbar__list-item'>
+          <Link to='/account' className='navbar__link'>
+            <FontAwesomeIcon
+              icon={faGears}
+              size='xl'
+              className='navbar__icon'
+            />
+            <span className='navbar__text'>Settings</span>
+          </Link>{' '}
+        </li>
+        {user?.permission === 'admin' && (
+          <li className='navbar__list-item'>
+            <Link to='/users' className='navbar__link'>
+              <FontAwesomeIcon
+                icon={faUserGroup}
+                size='xl'
+                className='navbar__icon'
+              />
+              <span className='navbar__text'>Users</span>
             </Link>
           </li>
         )}
-        <li className='navbar__list-item'>
-          <FontAwesomeIcon icon={faGears} size='xl' className='navbar__icon' />
-          <Link to='/account' className='navbar__text'>
-            Settings
-          </Link>{' '}
-        </li>
-        <li className='navbar__list-item'>
-          <FontAwesomeIcon
-            icon={faRightFromBracket}
-            size='xl'
-            className='navbar__icon'
-          />
-          <Link to='/login' onClick={logout} className='navbar__text'>
-            Logout
+        <li className='navbar__list-item navbar__logout'>
+          <Link
+            to='/login'
+            onClick={logout}
+            className='navbar__link'
+            // style={{ position: 'absolute', bottom: '0' }}
+          >
+            <FontAwesomeIcon
+              icon={faRightFromBracket}
+              size='xl'
+              className='navbar__icon'
+            />
+            <span className='navbar__text'>Logout</span>
           </Link>
         </li>
       </ul>

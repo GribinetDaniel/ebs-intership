@@ -1,31 +1,75 @@
 .navbar {
-  width: 13vw;
+  width: 100px;
   height: 100vh;
-  background-color: #fff;
+  background-color: #0c1e35;
   align-items: flex-start;
   position: fixed;
+  overflow: hidden;
+  z-index: 1;
+  &:hover {
+    width: 210px;
+    transition: all 0.5s ease;
+  }
+  &:not(:hover) {
+    transition: all 0.5s ease;
+  }
   &__list {
     width: 100%;
+    margin: 0;
+    padding: 0;
   }
+
   &__list-item {
+    display: flex;
     list-style-type: none;
     margin-top: 50px;
-    width: 100%;
-
+    width: 300px;
+    height: 30px;
+    align-items: center;
+    text-align: center;
     &:hover {
-      background-color: #f5f5f5;
+      a,
+      span {
+        color: #fff;
+      }
     }
   }
 
   &__icon {
-    width: 30px;
-    height: 24px;
+    width: 70px;
+    height: 20px;
   }
 
   &__text {
     font-size: large;
-    padding-left: 10px;
+    padding-left: 20px;
     text-decoration: none;
-    color: gray;
+    color: #7d84ab;
+    font-size: 20px;
+
+    &--logo {
+      text-transform: uppercase;
+      font-size: 25px;
+      font-weight: bold;
+      padding-left: 20px;
+    }
+  }
+
+  &__link {
+    color: #7d84ab;
+    padding: 10px;
+    text-decoration: none;
+
+    &--logo {
+      display: flex;
+      padding-bottom: 40px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__logout {
+    position: absolute;
+    bottom: 0;
   }
 }
