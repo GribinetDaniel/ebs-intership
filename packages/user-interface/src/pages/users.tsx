@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '../components/Header';
+import { Header } from '../components/Header/Header';
 import { Container } from 'react-bootstrap';
 import { User } from '../types';
 import { UserCard } from '../components/UserCard';

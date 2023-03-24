@@ -23,6 +23,12 @@ export function Register() {
     zipcode: '',
     phone: '',
   });
+  const [errors, setErrors] = useState({
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+  });
   const { currentStep, next, back, setError } = useMultistepForm();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {

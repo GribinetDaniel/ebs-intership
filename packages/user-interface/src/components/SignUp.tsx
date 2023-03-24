@@ -61,11 +61,14 @@ export function SignUp({
         value={password}
         onChange={handleInput}
       />
-      <label htmlFor='confirmPassword'>Confirm Password:</label>
+      <label htmlFor='confirmPassword' className='register__label'>
+        Confirm Password:
+      </label>
       <Input
         type='password'
         id='confirmPassword'
         name='confirmPassword'
+        className='auth__input'
         placeholder='************'
         value={confirmPassword}
         onChange={handleInput}
