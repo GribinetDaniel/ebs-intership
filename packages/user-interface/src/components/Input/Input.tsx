@@ -1,5 +1,14 @@
 import './index.scss';
-import { InputProps } from '../../types';
+
+export interface InputProps {
+  type?: string;
+  id?: string;
+  value?: string;
+  placeholder?: string;
+  name?: string;
+  className?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 export function Input({
   type,
