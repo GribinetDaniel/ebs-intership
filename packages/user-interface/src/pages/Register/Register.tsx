@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { mainAxios } from '../utils';
+import { mainAxios } from '../../utils';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserContext } from '../context/user-context';
-import { useMultistepForm } from '../hooks/useMultistepForm';
-import { SignUp } from '../components/SignUp';
-import { PersonalInfo } from '../components/PersonalInfo';
+import { UserContext } from '../../context/user-context';
+import { useMultistepForm } from '../../hooks/useMultistepForm';
+import { SignUp } from '../../components/SignUp';
+import { PersonalInfo } from '../../components/PersonalInfo';
+import './index.scss';
 
-function Register() {
+export function Register() {
   const navigate = useNavigate();
   const { setIsAuth, setUser } = React.useContext(UserContext);
   const [newUser, setNewUser] = useState({
@@ -54,17 +55,17 @@ function Register() {
 
   return (
     <div className='register'>
-      <div className='left'>
-        <div className='up'>
+      <div className='register__left-part'>
+        <div className='register__upper-half'>
           <div className='half-circle'></div>
         </div>
-        <div className='bottom'>
+        <div className='register__bottom-half'>
           <div className='half-circle'></div>
         </div>
       </div>
-      <div className='right'>
-        <div className='items'>
-          <div className='right-left'>
+      <div className='register__right-part'>
+        <div className='register__items'>
+          <div className='register__right-left-part'>
             {currentStep === 0 ? (
               <>
                 <h2>Hello!</h2>
@@ -77,12 +78,18 @@ function Register() {
               </>
             )}
           </div>
-          <div className='right-right'>
-            <div className='progress-bar'>
+          <div className='register__right-right-part'>
+            <div className='register__progress-bar'>
               {currentStep === 0 ? (
-                <div className='progress-done' style={{ width: '55%' }}></div>
+                <div
+                  className='register__progress-done'
+                  style={{ width: '55%' }}
+                ></div>
               ) : (
-                <div className='progress-done' style={{ width: '100%' }}></div>
+                <div
+                  className='register__progress-done'
+                  style={{ width: '100%' }}
+                ></div>
               )}
             </div>
             {currentStep === 0 && (
@@ -91,13 +98,16 @@ function Register() {
             {currentStep === 1 && (
               <PersonalInfo {...newUser} handleInput={handleInput} />
             )}
-            <div className='buttons'>
+            <div className='register__button'>
               {currentStep === 1 && (
-                <button className='button--secondary' onClick={back}>
+                <button className='register__button--secondary' onClick={back}>
                   Back
                 </button>
               )}
-              <button className='button--primary' onClick={handleSubmit}>
+              <button
+                className='register__button--primary'
+                onClick={handleSubmit}
+              >
                 {currentStep === 0 ? 'Next' : 'Submit'}
               </button>
             </div>
@@ -107,4 +117,3 @@ function Register() {
     </div>
   );
 }
-export default Register;

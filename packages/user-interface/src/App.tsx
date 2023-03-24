@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Homepage from './pages/Homepage';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Homepage } from './pages/Homepage';
 import { Routes, Route } from 'react-router-dom';
 import { UserContext } from './context/user-context';
 import { UserPosts } from './pages/UserPosts';
 import { Users } from './pages/Users';
 
-function App() {
+export function App() {
   const { isAuth, user } = useContext(UserContext);
   return (
     <>
@@ -28,5 +28,3 @@ function App() {
     </>
   );
 }
-
-export default App;
