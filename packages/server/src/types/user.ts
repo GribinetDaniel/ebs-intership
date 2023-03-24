@@ -24,6 +24,7 @@ export interface User {
   email: string;
   password: string;
   permission: string;
+  confirmPassword?: string;
   adress: Adress;
   phone: string;
   website: string;
