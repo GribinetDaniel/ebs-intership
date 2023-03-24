@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { mainAxios } from '../utils/main-axios';
+import { mainAxios } from '../../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/user-context';
+import { UserContext } from '../../context/user-context';
+import { Input } from '../../components/Input';
+import './index.scss';
 
-function Login() {
+export function Login() {
   const navigate = useNavigate();
   const { isAuth, setIsAuth, user, setUser } = useContext(UserContext);
   const [newUser, setNewUser] = useState({
@@ -35,45 +37,57 @@ function Login() {
 
   return (
     <div className='login'>
-      <div className='left'>
-        <div className='items'>
+      <div className='login__left-part'>
+        <div>
           <h2>Welcome back</h2>
-          <p>Welcome back! Please enter our details</p>
+          <p className='login__text'>Welcome back! Please enter our details</p>
           <form onSubmit={handleSubmit}>
-            <label htmlFor='username'>Username:</label>
-            <input
+            <label htmlFor='username' className='login__label'>
+              Username:
+            </label>
+            <Input
               type='text'
               id='username'
               name='username'
               placeholder='Enter your username'
+              className='auth__input'
               value={newUser.username}
               onChange={handleInput}
             />
-            <label htmlFor='password'>Password:</label>
-            <input
+            <label htmlFor='password' className='login__label'>
+              Password:
+            </label>
+            <Input
               type='password'
               id='password'
               name='password'
               placeholder='********'
+              className='auth__input'
               value={newUser.password}
               onChange={handleInput}
             />
-            <input type='submit' value='Sign In' />
+            <input
+              type='submit'
+              value='Sign In'
+              className='auth__input--submit'
+            />
             <p className='subtitle'>
-              Don't have an account? <Link to={'/register'}>Sign Up</Link>
+              Don't have an account?{' '}
+              <Link to={'/register'} className='login__link'>
+                Sign Up
+              </Link>
             </p>
           </form>
         </div>
       </div>
-      <div className='right'>
-        <div className='up'>
-          <div className='half-circle'></div>
+      <div className='login__right-part'>
+        <div className='login__upper-half'>
+          <div className='login__upper-half--half-circle'></div>
         </div>
-        <div className='down'>
-          <div className='half-circle'></div>
+        <div className='login__down-half'>
+          <div className='login__down-half--half-circle'></div>
         </div>
       </div>
     </div>
   );
 }
-export default Login;

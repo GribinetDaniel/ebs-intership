@@ -3,7 +3,6 @@ import { UserContext } from '../context/user-context';
 import { Post } from '../types';
 import { Header } from '../components/Header';
 import { PostCard } from '../components/PostCard';
-import Container from 'react-bootstrap/Container';
 import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
 import { Loading } from '../components/Loading';
