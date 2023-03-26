@@ -28,7 +28,7 @@ export function Register() {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
   };
 
-  const cityInput = (value: any) => {
+  const cityInput = (value: string) => {
     setNewUser({ ...newUser, city: value });
   };
 
@@ -51,6 +51,8 @@ export function Register() {
       }
     }
   }
+
+  console.log(newUser);
   return (
     <div className='register'>
       <div className='register__left-part'>

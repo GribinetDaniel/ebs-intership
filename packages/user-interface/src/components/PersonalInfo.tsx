@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from './Input';
 import '../pages/Register/index.scss';
-import { useQuery } from 'react-query';
-import { Autocomplete, TextField } from '@mui/material';
-import { useFetchCities } from '../hooks/useFetchCities';
+import { Autocomplete } from './Autocomplete';
 export function PersonalInfo({
   phone,
   street,
@@ -12,8 +10,6 @@ export function PersonalInfo({
   handleInput,
   cityInput,
 }: any) {
-  const { uniqueCities } = useFetchCities();
-
   return (
     <div className='items'>
       <form>
@@ -28,15 +24,8 @@ export function PersonalInfo({
           onChange={handleInput}
         />
         <label htmlFor=''>City</label>
-        <Autocomplete
-          sx={{ width: '100%', height: '70px' }}
-          id='combo-box-demo'
-          options={uniqueCities}
-          onInputChange={(event, value) => {
-            cityInput(value);
-          }}
-          renderInput={(params) => <TextField {...params} variant='outlined' />}
-        />
+        <Autocomplete className='input' cityInput={cityInput} />
+
         <label htmlFor='street'>Street:</label>
         <input
           type='text'
