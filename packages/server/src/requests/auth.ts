@@ -1,8 +1,7 @@
 import express from 'express';
 import { mainAxios, createToken } from '../utils';
 import { User } from '../types';
-import { body, validationResult, check } from 'express-validator';
-
+import { body, check, validationResult } from 'express-validator';
 const router = express.Router();
 
 router.post('/login', async (req, res) => {
@@ -23,11 +22,13 @@ router.post('/login', async (req, res) => {
 
 router.post(
   '/register',
-  body('email').custom(async (value) => {
-    let users = (await mainAxios.get('/users')).data;
-    let isUse = users.find((elem: User) => elem.email === value);
-    if (isUse) throw new Error('Email already in use');
-  }),
+  body('email')
+    .isEmail()
+    .custom(async (value) => {
+      let users = (await mainAxios.get('/users')).data;
+      let isUse = users.find((elem: User) => elem.email === value);
+      if (isUse) throw new Error('Email already in use');
+    }),
   body('password').isLength({ min: 5 }),
   body('username').custom(async (value) => {
     let users = (await mainAxios.get('/users')).data;

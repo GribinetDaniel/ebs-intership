@@ -7,6 +7,8 @@ import { SignUp } from '../../components/SignUp';
 import { PersonalInfo } from '../../components/PersonalInfo';
 import './index.scss';
 
+type Err = { [key: string]: string };
+
 export function Register() {
   const navigate = useNavigate();
   const { setIsAuth, setUser } = React.useContext(UserContext);
@@ -23,13 +25,10 @@ export function Register() {
     zipcode: '',
     phone: '',
   });
-  const [errors, setErrors] = useState({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
-  });
-  const { currentStep, next, back, setError } = useMultistepForm();
+  const [errors, setErrors] = useState({});
+
+  const { currentStep, setCurrentStep, next, back, setError } =
+    useMultistepForm();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
@@ -53,8 +52,14 @@ export function Register() {
         setUser(accountResponse.data);
         setIsAuth(true);
         navigate('/');
-      } catch (err) {
-        console.log(err);
+      } catch (err: any) {
+        let errs: Array<any> = [];
+        const obj: Err = {};
+        errs = err.response.data.errors;
+        errs.forEach((err) => (obj[err.param] = err.msg));
+        setErrors(obj);
+        if (obj.username || obj.name || obj.email || obj.password)
+          setCurrentStep(0);
       }
     }
   }
@@ -99,10 +104,14 @@ export function Register() {
               )}
             </div>
             {currentStep === 0 && (
-              <SignUp {...newUser} handleInput={handleInput} />
+              <SignUp {...newUser} handleInput={handleInput} errors={errors} />
             )}
             {currentStep === 1 && (
-              <PersonalInfo {...newUser} handleInput={handleInput} />
+              <PersonalInfo
+                {...newUser}
+                handleInput={handleInput}
+                erros={errors}
+              />
             )}
             <div className='register__button'>
               {currentStep === 1 && (

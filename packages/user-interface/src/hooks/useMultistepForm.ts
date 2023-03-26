@@ -26,5 +26,6 @@ export function useMultistepForm() {
     next,
     back,
     setError,
+    setCurrentStep,
   };
 }
