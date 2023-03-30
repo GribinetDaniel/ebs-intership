@@ -12,7 +12,7 @@ export function PersonalInfo({
 }: any) {
   return (
     <div className='items'>
-      <form>
+      <form autoComplete='off'>
         <label htmlFor='phone'>Phone:</label>
         <input
           type='text'

@@ -1,52 +1,50 @@
+import React from 'react';
 import { useFetchCities } from '../../hooks/useFetchCities';
 import './index.scss';
 import '../../index.css';
 
 export interface AutocompleteProps {
   className?: string;
-  cityInput: any;
-  // onChange?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
+  cityInput: (value: string) => void;
 }
 
 export function Autocomplete({ className, cityInput }: AutocompleteProps) {
   const { uniqueCities } = useFetchCities();
-  function autocomplete() {
-    let input = document.getElementById('cityInput') as HTMLInputElement;
-    let div = document.getElementById('cityDiv');
-    input?.addEventListener('input', function (this: any) {
-      closeList();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [input, setInput] = React.useState('');
 
-      if (!this.value) return;
+  let matchingCities = uniqueCities.filter((element) => {
+    return element.toUpperCase().includes(input.toUpperCase());
+  });
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value);
+  };
+  const cityClicked = (event: React.MouseEvent<HTMLInputElement>) => {
+    const element = event.target as HTMLElement;
+    cityInput(element.textContent!);
+    setInput(element.textContent!);
+    setIsOpen(false);
+  };
 
-      let suggestions = document.createElement('div');
-      suggestions.setAttribute('id', 'suggestions');
-      div?.appendChild(suggestions);
-
-      for (let i = 0; i < uniqueCities.length; i++) {
-        if (uniqueCities[i].toUpperCase().includes(input.value.toUpperCase())) {
-          let suggestion = document.createElement('div');
-          suggestion.setAttribute('id', 'sugestion');
-          suggestion.innerHTML = uniqueCities[i];
-          suggestion.addEventListener('click', function () {
-            cityInput(suggestion.innerHTML);
-            input!.value = suggestion.innerHTML;
-            closeList();
-          });
-          suggestion.style.cursor = 'pointer';
-          suggestions.appendChild(suggestion);
-        }
-      }
-
-      function closeList() {
-        let suggestions = document.getElementById('suggestions');
-        if (suggestions) suggestions?.parentNode?.removeChild(suggestions);
-      }
-    });
-  }
-  autocomplete();
   return (
-    <div id='cityDiv'>
-      <input type='text' className={className} id='cityInput' />
+    <div id='cityInput'>
+      <input
+        value={input}
+        type='text'
+        className={className}
+        id='cityInput'
+        onClick={() => setIsOpen(true)}
+        onChange={handleInput}
+      />
+      {isOpen && input && (
+        <div className='suggestions'>
+          {matchingCities?.map((city) => (
+            <div className='suggestion' onClick={cityClicked}>
+              {city}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

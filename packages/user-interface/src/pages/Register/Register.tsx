@@ -52,7 +52,6 @@ export function Register() {
     }
   }
 
-  console.log(newUser);
   return (
     <div className='register'>
       <div className='register__left-part'>
