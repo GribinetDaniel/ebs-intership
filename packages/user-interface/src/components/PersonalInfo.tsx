@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Autocomplete } from './Autocomplete';
-import axios from 'axios';
-import { useFetchCities } from '../hooks/useFetchCities';
 export function PersonalInfo({
   phone,
   street,
@@ -13,7 +11,7 @@ export function PersonalInfo({
 }: any) {
   return (
     <div className='items'>
-      <form>
+      <form autoComplete='off'>
         <label htmlFor='phone'>Phone:</label>
         <input
           type='text'

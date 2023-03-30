@@ -1,4 +1,4 @@
-#suggestions {
+.suggestions {
   background-color: #f4f2f2;
   position: absolute;
   z-index: 10;
@@ -8,18 +8,19 @@
   border-radius: 5px;
 }
 
-#sugestion {
+.suggestion {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   height: 30px;
   font-weight: 600;
-}
-#sugestion:hover {
-  background-color: #cfcccc;
+  cursor: pointer;
+  &:hover {
+    background-color: #cfcccc;
+  }
 }
 
-#cityDiv {
+#cityInput {
   position: relative;
 }
