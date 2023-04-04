@@ -19,7 +19,7 @@ export function Autocomplete({ className, cityInput }: AutocompleteProps) {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
-  const cityClicked = (event: React.MouseEvent<HTMLInputElement>) => {
+  const cityClicked = (event: React.MouseEvent) => {
     const element = event.target as HTMLElement;
     cityInput(element.textContent!);
     setInput(element.textContent!);
