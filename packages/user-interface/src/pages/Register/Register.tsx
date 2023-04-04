@@ -27,8 +27,7 @@ export function Register() {
   });
   const [errors, setErrors] = useState({});
 
-  const { currentStep, setCurrentStep, next, back, setError } =
-    useMultistepForm();
+  const { currentStep, setCurrentStep, next, back } = useMultistepForm();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
@@ -37,10 +36,11 @@ export function Register() {
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     if (currentStep === 0) {
-      newUser.password === newUser.confirmPassword
-        ? next()
-        : setNewUser({ ...newUser, confirmPassword: '' });
-      setError();
+      if (newUser.password === newUser.confirmPassword) next();
+      else {
+        setNewUser({ ...newUser, confirmPassword: '' });
+        setErrors({ ...errors, confirmPassword: "Password didn't match" });
+      }
     } else {
       try {
         const registerResponse = await mainAxios.post(
@@ -63,6 +63,8 @@ export function Register() {
       }
     }
   }
+  console.log(errors);
+  console.log(newUser.password, ' ', newUser.confirmPassword);
 
   return (
     <div className='register'>

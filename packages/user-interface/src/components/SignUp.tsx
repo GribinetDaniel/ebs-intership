@@ -94,9 +94,13 @@ export function SignUp({
         className='auth__input'
         placeholder='************'
         value={confirmPassword}
+        errors={errors.confirmPassword}
         onChange={handleInput}
       />
-      <span id='error-message'></span>
+      {errors.confirmPassword && (
+        <ErrorMessage error={errors.confirmPassword} />
+      )}
+      {/* <span id='error-message'></span> */}
       <p>
         Already have an account?
         <Link to='/login' className='register__link'>
