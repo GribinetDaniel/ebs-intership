@@ -1,4 +1,3 @@
-import React from 'react';
 import { Post } from '../types';
 import { Header } from '../components/Header';
 import { PostCard } from '../components/PostCard';

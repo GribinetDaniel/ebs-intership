@@ -1,7 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from './Input';
 import '../pages/Register/index.scss';
+
 import { Autocomplete } from './Autocomplete';
 export function PersonalInfo({
   phone,
@@ -9,6 +9,7 @@ export function PersonalInfo({
   suite,
   handleInput,
   cityInput,
+  addressInput,
 }: any) {
   return (
     <div className='items'>
@@ -34,7 +35,7 @@ export function PersonalInfo({
           className='input'
           placeholder='M. Eminescu 5'
           value={street}
-          onChange={handleInput}
+          onChange={addressInput}
         />
         <label htmlFor='suite'>Suite:</label>
         <input
@@ -44,7 +45,7 @@ export function PersonalInfo({
           className='input'
           placeholder='Apt.48'
           value={suite}
-          onChange={handleInput}
+          onChange={addressInput}
         />
         <p>
           Already have an account?
