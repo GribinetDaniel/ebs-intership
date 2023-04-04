@@ -15,9 +15,11 @@ function Register() {
     email: '',
     password: '',
     permission: 'user',
-    city: '',
-    street: '',
-    suite: '',
+    address: {
+      city: '',
+      street: '',
+      suite: '',
+    },
     phone: '',
   });
 
@@ -28,7 +30,14 @@ function Register() {
   };
 
   const cityInput = (value: string) => {
-    setNewUser({ ...newUser, city: value });
+    setNewUser({ ...newUser, address: { ...newUser.address, city: value } });
+  };
+
+  const addressInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({
+      ...newUser,
+      address: { ...newUser.address, [event.target.name]: event.target.value },
+    });
   };
 
   async function handleSubmit(event: React.SyntheticEvent) {
@@ -92,6 +101,7 @@ function Register() {
                 {...newUser}
                 handleInput={handleInput}
                 cityInput={cityInput}
+                addressInput={addressInput}
               />
             )}
             <div className='buttons'>
