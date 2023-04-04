@@ -2,6 +2,7 @@ import express from 'express';
 import { mainAxios, createToken } from '../utils';
 import { User } from '../types';
 import { body, check, validationResult } from 'express-validator';
+
 const router = express.Router();
 
 router.post('/login', async (req, res) => {

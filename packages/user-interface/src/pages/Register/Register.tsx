@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { mainAxios } from '../../utils';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SignUp } from '../../components/SignUp';
@@ -19,10 +19,11 @@ export function Register() {
     password: '',
     confirmPassword: '',
     permission: 'user',
-    city: '',
-    street: '',
-    suite: '',
-    zipcode: '',
+    address: {
+      city: '',
+      street: '',
+      suite: '',
+    },
     phone: '',
   });
   const [errors, setErrors] = useState({});
@@ -31,6 +32,17 @@ export function Register() {
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
+  };
+
+  const cityInput = (value: string) => {
+    setNewUser({ ...newUser, address: { ...newUser.address, city: value } });
+  };
+
+  const addressInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({
+      ...newUser,
+      address: { ...newUser.address, [event.target.name]: event.target.value },
+    });
   };
 
   async function handleSubmit(event: React.SyntheticEvent) {
@@ -112,7 +124,8 @@ export function Register() {
               <PersonalInfo
                 {...newUser}
                 handleInput={handleInput}
-                erros={errors}
+                cityInput={cityInput}
+                addressInput={addressInput}
               />
             )}
             <div className='register__button'>

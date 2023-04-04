@@ -32,8 +32,8 @@ export function SignUp({
         type='text'
         id='name'
         name='name'
-        placeholder='Enter your name'
         className='auth__input'
+        placeholder='Enter your name'
         value={name}
         onChange={handleInput}
         errors={errors.name}
@@ -46,8 +46,8 @@ export function SignUp({
         type='text'
         id='username'
         name='username'
-        placeholder='Enter your username'
         className='auth__input'
+        placeholder='Enter your username'
         value={username}
         onChange={handleInput}
         errors={errors.username}
@@ -61,8 +61,8 @@ export function SignUp({
         type='text'
         name='email'
         id='email'
-        placeholder='sample@mail.com'
         className='auth__input'
+        placeholder='sample@mail.com'
         value={email}
         onChange={handleInput}
         errors={errors.email}
