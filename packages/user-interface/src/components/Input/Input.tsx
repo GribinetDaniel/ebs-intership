@@ -8,6 +8,7 @@ export interface InputProps {
   name?: string;
   className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errors?: string;
 }
 
 export function Input({
@@ -18,7 +19,9 @@ export function Input({
   name,
   onChange,
   className,
+  errors,
 }: InputProps) {
+  errors && (className += ' error');
   return (
     <input
       type={type}

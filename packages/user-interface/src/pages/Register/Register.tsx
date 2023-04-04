@@ -7,6 +7,8 @@ import { SignUp } from '../../components/SignUp';
 import { PersonalInfo } from '../../components/PersonalInfo';
 import './index.scss';
 
+type Err = { [key: string]: string };
+
 export function Register() {
   const navigate = useNavigate();
   const { setIsAuth, setUser } = React.useContext(UserContext);
@@ -15,6 +17,7 @@ export function Register() {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     permission: 'user',
     address: {
       city: '',
@@ -23,8 +26,9 @@ export function Register() {
     },
     phone: '',
   });
+  const [errors, setErrors] = useState({});
 
-  const { currentStep, next, back } = useMultistepForm();
+  const { currentStep, setCurrentStep, next, back } = useMultistepForm();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
@@ -43,8 +47,13 @@ export function Register() {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    if (currentStep === 0) next();
-    else {
+    if (currentStep === 0) {
+      if (newUser.password === newUser.confirmPassword) next();
+      else {
+        setNewUser({ ...newUser, confirmPassword: '' });
+        setErrors({ ...errors, confirmPassword: "Password didn't match" });
+      }
+    } else {
       try {
         const registerResponse = await mainAxios.post(
           '/auth/register',
@@ -55,11 +64,19 @@ export function Register() {
         setUser(accountResponse.data);
         setIsAuth(true);
         navigate('/');
-      } catch (err) {
-        console.log(err);
+      } catch (err: any) {
+        let errs: Array<any> = [];
+        const obj: Err = {};
+        errs = err.response.data.errors;
+        errs.forEach((err) => (obj[err.param] = err.msg));
+        setErrors(obj);
+        if (obj.username || obj.name || obj.email || obj.password)
+          setCurrentStep(0);
       }
     }
   }
+  console.log(errors);
+  console.log(newUser.password, ' ', newUser.confirmPassword);
 
   return (
     <div className='register'>
@@ -101,7 +118,7 @@ export function Register() {
               )}
             </div>
             {currentStep === 0 && (
-              <SignUp {...newUser} handleInput={handleInput} />
+              <SignUp {...newUser} handleInput={handleInput} errors={errors} />
             )}
             {currentStep === 1 && (
               <PersonalInfo

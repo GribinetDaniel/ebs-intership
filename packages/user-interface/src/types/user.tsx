@@ -23,6 +23,7 @@ export interface User {
   username: string;
   email: string;
   password: string;
+  confirmPassword?: string;
   permission: string;
   adress: Adress;
   phone: string;
