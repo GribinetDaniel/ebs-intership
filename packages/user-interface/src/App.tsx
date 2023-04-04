@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Homepage } from './pages/Homepage';
-import { Routes, Route } from 'react-router-dom';
-
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserContext } from './context/user-context';
 import { UserPosts } from './pages/UserPosts';
 import { Users } from './pages/Users';
