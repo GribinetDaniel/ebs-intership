@@ -21,7 +21,7 @@ export function Input({
   className,
   errors,
 }: InputProps) {
-  errors && (className += ' error');
+  errors && (className += ' auth__input--error');
   return (
     <input
       type={type}
