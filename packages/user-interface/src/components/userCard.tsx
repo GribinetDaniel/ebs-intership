@@ -2,7 +2,12 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-export function UserCard({ user, setShowModal, setSelectedUser }: any) {
+export function UserCard({
+  user,
+  setShowModalEdit,
+  setSelectedUser,
+  setShowModalDelete,
+}: any) {
   return (
     <Card className='col-md-3'>
       <Card.Body>
@@ -16,11 +21,20 @@ export function UserCard({ user, setShowModal, setSelectedUser }: any) {
           Permission: {user.permission}
         </Card.Text>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer style={{ display: 'flex', gap: '170px' }}>
+        <Button
+          variant='secondary'
+          onClick={() => {
+            setShowModalDelete(true);
+            setSelectedUser(user);
+          }}
+        >
+          Delete
+        </Button>
         <Button
           variant='primary'
           onClick={() => {
-            setShowModal(true);
+            setShowModalEdit(true);
             setSelectedUser(user);
           }}
         >

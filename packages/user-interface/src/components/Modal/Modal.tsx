@@ -56,7 +56,8 @@ export function Modal({
     event.preventDefault();
     try {
       if (action === 'Edit') await mainAxios.patch(`/users/${id}`, modifedUser);
-      else await mainAxios.post('/users', modifedUser);
+      else if (action === 'Add') await mainAxios.post('/users', modifedUser);
+      else await mainAxios.delete(`/users/${id}`);
       setShowModal(false);
       queryClient.refetchQueries('users');
     } catch (err: any) {
@@ -67,110 +68,117 @@ export function Modal({
       setErrors(obj);
     }
   }
-
+  const className = `modal__content--${action}`;
   return (
     <div className='modal'>
-      <div className='modal__content'>
+      <div className={className}>
         <div className='modal__header'>{action} user</div>
         <div className='modal__body'>
-          <form autoComplete='off'>
-            <label className='modal__label'>Name</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='name'
-              id='name'
-              value={modifedUser.name}
-              onChange={handleInput}
-              errors={errors.name}
-            />
-            {errors.name && <ErrorMessage error={errors.name} />}
-            <label className='modal__label'>Username</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='username'
-              id='username'
-              value={modifedUser.username}
-              onChange={handleInput}
-              errors={errors.username}
-            />
-            {errors.username && <ErrorMessage error={errors.username} />}
-            {action === 'Add' && (
-              <>
-                <label className='modal__label'>Password</label>
-                <Input
-                  type='text'
-                  className='edit-user__input'
-                  name='password'
-                  id='passwword'
-                  value={modifedUser.password}
-                  onChange={handleInput}
-                  errors={errors.password}
-                />
-                {errors.username && <ErrorMessage error={errors.password} />}
-              </>
-            )}
-            <label className='modal__label'>Email</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='email'
-              id='email'
-              value={modifedUser.email}
-              onChange={handleInput}
-              errors={errors.email}
-            />
-            {errors.email && <ErrorMessage error={errors.email} />}
+          {(action === 'Add' || action === 'Edit') && (
+            <form autoComplete='off'>
+              <label className='modal__label'>Name</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='name'
+                id='name'
+                value={modifedUser.name}
+                onChange={handleInput}
+                errors={errors.name}
+              />
+              {errors.name && <ErrorMessage error={errors.name} />}
+              <label className='modal__label'>Username</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='username'
+                id='username'
+                value={modifedUser.username}
+                onChange={handleInput}
+                errors={errors.username}
+              />
+              {errors.username && <ErrorMessage error={errors.username} />}
+              {action === 'Add' && (
+                <>
+                  <label className='modal__label'>Password</label>
+                  <Input
+                    type='text'
+                    className='edit-user__input'
+                    name='password'
+                    id='passwword'
+                    value={modifedUser.password}
+                    onChange={handleInput}
+                    errors={errors.password}
+                  />
+                  {errors.username && <ErrorMessage error={errors.password} />}
+                </>
+              )}
+              <label className='modal__label'>Email</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='email'
+                id='email'
+                value={modifedUser.email}
+                onChange={handleInput}
+                errors={errors.email}
+              />
+              {errors.email && <ErrorMessage error={errors.email} />}
 
-            <label className='modal__label'>Street</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='street'
-              id='street'
-              value={modifedUser.address.street}
-              onChange={addressInput}
-            />
-            <label className='modal__label'>Suite</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='suite'
-              id='suite'
-              value={modifedUser.address.suite}
-              onChange={addressInput}
-            />
-            <label className='modal__label'>City</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='city'
-              id='city'
-              value={modifedUser.address.city}
-              onChange={addressInput}
-            />
-            <label className='modal__label'>Phone</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='phone'
-              id='phone'
-              value={modifedUser.phone}
-              onChange={handleInput}
-            />
-            <label className='modal__label'>Permission</label>
-            <Input
-              type='text'
-              className='edit-user__input'
-              name='permission'
-              id='permission'
-              value={modifedUser.permission}
-              onChange={handleInput}
-              errors={errors.permission}
-            />
-            {errors.permission && <ErrorMessage error={errors.permission} />}
-          </form>
+              <label className='modal__label'>Street</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='street'
+                id='street'
+                value={modifedUser.address.street}
+                onChange={addressInput}
+              />
+              <label className='modal__label'>Suite</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='suite'
+                id='suite'
+                value={modifedUser.address.suite}
+                onChange={addressInput}
+              />
+              <label className='modal__label'>City</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='city'
+                id='city'
+                value={modifedUser.address.city}
+                onChange={addressInput}
+              />
+              <label className='modal__label'>Phone</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='phone'
+                id='phone'
+                value={modifedUser.phone}
+                onChange={handleInput}
+              />
+              <label className='modal__label'>Permission</label>
+              <Input
+                type='text'
+                className='edit-user__input'
+                name='permission'
+                id='permission'
+                value={modifedUser.permission}
+                onChange={handleInput}
+                errors={errors.permission}
+              />
+              {errors.permission && <ErrorMessage error={errors.permission} />}
+            </form>
+          )}
+          {action === 'Delete' && (
+            <div className='modal__confirm-text'>
+              Are you sure you want to delete the user?
+            </div>
+          )}
         </div>
         <div className='modal__button'>
           <button

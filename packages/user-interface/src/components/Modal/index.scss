@@ -7,7 +7,8 @@
   width: 100vw;
   height: 100vh;
 
-  &__content {
+  &__content--Add,
+  &__content--Edit {
     width: 600px;
     height: 500px;
     background-color: #fff;
@@ -15,6 +16,13 @@
     flex-direction: column;
   }
 
+  &__content--Delete {
+    width: 600px;
+    height: 200px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
   &__header {
     display: block;
     width: 100%;
@@ -41,7 +49,7 @@
       background-color: #7e56da;
       color: white;
       padding: 10px 20px;
-      margin: 20px 30px;
+      margin: 0px 30px 20px 30px;
       border-radius: 5px;
       border: none;
       cursor: pointer;
@@ -54,7 +62,7 @@
     &--secondary {
       width: 100%;
       padding: 10px 20px;
-      margin: 20px 30px;
+      margin: 0px 30px 20px 30px;
       border-radius: 5px;
       border-color: #9675e4;
       border-width: 1px;
@@ -71,5 +79,11 @@
   &__label {
     font-size: 15px;
     margin-top: 10px;
+  }
+
+  &__confirm-text {
+    font-size: 18px;
+    // font-weight: bold;
+    text-align: center;
   }
 }

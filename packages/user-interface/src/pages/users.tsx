@@ -16,6 +16,7 @@ export function Users() {
 
   const [showModalEdit, setShowModalEdit] = React.useState(false);
   const [showModalAdd, setShowModalAdd] = React.useState(false);
+  const [showModalDelete, setShowModalDelete] = React.useState(false);
   const [selectedUser, setSelectedUser] = React.useState({
     name: '',
     username: '',
@@ -43,7 +44,8 @@ export function Users() {
               {data?.data.map((user: User) => (
                 <UserCard
                   user={user}
-                  setShowModal={setShowModalEdit}
+                  setShowModalEdit={setShowModalEdit}
+                  setShowModalDelete={setShowModalDelete}
                   setSelectedUser={setSelectedUser}
                 />
               ))}
@@ -64,6 +66,14 @@ export function Users() {
               setSelectedUser={setSelectedUser}
               setShowModal={setShowModalAdd}
               action='Add'
+            />
+          )}
+          {showModalDelete && (
+            <Modal
+              {...selectedUser}
+              setSelectedUser={setSelectedUser}
+              action='Delete'
+              setShowModal={setShowModalDelete}
             />
           )}
         </div>
