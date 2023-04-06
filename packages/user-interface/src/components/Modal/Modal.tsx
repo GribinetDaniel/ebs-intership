@@ -1,7 +1,9 @@
 import React from 'react';
 import { mainAxios } from '../../utils';
 import { Input } from '../Input';
+import { ErrorMessage } from '../ErrorMessage';
 import './index.scss';
+
 export function Modal({
   setShowModal,
   name,
@@ -20,6 +22,14 @@ export function Modal({
     address,
     phone,
     permission,
+    id,
+  });
+
+  const [errors, setErrors] = React.useState({
+    name: '',
+    username: '',
+    permission: '',
+    email: '',
   });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,11 +49,16 @@ export function Modal({
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     try {
+      console.log(id);
       await mainAxios.patch(`/users/${id}`, modifedUser);
       setShowModal(false);
       refetch();
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      let errs: Array<any> = [];
+      const obj: any = {};
+      errs = err.response.data.errors;
+      errs.forEach((err) => (obj[err.param] = err.msg));
+      setErrors(obj);
     }
   }
 
@@ -61,7 +76,9 @@ export function Modal({
               id='name'
               value={modifedUser.name}
               onChange={handleInput}
+              errors={errors.name}
             />
+            {errors.name && <ErrorMessage error={errors.name} />}
             <label className='modal__label'>Username</label>
             <Input
               type='text'
@@ -70,16 +87,21 @@ export function Modal({
               id='username'
               value={modifedUser.username}
               onChange={handleInput}
+              errors={errors.username}
             />
+            {errors.username && <ErrorMessage error={errors.username} />}
             <label className='modal__label'>Email</label>
             <Input
               type='text'
               className='edit-user__input'
-              name='Email'
-              id='Email'
+              name='email'
+              id='email'
               value={modifedUser.email}
               onChange={handleInput}
+              errors={errors.email}
             />
+            {errors.email && <ErrorMessage error={errors.email} />}
+
             <label className='modal__label'>Street</label>
             <Input
               type='text'
@@ -124,7 +146,9 @@ export function Modal({
               id='permission'
               value={modifedUser.permission}
               onChange={handleInput}
+              errors={errors.permission}
             />
+            {errors.permission && <ErrorMessage error={errors.permission} />}
           </form>
         </div>
         <div className='modal__button'>
