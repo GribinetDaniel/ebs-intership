@@ -3,6 +3,7 @@ import { mainAxios } from '../../utils';
 import { Input } from '../Input';
 import { ErrorMessage } from '../ErrorMessage';
 import './index.scss';
+import { useQueryClient } from 'react-query';
 
 export function Modal({
   setShowModal,
@@ -14,7 +15,6 @@ export function Modal({
   phone,
   permission,
   id,
-  refetch,
   action,
 }: any) {
   const [modifedUser, setModifedUser] = React.useState({
@@ -50,13 +50,15 @@ export function Modal({
     });
   };
 
+  const queryClient = useQueryClient();
+
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     try {
       if (action === 'Edit') await mainAxios.patch(`/users/${id}`, modifedUser);
       else await mainAxios.post('/users', modifedUser);
       setShowModal(false);
-      refetch();
+      queryClient.refetchQueries('users');
     } catch (err: any) {
       let errs: Array<any> = [];
       const obj: any = {};

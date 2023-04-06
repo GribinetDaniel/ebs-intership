@@ -10,7 +10,7 @@ import { Modal } from '../components/Modal';
 import { PlusButton } from '../components/PlusButton';
 
 export function Users() {
-  const { isLoading, error, data, refetch } = useQuery('users', () => {
+  const { isLoading, error, data } = useQuery('users', () => {
     return mainAxios.get('/users');
   });
 
@@ -54,14 +54,12 @@ export function Users() {
               {...selectedUser}
               setShowModal={setShowModalEdit}
               setSelectedUser={setSelectedUser}
-              refetch={refetch}
               action='Edit'
             />
           )}
           <PlusButton setShowModalAdd={setShowModalAdd} />
           {showModalAdd && (
             <Modal
-              refetch={refetch}
               {...selectedUser}
               setSelectedUser={setSelectedUser}
               setShowModal={setShowModalAdd}
