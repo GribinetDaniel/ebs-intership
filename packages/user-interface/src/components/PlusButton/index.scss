@@ -1,0 +1,32 @@
+.plus {
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  background-color: #fff;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  font-size: 100px;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(94, 94, 94, 0.68);
+  display: flex;
+  justify-content: center;
+  line-height: 69px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  &__text {
+    background-color: red;
+
+    background-image: linear-gradient(45deg, #f3ec78, #af4261);
+
+    background-size: 100%;
+    background-repeat: repeat;
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -moz-text-fill-color: transparent;
+  }
+}

@@ -7,14 +7,28 @@ import { mainAxios } from '../utils';
 import { Loading } from '../components/Loading';
 import { ErrorPage } from '../components/ErrorPage/ErrorPage';
 import { Modal } from '../components/Modal';
+import { PlusButton } from '../components/PlusButton';
 
 export function Users() {
   const { isLoading, error, data, refetch } = useQuery('users', () => {
     return mainAxios.get('/users');
   });
 
-  const [showModal, setShowModal] = React.useState(false);
-  const [selectedUser, setSelectedUser] = React.useState({});
+  const [showModalEdit, setShowModalEdit] = React.useState(false);
+  const [showModalAdd, setShowModalAdd] = React.useState(false);
+  const [selectedUser, setSelectedUser] = React.useState({
+    name: '',
+    username: '',
+    email: '',
+    phone: '',
+    password: '',
+    permission: '',
+    address: {
+      street: '',
+      suite: '',
+      city: '',
+    },
+  });
 
   return (
     <>
@@ -29,17 +43,29 @@ export function Users() {
               {data?.data.map((user: User) => (
                 <UserCard
                   user={user}
-                  setShowModal={setShowModal}
+                  setShowModal={setShowModalEdit}
                   setSelectedUser={setSelectedUser}
                 />
               ))}
             </div>
           </div>
-          {showModal && (
+          {showModalEdit && (
             <Modal
               {...selectedUser}
-              setShowModal={setShowModal}
+              setShowModal={setShowModalEdit}
+              setSelectedUser={setSelectedUser}
               refetch={refetch}
+              action='Edit'
+            />
+          )}
+          <PlusButton setShowModalAdd={setShowModalAdd} />
+          {showModalAdd && (
+            <Modal
+              refetch={refetch}
+              {...selectedUser}
+              setSelectedUser={setSelectedUser}
+              setShowModal={setShowModalAdd}
+              action='Add'
             />
           )}
         </div>

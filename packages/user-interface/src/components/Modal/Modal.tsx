@@ -6,6 +6,7 @@ import './index.scss';
 
 export function Modal({
   setShowModal,
+  setSelectedUser,
   name,
   username,
   email,
@@ -14,6 +15,7 @@ export function Modal({
   permission,
   id,
   refetch,
+  action,
 }: any) {
   const [modifedUser, setModifedUser] = React.useState({
     name,
@@ -23,6 +25,7 @@ export function Modal({
     phone,
     permission,
     id,
+    password: '',
   });
 
   const [errors, setErrors] = React.useState({
@@ -30,6 +33,7 @@ export function Modal({
     username: '',
     permission: '',
     email: '',
+    password: '',
   });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,8 +53,8 @@ export function Modal({
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     try {
-      console.log(id);
-      await mainAxios.patch(`/users/${id}`, modifedUser);
+      if (action === 'Edit') await mainAxios.patch(`/users/${id}`, modifedUser);
+      else await mainAxios.post('/users', modifedUser);
       setShowModal(false);
       refetch();
     } catch (err: any) {
@@ -65,7 +69,7 @@ export function Modal({
   return (
     <div className='modal'>
       <div className='modal__content'>
-        <div className='modal__header'>Edit User</div>
+        <div className='modal__header'>{action} user</div>
         <div className='modal__body'>
           <form autoComplete='off'>
             <label className='modal__label'>Name</label>
@@ -90,6 +94,21 @@ export function Modal({
               errors={errors.username}
             />
             {errors.username && <ErrorMessage error={errors.username} />}
+            {action === 'Add' && (
+              <>
+                <label className='modal__label'>Password</label>
+                <Input
+                  type='text'
+                  className='edit-user__input'
+                  name='password'
+                  id='passwword'
+                  value={modifedUser.password}
+                  onChange={handleInput}
+                  errors={errors.password}
+                />
+                {errors.username && <ErrorMessage error={errors.password} />}
+              </>
+            )}
             <label className='modal__label'>Email</label>
             <Input
               type='text'
@@ -154,12 +173,27 @@ export function Modal({
         <div className='modal__button'>
           <button
             className='modal__button--secondary'
-            onClick={() => setShowModal(false)}
+            onClick={() => {
+              setShowModal(false);
+              setSelectedUser({
+                name: '',
+                username: '',
+                email: '',
+                phone: '',
+                password: '',
+                permission: '',
+                address: {
+                  street: '',
+                  suite: '',
+                  city: '',
+                },
+              });
+            }}
           >
             Close
           </button>
           <button className='modal__button--primary' onClick={handleSubmit}>
-            Edit
+            {action}
           </button>
         </div>
       </div>
