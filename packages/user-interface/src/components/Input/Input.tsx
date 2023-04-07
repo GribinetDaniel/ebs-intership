@@ -4,6 +4,7 @@ export interface InputProps {
   type?: string;
   id?: string;
   value?: string;
+  defaultValue?: string;
   placeholder?: string;
   name?: string;
   className?: string;
@@ -15,6 +16,7 @@ export function Input({
   type,
   id,
   value,
+  defaultValue,
   placeholder,
   name,
   onChange,
@@ -27,6 +29,7 @@ export function Input({
       type={type}
       id={id}
       value={value}
+      defaultValue={defaultValue}
       placeholder={placeholder}
       name={name}
       className={className}

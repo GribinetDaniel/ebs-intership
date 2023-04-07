@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserContext } from './context/user-context';
 import { UserPosts } from './pages/UserPosts';
 import { Users } from './pages/Users';
+import { EditPost } from './pages/EditPost';
 export function App() {
   const { isAuth, user } = useContext(UserContext);
   return (
@@ -17,6 +18,7 @@ export function App() {
           {user?.permission === 'admin' && (
             <Route path='/users' element={<Users />} />
           )}
+          <Route path='/posts/:id' element={<EditPost />} />
           <Route path='*' element={<Navigate to='' />} />
         </Routes>
       ) : (

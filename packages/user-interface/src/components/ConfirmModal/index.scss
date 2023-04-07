@@ -1,0 +1,62 @@
+.modal {
+  //   position: fixed;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__content {
+    width: 600px;
+    height: 200px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__body {
+    padding: 20px;
+    margin: 20px 0px 20px 20px;
+    height: 80%;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &__button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &--primary {
+      width: 100px;
+      background-color: #7e56da;
+      color: white;
+      padding: 10px 20px;
+      margin: 0px 30px 20px 30px;
+      border-radius: 5px;
+      border: none;
+      text-transform: capitalize;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #764ed4;
+      }
+    }
+    &--secondary {
+      width: 100px;
+      padding: 10px 20px;
+      margin: 0px 30px 20px 30px;
+      border-radius: 5px;
+      border-color: #9675e4;
+      border-width: 1px;
+      background-color: #fff;
+      color: #7e56da;
+      cursor: pointer;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}
