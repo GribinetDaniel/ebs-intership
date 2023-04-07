@@ -7,8 +7,8 @@
   width: 100vw;
   height: 100vh;
 
-  &__content--Add,
-  &__content--Edit {
+  &__content--create,
+  &__content--edit {
     width: 600px;
     height: 500px;
     background-color: #fff;
@@ -16,7 +16,7 @@
     flex-direction: column;
   }
 
-  &__content--Delete {
+  &__content--delete {
     width: 600px;
     height: 200px;
     background-color: #fff;
@@ -30,12 +30,18 @@
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
+    text-transform: capitalize;
   }
 
   &__body {
     margin: 0px 0px 20px 20px;
     height: 80%;
     overflow: auto;
+
+    &--delete {
+      margin: 0px 0px 20px 20px;
+      height: 80%;
+    }
   }
 
   &__button {
@@ -52,6 +58,7 @@
       margin: 0px 30px 20px 30px;
       border-radius: 5px;
       border: none;
+      text-transform: capitalize;
       cursor: pointer;
 
       &:hover {
@@ -83,7 +90,6 @@
 
   &__confirm-text {
     font-size: 18px;
-    // font-weight: bold;
     text-align: center;
   }
 }

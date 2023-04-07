@@ -55,8 +55,8 @@ export function Modal({
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     try {
-      if (action === 'Edit') await mainAxios.patch(`/users/${id}`, modifedUser);
-      else if (action === 'Add') await mainAxios.post('/users', modifedUser);
+      if (action === 'edit') await mainAxios.patch(`/users/${id}`, modifedUser);
+      else if (action === 'create') await mainAxios.post('/users', modifedUser);
       else await mainAxios.delete(`/users/${id}`);
       setShowModal(false);
       queryClient.refetchQueries('users');
@@ -68,13 +68,19 @@ export function Modal({
       setErrors(obj);
     }
   }
-  const className = `modal__content--${action}`;
+  const contentClassName = `modal__content--${action}`;
+  const bodyClassName =
+    action === 'delete' ? 'modal__body--delete' : 'modal__body';
   return (
     <div className='modal'>
-      <div className={className}>
-        <div className='modal__header'>{action} user</div>
-        <div className='modal__body'>
-          {(action === 'Add' || action === 'Edit') && (
+      <div className={contentClassName}>
+        {action === 'delete' ? (
+          <div className='modal__header'>Are you sure?</div>
+        ) : (
+          <div className='modal__header'>{action} user</div>
+        )}
+        <div className={bodyClassName}>
+          {(action === 'create' || action === 'edit') && (
             <form autoComplete='off'>
               <label className='modal__label'>Name</label>
               <Input
@@ -98,7 +104,7 @@ export function Modal({
                 errors={errors.username}
               />
               {errors.username && <ErrorMessage error={errors.username} />}
-              {action === 'Add' && (
+              {action === 'create' && (
                 <>
                   <label className='modal__label'>Password</label>
                   <Input
@@ -174,9 +180,10 @@ export function Modal({
               {errors.permission && <ErrorMessage error={errors.permission} />}
             </form>
           )}
-          {action === 'Delete' && (
+          {action === 'delete' && (
             <div className='modal__confirm-text'>
-              Are you sure you want to delete the user?
+              Do you really want to delete this user? <br />
+              This procces cannot be undone!
             </div>
           )}
         </div>

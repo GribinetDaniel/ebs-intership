@@ -56,7 +56,7 @@ export function Users() {
               {...selectedUser}
               setShowModal={setShowModalEdit}
               setSelectedUser={setSelectedUser}
-              action='Edit'
+              action='edit'
             />
           )}
           <PlusButton setShowModalAdd={setShowModalAdd} />
@@ -65,14 +65,14 @@ export function Users() {
               {...selectedUser}
               setSelectedUser={setSelectedUser}
               setShowModal={setShowModalAdd}
-              action='Add'
+              action='create'
             />
           )}
           {showModalDelete && (
             <Modal
               {...selectedUser}
               setSelectedUser={setSelectedUser}
-              action='Delete'
+              action='delete'
               setShowModal={setShowModalDelete}
             />
           )}
