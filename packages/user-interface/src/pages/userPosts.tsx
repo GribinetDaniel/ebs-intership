@@ -7,7 +7,11 @@ import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
 import { Loading } from '../components/Loading';
 import { ErrorPage } from '../components/ErrorPage/ErrorPage';
+import { PlusButton } from '../components/PlusButton';
+import { useNavigate } from 'react-router-dom';
+
 export function UserPosts() {
+  const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
 
   const { isLoading, error, data } = useQuery('user-posts', () => {
@@ -30,6 +34,7 @@ export function UserPosts() {
               ))}
             </div>
           </div>
+          <PlusButton onClick={() => navigate('/new-post')} />
         </div>
       )}
     </>

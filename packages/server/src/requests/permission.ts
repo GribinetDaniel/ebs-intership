@@ -92,15 +92,23 @@ router.post(
   }
 );
 
-router.post('/posts', async (req, res, next) => {
-  let token = req.headers.authorization!;
-  if (token == null) res.status(401).json({ message: 'unauthenticated' });
-  else {
-    let decoded = jwt.verify(token, secret) as Token;
-    req.body.userId = decoded.id;
-    next();
+router.post(
+  '/posts',
+  check('title', 'Title is required').notEmpty(),
+  check('body', 'Body is required').notEmpty(),
+  async (req, res, next) => {
+    let token = req.headers.authorization!;
+    if (token == null) res.status(401).json({ message: 'unauthenticated' });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    } else {
+      let decoded = jwt.verify(token, secret) as Token;
+      req.body.userId = decoded.id;
+      next();
+    }
   }
-});
+);
 
 router.patch(
   '/posts/:id',

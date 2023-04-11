@@ -16,6 +16,7 @@ export function Modal({
   permission,
   id,
   action,
+  password,
 }: any) {
   const [modifedUser, setModifedUser] = React.useState({
     name,
@@ -25,7 +26,7 @@ export function Modal({
     phone,
     permission,
     id,
-    password: '',
+    password,
   });
 
   const [errors, setErrors] = React.useState({
