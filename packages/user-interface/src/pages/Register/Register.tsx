@@ -75,8 +75,6 @@ export function Register() {
       }
     }
   }
-  console.log(errors);
-  console.log(newUser.password, ' ', newUser.confirmPassword);
 
   return (
     <div className='register'>
