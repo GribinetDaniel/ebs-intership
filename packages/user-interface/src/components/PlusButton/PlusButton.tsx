@@ -1,8 +1,13 @@
 import React from 'react';
 import './index.scss';
-export function PlusButton({ setShowModalAdd }: any) {
+
+export interface PlusButtonProps {
+  onClick?: () => void;
+}
+
+export function PlusButton({ onClick }: PlusButtonProps) {
   return (
-    <div className='plus' onClick={() => setShowModalAdd(true)}>
+    <div className='plus' onClick={onClick}>
       <div className='plus__text'>+</div>
     </div>
   );

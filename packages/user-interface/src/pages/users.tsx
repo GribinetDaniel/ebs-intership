@@ -59,7 +59,7 @@ export function Users() {
               action='edit'
             />
           )}
-          <PlusButton setShowModalAdd={setShowModalAdd} />
+          <PlusButton onClick={() => setShowModalAdd(true)} />
           {showModalAdd && (
             <Modal
               {...selectedUser}
