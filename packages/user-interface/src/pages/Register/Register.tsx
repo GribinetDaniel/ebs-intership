@@ -138,7 +138,7 @@ export function Register() {
                 className='register__button--primary'
                 onClick={handleSubmit}
               >
-                {currentStep === 0 ? 'Next' : 'Submit'}
+                {currentStep === 0 ? 'Next' : 'Sign Up'}
               </button>
             </div>
           </div>

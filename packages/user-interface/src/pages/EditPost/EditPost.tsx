@@ -5,10 +5,11 @@ import { Header } from '../../components/Header';
 import { Loading } from '../../components/Loading';
 import { mainAxios } from '../../utils';
 import { Input } from '../../components/Input';
-import './index.scss';
 import { useNavigate } from 'react-router-dom';
 import { ConfirmModal } from '../../components/ConfirmModal';
-
+import { ErrorMessage } from '../../components/ErrorMessage';
+import { TextArea } from '../../components/TextArea';
+import './index.scss';
 export function EditPost() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -31,6 +32,11 @@ export function EditPost() {
     id: '',
   });
 
+  const [errors, setErrors] = React.useState({
+    title: '',
+    body: '',
+  });
+
   const [showModal, setShowModal] = React.useState(false);
 
   const handleInput = (
@@ -47,8 +53,13 @@ export function EditPost() {
       await mainAxios.patch(`${path}`, post);
       queryClient.refetchQueries('posts');
       navigate('/');
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
+      let errs: Array<any> = [];
+      const obj: any = {};
+      errs = err.response.data.errors;
+      errs.forEach((err) => (obj[err.param] = err.msg));
+      setErrors(obj);
     }
   };
 
@@ -75,20 +86,29 @@ export function EditPost() {
               <form>
                 <label className='edit-post__label'>Title</label>
                 <Input
-                  // defaultValue={post.title}
                   value={post.title}
                   className='post__input'
                   onChange={handleInput}
                   name='title'
+                  errors={errors.title}
                 />
+                {errors.title && <ErrorMessage error={errors.title} />}
                 <label className='edit-post__label'>Body</label>
-                <textarea
+                {/* <textarea
                   name='body'
                   id='body'
                   value={post.body}
                   className='edit-post__textarea'
                   onChange={handleInput}
-                ></textarea>
+                ></textarea> */}
+                <TextArea
+                  name='body'
+                  error={errors.body}
+                  value={post.body}
+                  className='textarea'
+                  onChange={handleInput}
+                />
+                {errors.body && <ErrorMessage error={errors.body} />}
               </form>
               <div className='edit-post__button'>
                 <button
