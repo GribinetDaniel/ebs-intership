@@ -6,9 +6,14 @@ import '../../index.css';
 export interface AutocompleteProps {
   className?: string;
   cityInput: (value: string) => void;
+  placeholder: string;
 }
 
-export function Autocomplete({ className, cityInput }: AutocompleteProps) {
+export function Autocomplete({
+  className,
+  cityInput,
+  placeholder,
+}: AutocompleteProps) {
   const { uniqueCities } = useFetchCities();
   const [isOpen, setIsOpen] = React.useState(false);
   const [input, setInput] = React.useState('');
@@ -27,7 +32,7 @@ export function Autocomplete({ className, cityInput }: AutocompleteProps) {
   };
 
   return (
-    <div id='cityInput'>
+    <div className='cityInput'>
       <input
         value={input}
         type='text'
@@ -35,6 +40,7 @@ export function Autocomplete({ className, cityInput }: AutocompleteProps) {
         id='cityInput'
         onClick={() => setIsOpen(true)}
         onChange={handleInput}
+        placeholder={placeholder}
       />
       {isOpen && input && (
         <div className='suggestions'>

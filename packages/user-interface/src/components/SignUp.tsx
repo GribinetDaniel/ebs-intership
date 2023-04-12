@@ -25,10 +25,9 @@ export function SignUp({
 }: SignUpProps) {
   return (
     <form className='register__form' autoComplete='off'>
-      <label htmlFor='name' className='register__label'>
-        Name:
-      </label>
       <Input
+        label='Name'
+        classNameLabel='register__label'
         type='text'
         id='name'
         name='name'
@@ -38,11 +37,9 @@ export function SignUp({
         onChange={handleInput}
         errors={errors.name}
       />
-      {errors.name && <ErrorMessage error={errors.name} />}
-      <label htmlFor='username' className='register__label'>
-        Username:
-      </label>
       <Input
+        label='Username'
+        classNameLabel='register__label'
         type='text'
         id='username'
         name='username'
@@ -52,12 +49,9 @@ export function SignUp({
         onChange={handleInput}
         errors={errors.username}
       />
-      {errors.username && <ErrorMessage error={errors.username} />}
-
-      <label htmlFor='email' className='register__label'>
-        Email:
-      </label>
       <Input
+        label='Email'
+        classNameLabel='register__label'
         type='text'
         name='email'
         id='email'
@@ -67,12 +61,10 @@ export function SignUp({
         onChange={handleInput}
         errors={errors.email}
       />
-      {errors.email && <ErrorMessage error={errors.email} />}
 
-      <label htmlFor='password' className='register__label'>
-        Password:
-      </label>
       <Input
+        label='Password'
+        classNameLabel='register__label'
         type='password'
         id='password'
         name='password'
@@ -82,12 +74,10 @@ export function SignUp({
         onChange={handleInput}
         errors={errors.password}
       />
-      {errors.password && <ErrorMessage error={errors.password} />}
 
-      <label htmlFor='confirmPassword' className='register__label'>
-        Confirm Password:
-      </label>
       <Input
+        label='Confirm Password'
+        classNameLabel='register__label'
         type='password'
         id='confirmPassword'
         name='confirmPassword'

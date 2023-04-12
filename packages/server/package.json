@@ -10,7 +10,7 @@
     "add-post": "ts-node src/scripts/add-posts",
     "add-pswd": "ts-node src/scripts/add-pswd",
     "generate-random-string": "ts-node src/scripts/generate-random-string",
-    "dev": "nodemon src/main.ts"
+    "dev": "nodemon src/main.ts --ignore src/db.json"
   },
   "author": "",
   "license": "ISC",

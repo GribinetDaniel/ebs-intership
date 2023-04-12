@@ -14,8 +14,9 @@ export function PersonalInfo({
   return (
     <div className='items'>
       <form autoComplete='off'>
-        <label htmlFor='phone'>Phone:</label>
         <Input
+          label='Phone'
+          classNameLabel='register__label'
           type='text'
           name='phone'
           id='phone'
@@ -24,11 +25,16 @@ export function PersonalInfo({
           value={phone}
           onChange={handleInput}
         />
-        <label htmlFor=''>City</label>
-        <Autocomplete className='auth__input' cityInput={cityInput} />
+        <label className='register__label'>City</label>
+        <Autocomplete
+          className='auth__input'
+          cityInput={cityInput}
+          placeholder='Chisinau'
+        />
 
-        <label htmlFor='street'>Street:</label>
         <Input
+          label='Street'
+          classNameLabel='register__label'
           type='text'
           name='street'
           id='street'
@@ -37,8 +43,9 @@ export function PersonalInfo({
           value={street}
           onChange={addressInput}
         />
-        <label htmlFor='suite'>Suite:</label>
         <Input
+          label='Suite'
+          classNameLabel='register__label'
           type='text'
           name='suite'
           id='suite'
