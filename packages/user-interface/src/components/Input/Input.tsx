@@ -31,7 +31,7 @@ export function Input({
   errors && (className += ' error');
   return (
     <div>
-      <label className={classNameLabel}>{label}</label>
+      {label && <label className={classNameLabel}>{label}</label>}
       <input
         type={type}
         id={id}

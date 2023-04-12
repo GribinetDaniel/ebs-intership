@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from '../Input';
 import { ErrorMessage } from '../ErrorMessage';
 import { TextArea } from '../TextArea';
-import { ConfirmModal } from '../ConfirmModal';
+import { DeletePostModal } from '../DeletePostModal';
 import './index.scss';
 
 export function PostContent({
@@ -27,7 +27,6 @@ export function PostContent({
             name='title'
             errors={errors.title}
           />
-          {errors.title && <ErrorMessage error={errors.title} />}
           <label className='edit-post__label'>Body</label>
           <TextArea
             name='body'
@@ -53,7 +52,7 @@ export function PostContent({
         </div>
       </div>
       {showModal && (
-        <ConfirmModal deletePost={deletePost} setShowModal={setShowModal} />
+        <DeletePostModal setShowModal={setShowModal} deletePost={deletePost} />
       )}
     </div>
   );
