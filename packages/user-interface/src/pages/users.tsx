@@ -6,8 +6,10 @@ import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
 import { Loading } from '../components/Loading';
 import { ErrorPage } from '../components/ErrorPage/ErrorPage';
-import { Modal } from '../components/Modal';
 import { PlusButton } from '../components/PlusButton';
+import { AddUserModal } from '../components/AddUserModal';
+import { EditUserModal } from '../components/EditUserModal';
+import { DeleteUserModal } from '../components/DeleteUserModal';
 
 export function Users() {
   const { isLoading, error, data } = useQuery('users', () => {
@@ -52,27 +54,17 @@ export function Users() {
             </div>
           </div>
           {showModalEdit && (
-            <Modal
-              {...selectedUser}
+            <EditUserModal
               setShowModal={setShowModalEdit}
-              setSelectedUser={setSelectedUser}
-              action='edit'
+              user={selectedUser}
             />
           )}
           <PlusButton onClick={() => setShowModalAdd(true)} />
-          {showModalAdd && (
-            <Modal
-              {...selectedUser}
-              setSelectedUser={setSelectedUser}
-              setShowModal={setShowModalAdd}
-              action='create'
-            />
-          )}
+          {showModalAdd && <AddUserModal setShowModal={setShowModalAdd} />}
+
           {showModalDelete && (
-            <Modal
-              {...selectedUser}
-              setSelectedUser={setSelectedUser}
-              action='delete'
+            <DeleteUserModal
+              user={selectedUser}
               setShowModal={setShowModalDelete}
             />
           )}
