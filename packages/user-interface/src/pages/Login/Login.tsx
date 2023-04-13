@@ -3,12 +3,17 @@ import { mainAxios } from '../../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import { Input } from '../../components/Input';
+import { isAxiosError } from 'axios';
 import './index.scss';
 
 export function Login() {
   const navigate = useNavigate();
   const { setIsAuth, setUser } = useContext(UserContext);
   const [newUser, setNewUser] = useState({
+    username: '',
+    password: '',
+  });
+  const [errors, setErrors] = React.useState({
     username: '',
     password: '',
   });
@@ -27,14 +32,14 @@ export function Login() {
       setIsAuth(true);
       navigate('/');
     } catch (err) {
-      console.log(err);
-      setNewUser({
-        username: '',
-        password: '',
-      });
+      if (isAxiosError(err)) {
+        const errs = err!.response!.data;
+        setErrors({ ...errors, [errs.param]: errs.msg });
+      } else console.log(err);
+      setNewUser({ ...newUser, password: '' });
     }
   }
-
+  console.log(errors);
   return (
     <div className='login'>
       <div className='login__left-part'>
@@ -49,6 +54,7 @@ export function Login() {
               placeholder='Enter your username'
               value={newUser.username}
               onChange={handleInput}
+              errors={errors.username}
             />
             <Input
               label='Password'
@@ -57,6 +63,7 @@ export function Login() {
               placeholder='********'
               value={newUser.password}
               onChange={handleInput}
+              errors={errors.password}
             />
             <button className='register__button--primary'>Sign in</button>
             <p>
