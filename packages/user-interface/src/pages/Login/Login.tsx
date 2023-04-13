@@ -44,32 +44,22 @@ export function Login() {
           <form onSubmit={handleSubmit}>
             <Input
               label='Username'
-              classNameLabel='login__label'
               type='text'
-              id='username'
               name='username'
               placeholder='Enter your username'
-              className='auth__input'
               value={newUser.username}
               onChange={handleInput}
             />
             <Input
               label='Password'
-              classNameLabel='login__label'
               type='password'
-              id='password'
               name='password'
               placeholder='********'
-              className='auth__input'
               value={newUser.password}
               onChange={handleInput}
             />
-            <input
-              type='submit'
-              value='Sign In'
-              className='auth__input--submit'
-            />
-            <p className='subtitle'>
+            <button className='register__button--primary'>Sign in</button>
+            <p>
               Don't have an account?{' '}
               <Link to={'/register'} className='login__link'>
                 Sign Up

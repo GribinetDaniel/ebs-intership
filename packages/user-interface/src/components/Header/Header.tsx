@@ -12,7 +12,7 @@ import {
 import './index.scss';
 import { UserImage } from '../UserImage';
 export function Header() {
-  const { user, setUser, isAuth, setIsAuth } = React.useContext(UserContext);
+  const { user, setUser, setIsAuth } = React.useContext(UserContext);
 
   function logout() {
     setUser(undefined);
@@ -68,12 +68,7 @@ export function Header() {
           </li>
         )}
         <li className='navbar__list-item navbar__logout'>
-          <Link
-            to='/login'
-            onClick={logout}
-            className='navbar__link'
-            // style={{ position: 'absolute', bottom: '0' }}
-          >
+          <Link to='/login' onClick={logout} className='navbar__link'>
             <FontAwesomeIcon
               icon={faRightFromBracket}
               size='xl'

@@ -4,16 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { PostContent } from '../../components/PostContent';
 import { UserContext } from '../../context/user-context';
+import { defaultPost, Post } from '../../types';
 import { mainAxios } from '../../utils';
+import { isAxiosError } from 'axios';
+
 export function NewPost() {
   const { user } = React.useContext(UserContext);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [post, setPost] = React.useState({
-    title: '',
-    body: '',
-    userId: user?.id,
-  });
+  const [post, setPost] = React.useState<Post>(defaultPost);
 
   React.useEffect(() => {
     if (user) setPost({ ...post, userId: user.id });
@@ -37,13 +36,14 @@ export function NewPost() {
       await mainAxios.post('/posts', post);
       queryClient.refetchQueries('posts');
       navigate('/own-posts');
-    } catch (err: any) {
-      console.log(err);
-      let errs: Array<any> = [];
-      const obj: any = {};
-      errs = err.response.data.errors;
-      errs.forEach((err) => (obj[err.param] = err.msg));
-      setErrors(obj);
+    } catch (err) {
+      if (isAxiosError(err)) {
+        let errs: Array<{ msg: string; param: string }> = [];
+        const obj: any = {};
+        errs = err!.response!.data.errors;
+        errs.forEach((err) => (obj[err.param] = err.msg));
+        setErrors(obj);
+      } else console.log(err);
     }
   }
   return (

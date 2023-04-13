@@ -1,6 +1,15 @@
 import React from 'react';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
-export function DeletePostModal({ deletePost, setShowModal }: any) {
+
+interface DeletePostModalProps {
+  deletePost?: (e: React.SyntheticEvent) => void;
+  setShowModal: (arg: boolean) => void;
+}
+
+export function DeletePostModal({
+  deletePost,
+  setShowModal,
+}: DeletePostModalProps) {
   return (
     <Modal title='Are you sure?'>
       <ModalContent>

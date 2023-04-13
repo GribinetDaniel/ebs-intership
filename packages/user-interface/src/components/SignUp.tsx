@@ -1,96 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from './Input';
+import { User } from '../types';
 import '../pages/Register/index.scss';
-import { ErrorMessage } from './ErrorMessage';
 
-export interface SignUpProps {
+interface SignUpErrors {
   name: string;
   username: string;
   email: string;
   password: string;
-  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   confirmPassword: string;
-  errors?: any;
 }
 
-export function SignUp({
-  name,
-  username,
-  email,
-  password,
-  handleInput,
-  confirmPassword,
-  errors,
-}: SignUpProps) {
+interface SignUpProps {
+  user: User;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errors: SignUpErrors;
+}
+
+export function SignUp({ user, handleInput, errors }: SignUpProps) {
   return (
     <form className='register__form' autoComplete='off'>
       <Input
         label='Name'
-        classNameLabel='register__label'
         type='text'
-        id='name'
         name='name'
-        className='auth__input'
         placeholder='Enter your name'
-        value={name}
+        value={user.name}
         onChange={handleInput}
         errors={errors.name}
       />
       <Input
         label='Username'
-        classNameLabel='register__label'
         type='text'
-        id='username'
         name='username'
-        className='auth__input'
         placeholder='Enter your username'
-        value={username}
+        value={user.username}
         onChange={handleInput}
         errors={errors.username}
       />
       <Input
         label='Email'
-        classNameLabel='register__label'
         type='text'
         name='email'
-        id='email'
-        className='auth__input'
         placeholder='sample@mail.com'
-        value={email}
+        value={user.email}
         onChange={handleInput}
         errors={errors.email}
       />
 
       <Input
         label='Password'
-        classNameLabel='register__label'
         type='password'
-        id='password'
         name='password'
         placeholder='************'
-        className='auth__input'
-        value={password}
+        value={user.password}
         onChange={handleInput}
         errors={errors.password}
       />
 
       <Input
         label='Confirm Password'
-        classNameLabel='register__label'
         type='password'
-        id='confirmPassword'
         name='confirmPassword'
-        className='auth__input'
         placeholder='************'
-        value={confirmPassword}
+        value={user.confirmPassword}
         errors={errors.confirmPassword}
         onChange={handleInput}
       />
-      {errors.confirmPassword && (
-        <ErrorMessage error={errors.confirmPassword} />
-      )}
-      {/* <span id='error-message'></span> */}
       <p>
         Already have an account?
         <Link to='/login' className='register__link'>

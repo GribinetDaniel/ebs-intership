@@ -5,28 +5,21 @@ import { UserContext } from '../../context/user-context';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SignUp } from '../../components/SignUp';
 import { PersonalInfo } from '../../components/PersonalInfo';
+import { defaultUser, User } from '../../types';
+import { isAxiosError } from 'axios';
 import './index.scss';
-
-type Err = { [key: string]: string };
 
 export function Register() {
   const navigate = useNavigate();
   const { setIsAuth, setUser } = React.useContext(UserContext);
-  const [newUser, setNewUser] = useState({
+  const [newUser, setNewUser] = useState<User>(defaultUser);
+  const [errors, setErrors] = useState({
     name: '',
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
-    permission: 'user',
-    address: {
-      city: '',
-      street: '',
-      suite: '',
-    },
-    phone: '',
   });
-  const [errors, setErrors] = useState({});
 
   const { currentStep, setCurrentStep, next, back } = useMultistepForm();
 
@@ -64,14 +57,16 @@ export function Register() {
         setUser(accountResponse.data);
         setIsAuth(true);
         navigate('/');
-      } catch (err: any) {
-        let errs: Array<any> = [];
-        const obj: Err = {};
-        errs = err.response.data.errors;
-        errs.forEach((err) => (obj[err.param] = err.msg));
-        setErrors(obj);
-        if (obj.username || obj.name || obj.email || obj.password)
-          setCurrentStep(0);
+      } catch (err) {
+        if (isAxiosError(err)) {
+          let errs: Array<{ msg: string; param: string }> = [];
+          const obj: any = {};
+          errs = err!.response!.data.errors;
+          errs.forEach((err) => (obj[err.param] = err.msg));
+          setErrors(obj);
+          if (obj.username || obj.name || obj.email || obj.password)
+            setCurrentStep(0);
+        } else console.log(err);
       }
     }
   }
@@ -116,11 +111,15 @@ export function Register() {
               )}
             </div>
             {currentStep === 0 && (
-              <SignUp {...newUser} handleInput={handleInput} errors={errors} />
+              <SignUp
+                user={newUser}
+                handleInput={handleInput}
+                errors={errors}
+              />
             )}
             {currentStep === 1 && (
               <PersonalInfo
-                {...newUser}
+                user={newUser}
                 handleInput={handleInput}
                 cityInput={cityInput}
                 addressInput={addressInput}

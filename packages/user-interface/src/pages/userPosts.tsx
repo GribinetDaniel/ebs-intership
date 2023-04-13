@@ -27,7 +27,6 @@ export function UserPosts() {
         <div className='content'>
           <Header />
           <div className='home-page'>
-            {/* <h2>My Posts</h2> */}
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {userPosts?.map((post: Post) => (
                 <PostCard {...post} />

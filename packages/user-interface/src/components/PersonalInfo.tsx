@@ -1,28 +1,32 @@
 import { Link } from 'react-router-dom';
 import { Input } from './Input';
+import { User } from '../types';
 import '../pages/Register/index.scss';
 
 import { Autocomplete } from './Autocomplete';
+
+interface PersonalInfoProps {
+  user: User;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  cityInput: (value: string) => void;
+  addressInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 export function PersonalInfo({
-  phone,
-  street,
-  suite,
+  user,
   handleInput,
   cityInput,
   addressInput,
-}: any) {
+}: PersonalInfoProps) {
   return (
     <div className='items'>
       <form autoComplete='off'>
         <Input
           label='Phone'
-          classNameLabel='register__label'
           type='text'
           name='phone'
-          id='phone'
-          className='auth__input'
           placeholder='+1(XXX) XXX-XXXX'
-          value={phone}
+          value={user.phone}
           onChange={handleInput}
         />
         <label className='register__label'>City</label>
@@ -34,24 +38,18 @@ export function PersonalInfo({
 
         <Input
           label='Street'
-          classNameLabel='register__label'
           type='text'
           name='street'
-          id='street'
-          className='auth__input'
           placeholder='M. Eminescu 5'
-          value={street}
+          value={user.address.street}
           onChange={addressInput}
         />
         <Input
           label='Suite'
-          classNameLabel='register__label'
           type='text'
           name='suite'
-          id='suite'
-          className='auth__input'
           placeholder='Apt.48'
-          value={suite}
+          value={user.address.suite}
           onChange={addressInput}
         />
         <p>

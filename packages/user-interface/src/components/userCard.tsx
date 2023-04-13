@@ -1,13 +1,21 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { User } from '../types';
+
+interface UserCardProps {
+  user: User;
+  setShowModalEdit: (arg: boolean) => void;
+  setShowModalDelete: (arg: boolean) => void;
+  setSelectedUser: (arg: User) => void;
+}
 
 export function UserCard({
   user,
   setShowModalEdit,
   setSelectedUser,
   setShowModalDelete,
-}: any) {
+}: UserCardProps) {
   return (
     <Card className='col-md-3'>
       <Card.Body>

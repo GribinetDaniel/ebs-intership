@@ -19,7 +19,6 @@ export function PostCard(props: Post) {
         (pathname === '/own-posts' && user?.id === props.userId)) && (
         <Card.Footer>
           <Button
-            className=''
             variant='primary'
             onClick={() => navigate(`/posts/${props.id}`)}
           >

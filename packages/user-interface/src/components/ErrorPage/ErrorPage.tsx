@@ -4,7 +4,7 @@ import './index.scss';
 export function ErrorPage() {
   return (
     <div className='error-page'>
-      <img className='error-page__image' src={errImg} />
+      <img className='error-page__image' src={errImg} alt='Error' />
     </div>
   );
 }

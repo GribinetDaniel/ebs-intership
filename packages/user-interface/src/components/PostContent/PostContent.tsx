@@ -1,9 +1,27 @@
 import React from 'react';
 import { Input } from '../Input';
-import { ErrorMessage } from '../ErrorMessage';
 import { TextArea } from '../TextArea';
 import { DeletePostModal } from '../DeletePostModal';
+import { Post } from '../../types';
 import './index.scss';
+
+interface PostErrors {
+  title: string;
+  body: string;
+}
+
+interface PostContentProps {
+  deletePost?: (e: React.SyntheticEvent) => void;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  onSubmit: (e: React.SyntheticEvent) => void;
+  post: Post;
+  errors: PostErrors;
+  action: string;
+}
 
 export function PostContent({
   deletePost,
@@ -12,7 +30,7 @@ export function PostContent({
   post,
   errors,
   action,
-}: any) {
+}: PostContentProps) {
   const [showModal, setShowModal] = React.useState(false);
 
   return (
@@ -22,7 +40,6 @@ export function PostContent({
           <label className='edit-post__label'>Title</label>
           <Input
             value={post.title}
-            className='post__input'
             onChange={onChange}
             name='title'
             errors={errors.title}
@@ -32,10 +49,8 @@ export function PostContent({
             name='body'
             error={errors.body}
             value={post.body}
-            className='textarea'
             onChange={onChange}
           />
-          {errors.body && <ErrorMessage error={errors.body} />}
         </form>
         <div className='edit-post__button'>
           {action === 'edit' && (

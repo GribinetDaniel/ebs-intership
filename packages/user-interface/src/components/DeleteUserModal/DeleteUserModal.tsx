@@ -1,8 +1,15 @@
 import React from 'react';
 import { useQueryClient } from 'react-query';
+import { User } from '../../types';
 import { mainAxios } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
-export function DeleteUserModal({ user, setShowModal }: any) {
+
+interface DeleteUserModalProps {
+  user: User;
+  setShowModal: (arg: boolean) => void;
+}
+
+export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
   const queryClient = useQueryClient();
 
   const deleteUser = async (event: React.SyntheticEvent) => {

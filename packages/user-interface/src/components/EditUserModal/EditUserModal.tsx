@@ -3,8 +3,14 @@ import { useQueryClient } from 'react-query';
 import { mainAxios } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
 import { Input } from '../Input';
+import { User } from '../../types';
 
-export function EditUserModal({ setShowModal, user }: any) {
+export interface EditUserModalProps {
+  user: User;
+  setShowModal: (arg: boolean) => void;
+}
+
+export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
   const [modifedUser, setModifedUser] = React.useState(user);
   const [errors, setErrors] = React.useState({
     name: '',
@@ -52,22 +58,16 @@ export function EditUserModal({ setShowModal, user }: any) {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Input
               label='Name'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='name'
-              id='name'
               value={modifedUser.name}
               onChange={handleInput}
               errors={errors.name}
             />
             <Input
               label='Username'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='username'
-              id='username'
               value={modifedUser.username}
               onChange={handleInput}
               errors={errors.username}
@@ -76,22 +76,16 @@ export function EditUserModal({ setShowModal, user }: any) {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Input
               label='Email'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='email'
-              id='email'
               value={modifedUser.email}
               onChange={handleInput}
               errors={errors.email}
             />
             <Input
               label='Street'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='street'
-              id='street'
               value={modifedUser.address.street}
               onChange={addressInput}
             />
@@ -99,21 +93,15 @@ export function EditUserModal({ setShowModal, user }: any) {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Input
               label='Suite'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='suite'
-              id='suite'
               value={modifedUser.address.suite}
               onChange={addressInput}
             />
             <Input
               label='City'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='city'
-              id='city'
               value={modifedUser.address.city}
               onChange={addressInput}
             />
@@ -121,21 +109,15 @@ export function EditUserModal({ setShowModal, user }: any) {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Input
               label='Phone'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='phone'
-              id='phone'
               value={modifedUser.phone}
               onChange={handleInput}
             />
             <Input
               label='Permission'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='permission'
-              id='permission'
               value={modifedUser.permission}
               onChange={handleInput}
               errors={errors.permission}

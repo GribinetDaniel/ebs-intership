@@ -6,6 +6,9 @@ import { Loading } from '../../components/Loading';
 import { mainAxios } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { PostContent } from '../../components/PostContent';
+import { defaultPost, Post } from '../../types';
+import { isAxiosError } from 'axios';
+
 export function EditPost() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -21,12 +24,7 @@ export function EditPost() {
       },
     }
   );
-  const [post, setPost] = React.useState({
-    title: '',
-    body: '',
-    userId: '',
-    id: '',
-  });
+  const [post, setPost] = React.useState<Post>(defaultPost);
 
   const [errors, setErrors] = React.useState({
     title: '',
@@ -47,13 +45,14 @@ export function EditPost() {
       await mainAxios.patch(`${path}`, post);
       queryClient.refetchQueries('posts');
       navigate('/');
-    } catch (err: any) {
-      console.log(err);
-      let errs: Array<any> = [];
-      const obj: any = {};
-      errs = err.response.data.errors;
-      errs.forEach((err) => (obj[err.param] = err.msg));
-      setErrors(obj);
+    } catch (err) {
+      if (isAxiosError(err)) {
+        let errs: Array<{ msg: string; param: string }> = [];
+        const obj: any = {};
+        errs = err!.response!.data.errors;
+        errs.forEach((err) => (obj[err.param] = err.msg));
+        setErrors(obj);
+      } else console.log(err);
     }
   };
 

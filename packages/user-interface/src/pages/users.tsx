@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../components/Header';
-import { User } from '../types';
+import { User, defaultUser } from '../types';
 import { UserCard } from '../components/UserCard';
 import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
@@ -19,19 +19,7 @@ export function Users() {
   const [showModalEdit, setShowModalEdit] = React.useState(false);
   const [showModalAdd, setShowModalAdd] = React.useState(false);
   const [showModalDelete, setShowModalDelete] = React.useState(false);
-  const [selectedUser, setSelectedUser] = React.useState({
-    name: '',
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
-    permission: '',
-    address: {
-      street: '',
-      suite: '',
-      city: '',
-    },
-  });
+  const [selectedUser, setSelectedUser] = React.useState<User>(defaultUser);
 
   return (
     <>
