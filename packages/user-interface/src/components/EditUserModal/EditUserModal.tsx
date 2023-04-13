@@ -55,7 +55,13 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
     <Modal title='Edit User'>
       <ModalContent>
         <form autoComplete='off'>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              gap: '30px',
+            }}
+          >
             <Input
               label='Name'
               type='text'
@@ -73,7 +79,13 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
               errors={errors.username}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              gap: '30px',
+            }}
+          >
             <Input
               label='Email'
               type='text'
@@ -90,7 +102,13 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
               onChange={addressInput}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              gap: '30px',
+            }}
+          >
             <Input
               label='Suite'
               type='text'
@@ -106,7 +124,13 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
               onChange={addressInput}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              gap: '30px',
+            }}
+          >
             <Input
               label='Phone'
               type='text'

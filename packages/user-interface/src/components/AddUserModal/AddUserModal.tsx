@@ -62,7 +62,8 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
@@ -85,7 +86,8 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
@@ -108,7 +110,8 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
@@ -129,7 +132,8 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
@@ -147,7 +151,7 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
               onChange={handleInput}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'left' }}>
+          <div style={{ display: 'flex', paddingLeft: '16px' }}>
             <Input
               label='Permission'
               type='text'

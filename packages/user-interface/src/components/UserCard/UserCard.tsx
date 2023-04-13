@@ -3,6 +3,7 @@ import { User } from '../../types';
 import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faUserPen } from '@fortawesome/free-solid-svg-icons';
 
 interface UserCardProps {
   user: User;
@@ -20,7 +21,27 @@ export function UserCard({
   return (
     <div className='col-md-3'>
       <div className='user-card'>
-        <div className='user-card__header'>{user.name}</div>
+        <div className='user-card__header'>
+          {user.name}
+          <div className='user-card__icons'>
+            <FontAwesomeIcon
+              icon={faTrashCan}
+              style={{ color: '#C21807', cursor: 'pointer' }}
+              onClick={() => {
+                setShowModalDelete(true);
+                setSelectedUser(user);
+              }}
+            />
+            <FontAwesomeIcon
+              icon={faUserPen}
+              style={{ color: '#7e56da', cursor: 'pointer' }}
+              onClick={() => {
+                setShowModalEdit(true);
+                setSelectedUser(user);
+              }}
+            />
+          </div>
+        </div>
         <div className='user-card__body'>
           <div className='user-card__row'>
             <span className='user-card__label'>Username: </span>
@@ -42,26 +63,6 @@ export function UserCard({
             <span className='user-card__label'>Permission: </span>
             <span className='user-card__info'>{user.permission}</span>
           </div>
-        </div>
-        <div className='user-card__footer'>
-          <FontAwesomeIcon
-            icon={faTrashCan}
-            size='xl'
-            style={{ color: '#C21807', cursor: 'pointer' }}
-            onClick={() => {
-              setShowModalDelete(true);
-              setSelectedUser(user);
-            }}
-          />
-          <button
-            className='user-card__button'
-            onClick={() => {
-              setSelectedUser(user);
-              setShowModalEdit(true);
-            }}
-          >
-            Edit
-          </button>
         </div>
       </div>
     </div>
