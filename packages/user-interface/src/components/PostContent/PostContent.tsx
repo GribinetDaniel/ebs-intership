@@ -12,15 +12,15 @@ interface PostErrors {
 
 interface PostContentProps {
   deletePost?: (e: React.SyntheticEvent) => void;
-  onChange: (
+  onChange?: (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
-  onSubmit: (e: React.SyntheticEvent) => void;
+  onSubmit?: (e: React.SyntheticEvent) => void;
   post: Post;
-  errors: PostErrors;
-  action: string;
+  errors?: PostErrors;
+  action?: string;
 }
 
 export function PostContent({
@@ -42,14 +42,16 @@ export function PostContent({
             value={post.title}
             onChange={onChange}
             name='title'
-            errors={errors.title}
+            errors={errors?.title}
+            disabled={action === 'view'}
           />
           <label className='edit-post__label'>Body</label>
           <TextArea
             name='body'
-            error={errors.body}
+            error={errors?.body}
             value={post.body}
             onChange={onChange}
+            disabled={action === 'view'}
           />
         </form>
         <div className='edit-post__button'>
@@ -61,9 +63,11 @@ export function PostContent({
               Delete
             </button>
           )}
-          <button className='edit-post__button--primary' onClick={onSubmit}>
-            {action}
-          </button>
+          {action !== 'view' && (
+            <button className='edit-post__button--primary' onClick={onSubmit}>
+              {action}
+            </button>
+          )}
         </div>
       </div>
       {showModal && (

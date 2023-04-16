@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Post } from '../types';
+import { User } from '../types';
 import { mainAxios } from '../utils';
 
 export interface ContextInterface {

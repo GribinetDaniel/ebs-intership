@@ -12,7 +12,9 @@ import { isAxiosError } from 'axios';
 export function EditPost() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const path = window.location.pathname;
+  let path = window.location.pathname;
+  path = path.replace('/edit', '');
+
   const { isLoading, error, data } = useQuery(
     `edit-post`,
     () => {

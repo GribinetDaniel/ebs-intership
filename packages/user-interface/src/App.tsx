@@ -8,6 +8,7 @@ import { UserPosts } from './pages/UserPosts';
 import { Users } from './pages/Users';
 import { EditPost } from './pages/EditPost';
 import { NewPost } from './pages/NewPost';
+import { PostPage } from './pages/PostPage';
 export function App() {
   const { isAuth, user } = useContext(UserContext);
   return (
@@ -19,7 +20,8 @@ export function App() {
           {user?.permission === 'admin' && (
             <Route path='/users' element={<Users />} />
           )}
-          <Route path='/posts/:id' element={<EditPost />} />
+          <Route path='/posts/:id/edit' element={<EditPost />} />
+          <Route path='/posts/:id' element={<PostPage />} />
           <Route path='new-post' element={<NewPost />} />
           <Route path='*' element={<Navigate to='' />} />
         </Routes>
