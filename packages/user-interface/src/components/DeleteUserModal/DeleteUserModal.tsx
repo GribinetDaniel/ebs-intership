@@ -3,6 +3,7 @@ import { useQueryClient } from 'react-query';
 import { User } from '../../types';
 import { mainAxios } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
+import { Button } from '../Button';
 
 interface DeleteUserModalProps {
   user: User;
@@ -32,15 +33,18 @@ export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
         </div>
       </ModalContent>
       <ModalFooter>
-        <button
-          className='modal__button--secondary'
+        <Button
+          text='Close'
+          type='secondary'
+          width='100%'
           onClick={() => setShowModal(false)}
-        >
-          Close
-        </button>
-        <button className='modal__button--primary' onClick={deleteUser}>
-          Delete
-        </button>
+        />
+        <Button
+          text='Delete'
+          type='primary'
+          onClick={deleteUser}
+          width='100%'
+        />
       </ModalFooter>
     </Modal>
   );

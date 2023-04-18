@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
+import { Button } from '../Button';
 
 interface DeletePostModalProps {
   deletePost?: (e: React.SyntheticEvent) => void;
@@ -20,15 +21,12 @@ export function DeletePostModal({
         </div>
       </ModalContent>
       <ModalFooter>
-        <button
-          className='modal__button--secondary'
+        <Button
+          type='secondary'
+          text='Close'
           onClick={() => setShowModal(false)}
-        >
-          Close
-        </button>
-        <button className='modal__button--primary' onClick={deletePost}>
-          Delete
-        </button>
+        />
+        <Button type='primary' text='Delete' onClick={deletePost} />
       </ModalFooter>
     </Modal>
   );

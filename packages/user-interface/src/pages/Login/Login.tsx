@@ -3,6 +3,7 @@ import { mainAxios } from '../../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 import { isAxiosError } from 'axios';
 import './index.scss';
 
@@ -46,7 +47,7 @@ export function Login() {
         <div>
           <h2>Welcome back</h2>
           <p className='login__text'>Welcome back! Please enter our details</p>
-          <form onSubmit={handleSubmit}>
+          <form>
             <Input
               label='Username'
               type='text'
@@ -65,7 +66,12 @@ export function Login() {
               onChange={handleInput}
               errors={errors.password}
             />
-            <button className='register__button--primary'>Sign in</button>
+            <Button
+              type='primary'
+              text='Sign in'
+              onClick={handleSubmit}
+              style={{ padding: '10px 20px', margin: '20px 0px' }}
+            />
             <p>
               Don't have an account?{' '}
               <Link to={'/register'} className='login__link'>

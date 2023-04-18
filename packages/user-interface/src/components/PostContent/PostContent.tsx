@@ -4,6 +4,7 @@ import { TextArea } from '../TextArea';
 import { DeletePostModal } from '../DeletePostModal';
 import { Post } from '../../types';
 import './index.scss';
+import { Button } from '../Button';
 
 interface PostErrors {
   title: string;
@@ -54,16 +55,20 @@ export function PostContent({
         </form>
         <div className='edit-post__button'>
           {action === 'edit' && (
-            <button
-              className='edit-post__button--secondary'
+            <Button
+              text='Delete'
+              type='secondary'
+              style={{ width: '100px' }}
               onClick={() => setShowModal(true)}
-            >
-              Delete
-            </button>
+            />
           )}
-          <button className='edit-post__button--primary' onClick={onSubmit}>
-            {action}
-          </button>
+          <Button
+            type='primary'
+            text={action}
+            width='100px'
+            style={{ marginLeft: 'auto', width: '100px' }}
+            onClick={onSubmit}
+          />
         </div>
       </div>
       {showModal && (

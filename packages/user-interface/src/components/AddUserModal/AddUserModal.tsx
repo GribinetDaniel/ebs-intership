@@ -6,6 +6,7 @@ import { mainAxios } from '../../utils';
 import { ModalContent } from '../Modal';
 import { isAxiosError } from 'axios';
 import { defaultUser, User } from '../../types';
+import { Button } from '../Button';
 
 export interface AddUserModalProps {
   setShowModal: (arg0: boolean) => void;
@@ -92,7 +93,7 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
           >
             <Input
               label='Password'
-              type='text'
+              type='password'
               name='password'
               value={newUser.password}
               onChange={handleInput}
@@ -164,15 +165,12 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <button
-          className='modal__button--secondary'
+        <Button
+          text='Close'
+          type='secondary'
           onClick={() => setShowModal(false)}
-        >
-          Close
-        </button>
-        <button className='modal__button--primary' onClick={handleSubmit}>
-          Create
-        </button>
+        />
+        <Button type='primary' onClick={handleSubmit} text='Create' />
       </ModalFooter>
     </Modal>
   );

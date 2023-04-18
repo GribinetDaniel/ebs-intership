@@ -4,6 +4,7 @@ import { mainAxios } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
 import { Input } from '../Input';
 import { User } from '../../types';
+import { Button } from '../Button';
 
 export interface EditUserModalProps {
   user: User;
@@ -150,15 +151,12 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <button
-          className='modal__button--secondary'
+        <Button
+          type='secondary'
+          text='Close'
           onClick={() => setShowModal(false)}
-        >
-          Close
-        </button>
-        <button className='modal__button--primary' onClick={handleSubmit}>
-          Edit
-        </button>
+        />
+        <Button type='primary' text='Edit' onClick={handleSubmit} />
       </ModalFooter>
     </Modal>
   );

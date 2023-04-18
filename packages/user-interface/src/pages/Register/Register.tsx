@@ -8,6 +8,7 @@ import { PersonalInfo } from '../../components/PersonalInfo';
 import { defaultUser, User } from '../../types';
 import { isAxiosError } from 'axios';
 import './index.scss';
+import { Button } from '../../components/Button';
 
 export function Register() {
   const navigate = useNavigate();
@@ -127,16 +128,28 @@ export function Register() {
             )}
             <div className='register__button'>
               {currentStep === 1 && (
-                <button className='register__button--secondary' onClick={back}>
-                  Back
-                </button>
+                // <button className='register__button--secondary' onClick={back}>
+                //   Back
+                // </button>
+                <Button
+                  type='secondary'
+                  text='Back'
+                  onClick={back}
+                  style={{ padding: '10px 20px', margin: '20px 0px' }}
+                />
               )}
-              <button
+              {/* <button
                 className='register__button--primary'
                 onClick={handleSubmit}
               >
                 {currentStep === 0 ? 'Next' : 'Sign Up'}
-              </button>
+              </button> */}
+              <Button
+                type='primary'
+                text={currentStep === 0 ? 'Next' : 'Sign Up'}
+                onClick={handleSubmit}
+                style={{ padding: '10px 20px', margin: '20px 0px' }}
+              />
             </div>
           </div>
         </div>
