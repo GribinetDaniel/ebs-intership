@@ -65,7 +65,6 @@ export function PostContent({
           <Button
             type='primary'
             text={action}
-            width='100px'
             style={{ marginLeft: 'auto', width: '100px' }}
             onClick={onSubmit}
           />

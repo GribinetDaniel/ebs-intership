@@ -36,15 +36,9 @@ export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
         <Button
           text='Close'
           type='secondary'
-          width='100%'
           onClick={() => setShowModal(false)}
         />
-        <Button
-          text='Delete'
-          type='primary'
-          onClick={deleteUser}
-          width='100%'
-        />
+        <Button text='Delete' type='primary' onClick={deleteUser} />
       </ModalFooter>
     </Modal>
   );
