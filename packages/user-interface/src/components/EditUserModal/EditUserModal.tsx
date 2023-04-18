@@ -151,12 +151,12 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <Button
-          type='secondary'
-          text='Close'
-          onClick={() => setShowModal(false)}
-        />
-        <Button type='primary' text='Edit' onClick={handleSubmit} />
+        <Button type='secondary' onClick={() => setShowModal(false)}>
+          Close
+        </Button>
+        <Button type='primary' onClick={handleSubmit}>
+          Edit
+        </Button>
       </ModalFooter>
     </Modal>
   );

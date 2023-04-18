@@ -165,12 +165,12 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <Button
-          text='Close'
-          type='secondary'
-          onClick={() => setShowModal(false)}
-        />
-        <Button type='primary' onClick={handleSubmit} text='Create' />
+        <Button type='secondary' onClick={() => setShowModal(false)}>
+          Close
+        </Button>
+        <Button type='primary' onClick={handleSubmit}>
+          Create
+        </Button>
       </ModalFooter>
     </Modal>
   );

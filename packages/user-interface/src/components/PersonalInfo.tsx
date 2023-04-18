@@ -30,11 +30,7 @@ export function PersonalInfo({
           onChange={handleInput}
         />
         <label className='register__label'>City</label>
-        <Autocomplete
-          className='auth__input'
-          cityInput={cityInput}
-          placeholder='Chisinau'
-        />
+        <Autocomplete cityInput={cityInput} placeholder='Chisinau' />
 
         <Input
           label='Street'

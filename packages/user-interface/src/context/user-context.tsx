@@ -1,5 +1,6 @@
 import React from 'react';
-import { User, Post } from '../types';
+import { useQuery } from 'react-query';
+import { User } from '../types';
 import { mainAxios } from '../utils';
 
 export interface ContextInterface {
@@ -29,15 +30,13 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   );
   const [user, setUser] = React.useState<User>();
 
+  const { data } = useQuery('user', () => {
+    return mainAxios.get('/account');
+  });
+
   React.useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await mainAxios.get('/account');
-        setUser(response.data);
-      } catch (err) {}
-    }
-    getUser();
-  }, []);
+    setUser(data?.data);
+  }, [data]);
 
   return (
     <UserContext.Provider

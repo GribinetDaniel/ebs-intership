@@ -21,12 +21,12 @@ export function DeletePostModal({
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button
-          type='secondary'
-          text='Close'
-          onClick={() => setShowModal(false)}
-        />
-        <Button type='primary' text='Delete' onClick={deletePost} />
+        <Button type='secondary' onClick={() => setShowModal(false)}>
+          Close
+        </Button>
+        <Button type='primary' onClick={deletePost}>
+          Delete
+        </Button>
       </ModalFooter>
     </Modal>
   );

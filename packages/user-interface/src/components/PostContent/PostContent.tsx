@@ -56,18 +56,20 @@ export function PostContent({
         <div className='edit-post__button'>
           {action === 'edit' && (
             <Button
-              text='Delete'
               type='secondary'
               style={{ width: '100px' }}
               onClick={() => setShowModal(true)}
-            />
+            >
+              Delete
+            </Button>
           )}
           <Button
             type='primary'
-            text={action}
             style={{ marginLeft: 'auto', width: '100px' }}
             onClick={onSubmit}
-          />
+          >
+            {action}
+          </Button>
         </div>
       </div>
       {showModal && (

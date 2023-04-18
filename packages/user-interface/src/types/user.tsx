@@ -29,6 +29,7 @@ export interface User {
   phone: string;
   website: string;
   company: Company;
+  userImage: string;
 }
 
 export const defaultUser = {
@@ -56,4 +57,5 @@ export const defaultUser = {
     catchPhrase: '',
     bs: '',
   },
+  userImage: '#ffd847',
 };

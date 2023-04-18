@@ -29,7 +29,6 @@ export function Users() {
         <div className='content'>
           <Header />
           <div className='home-page'>
-            {/* <h2>Users</h2> */}
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {data?.data.map((user: User) => (
                 <UserCard

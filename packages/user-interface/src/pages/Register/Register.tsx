@@ -128,28 +128,21 @@ export function Register() {
             )}
             <div className='register__button'>
               {currentStep === 1 && (
-                // <button className='register__button--secondary' onClick={back}>
-                //   Back
-                // </button>
                 <Button
                   type='secondary'
-                  text='Back'
                   onClick={back}
                   style={{ padding: '10px 20px', margin: '20px 0px' }}
-                />
+                >
+                  Back
+                </Button>
               )}
-              {/* <button
-                className='register__button--primary'
-                onClick={handleSubmit}
-              >
-                {currentStep === 0 ? 'Next' : 'Sign Up'}
-              </button> */}
               <Button
                 type='primary'
-                text={currentStep === 0 ? 'Next' : 'Sign Up'}
                 onClick={handleSubmit}
                 style={{ padding: '10px 20px', margin: '20px 0px' }}
-              />
+              >
+                {currentStep === 0 ? 'Next' : 'Sign Up'}
+              </Button>
             </div>
           </div>
         </div>

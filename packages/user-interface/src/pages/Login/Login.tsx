@@ -68,10 +68,11 @@ export function Login() {
             />
             <Button
               type='primary'
-              text='Sign in'
               onClick={handleSubmit}
               style={{ padding: '10px 20px', margin: '20px 0px' }}
-            />
+            >
+              Sign in
+            </Button>
             <p>
               Don't have an account?{' '}
               <Link to={'/register'} className='login__link'>
