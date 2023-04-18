@@ -7,7 +7,7 @@ import './index.scss';
 
 export function Login() {
   const navigate = useNavigate();
-  const { isAuth, setIsAuth, user, setUser } = useContext(UserContext);
+  const { setIsAuth, setUser } = useContext(UserContext);
   const [newUser, setNewUser] = useState({
     username: '',
     password: '',
@@ -42,10 +42,9 @@ export function Login() {
           <h2>Welcome back</h2>
           <p className='login__text'>Welcome back! Please enter our details</p>
           <form onSubmit={handleSubmit}>
-            <label htmlFor='username' className='login__label'>
-              Username:
-            </label>
             <Input
+              label='Username'
+              classNameLabel='login__label'
               type='text'
               id='username'
               name='username'
@@ -54,10 +53,9 @@ export function Login() {
               value={newUser.username}
               onChange={handleInput}
             />
-            <label htmlFor='password' className='login__label'>
-              Password:
-            </label>
             <Input
+              label='Password'
+              classNameLabel='login__label'
               type='password'
               id='password'
               name='password'
