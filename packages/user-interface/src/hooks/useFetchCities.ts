@@ -1,19 +1,21 @@
-import { useQuery } from 'react-query';
-import axios from 'axios';
+import { useQuery } from "react-query";
+import axios from "axios";
+import _ from "lodash";
 
 export function useFetchCities() {
-  const { data } = useQuery('cities', () => {
-    return axios.get('https://main-api.posta.md/nomenclatures/cities');
-  });
+ const { data } = useQuery("cities", () => {
+  return axios.get("https://main-api.posta.md/nomenclatures/cities");
+ });
 
-  let cities: Array<any> = [];
+ let cities: Array<{ name: string; region: string }> = [];
 
-  data?.data.results.map((elem: any) => cities.push(elem.name));
-  const uniqueCities = cities.filter((item, pos) => {
-    return cities.indexOf(item) == pos;
-  });
+ data?.data.results.map((elem: any) => {
+  cities.push({ name: elem.name, region: elem.region.name });
+ });
 
-  return {
-    uniqueCities,
-  };
+ const uniqueCities = _.uniqBy(cities, "name");
+
+ return {
+  uniqueCities,
+ };
 }

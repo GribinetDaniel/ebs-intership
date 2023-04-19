@@ -67,162 +67,170 @@ export function Account() {
   }
  };
 
+ console.log(modifedUser);
+
  return (
-  <div className="content">
-   <Header />
-   <div className="settings">
-    <div className="settings__header">
-     <Button type="circle" onClick={() => navigate("/")}>
-      <FontAwesomeIcon icon={faArrowLeft} size="xs" />
-     </Button>
-     Account Settings
-    </div>
-    <hr className="settings__line" />
-    <div className="settings__body">
-     <div className="settings__left">
-      <div className="settings__description">
-       <h3>User Information</h3>
-       <p>
-        Here you can edit public information about yourself <br />
-        The changes will be displayed for other users
-       </p>
-      </div>
-      <form autoComplete="off">
-       <div
-        style={{
-         display: "flex",
-         gap: "70px",
-         marginTop: "30px",
-        }}
-       >
-        <div style={{ width: "50%" }}>
-         <Input
-          label="Email"
-          name="email"
-          type="email"
-          value={modifedUser.email}
-          onChange={handleInput}
-          errors={errors.email}
-         />
-        </div>
-        <div style={{ width: "50%" }}>
-         <Input
-          label="Phone"
-          name="phone"
-          type="text"
-          value={modifedUser.phone}
-          onChange={handleInput}
-         />
-        </div>
-       </div>
-       <div
-        style={{
-         display: "flex",
-         gap: "70px",
-         marginTop: "20px",
-        }}
-       >
-        <div style={{ width: "50%" }}>
-         <Input
-          label="Name"
-          name="name"
-          type="text"
-          value={modifedUser.name}
-          onChange={handleInput}
-          errors={errors.name}
-         />
-        </div>
-        <div style={{ width: "50%" }}>
-         <Input
-          label="Username"
-          name="username"
-          type="text"
-          value={modifedUser.username}
-          onChange={handleInput}
-          errors={errors.username}
-         />
-        </div>
-       </div>
-       <div
-        style={{
-         display: "flex",
-         gap: "70px",
-         marginTop: "20px",
-        }}
-       >
-        <div style={{ width: "33%" }}>
-         <Autocomplete
-          value={modifedUser.address.city}
-          setValue={(value: string) =>
-           setModifedUser({
-            ...modifedUser,
-            address: {
-             ...modifedUser.address,
-             city: value,
-            },
-           })
-          }
-         />
-        </div>
-        <div style={{ width: "33%" }}>
-         <Input
-          label="Street"
-          name="street"
-          type="text"
-          value={modifedUser.address.street}
-          onChange={addressInput}
-         />
-        </div>
-        <div style={{ width: "33%" }}>
-         <Input
-          label="Suite"
-          name="suite"
-          type="text"
-          value={modifedUser.address.suite}
-          onChange={addressInput}
-         />
-        </div>
-       </div>
-      </form>
-      <div style={{ textAlign: "right" }}>
-       <Button
-        type="primary"
-        style={{
-         width: "100px",
-         margin: "10px 0px",
-         position: "absolute",
-         bottom: "10px",
-         right: "400px",
-        }}
-        onClick={handleSubmit}
-       >
-        Save
+  <>
+   {user && (
+    // {user}
+    <div className="content">
+     <Header />
+     <div className="settings">
+      <div className="settings__header">
+       <Button type="circle" onClick={() => navigate("/")}>
+        <FontAwesomeIcon icon={faArrowLeft} size="xs" />
        </Button>
+       Account Settings
       </div>
-     </div>
-     <div className="settings__right">
-      <div className="settings__user-image">
-       <UserImage
-        style={{
-         width: "150px",
-         height: "150px",
-         fontSize: "50px",
-         backgroundColor: modifedUser.userImage,
-         marginBottom: "30px",
-        }}
-       />
+      <hr className="settings__line" />
+      <div className="settings__body">
+       <div className="settings__left">
+        <div className="settings__description">
+         <h3>User Information</h3>
+         <p>
+          Here you can edit public information about yourself <br />
+          The changes will be displayed for other users
+         </p>
+        </div>
+        <form autoComplete="off">
+         <div
+          style={{
+           display: "flex",
+           gap: "70px",
+           marginTop: "30px",
+          }}
+         >
+          <div style={{ width: "50%" }}>
+           <Input
+            label="Email"
+            name="email"
+            type="email"
+            value={modifedUser.email}
+            onChange={handleInput}
+            errors={errors.email}
+           />
+          </div>
+          <div style={{ width: "50%" }}>
+           <Input
+            label="Phone"
+            name="phone"
+            type="text"
+            value={modifedUser.phone}
+            onChange={handleInput}
+           />
+          </div>
+         </div>
+         <div
+          style={{
+           display: "flex",
+           gap: "70px",
+           marginTop: "20px",
+          }}
+         >
+          <div style={{ width: "50%" }}>
+           <Input
+            label="Name"
+            name="name"
+            type="text"
+            value={modifedUser.name}
+            onChange={handleInput}
+            errors={errors.name}
+           />
+          </div>
+          <div style={{ width: "50%" }}>
+           <Input
+            label="Username"
+            name="username"
+            type="text"
+            value={modifedUser.username}
+            onChange={handleInput}
+            errors={errors.username}
+           />
+          </div>
+         </div>
+         <div
+          style={{
+           display: "flex",
+           gap: "70px",
+           marginTop: "20px",
+          }}
+         >
+          <div style={{ width: "33%" }}>
+           <Autocomplete
+            // value={modifedUser.address.city}
+            setValue={(value: string) =>
+             setModifedUser({
+              ...modifedUser,
+              address: {
+               ...modifedUser.address,
+               city: value,
+              },
+             })
+            }
+            value={user.address.city}
+           />
+          </div>
+          <div style={{ width: "33%" }}>
+           <Input
+            label="Street"
+            name="street"
+            type="text"
+            value={modifedUser.address.street}
+            onChange={addressInput}
+           />
+          </div>
+          <div style={{ width: "33%" }}>
+           <Input
+            label="Suite"
+            name="suite"
+            type="text"
+            value={modifedUser.address.suite}
+            onChange={addressInput}
+           />
+          </div>
+         </div>
+        </form>
+        <div style={{ textAlign: "right" }}>
+         <Button
+          type="primary"
+          style={{
+           width: "100px",
+           margin: "10px 0px",
+           position: "absolute",
+           bottom: "10px",
+           right: "400px",
+          }}
+          onClick={handleSubmit}
+         >
+          Save
+         </Button>
+        </div>
+       </div>
+       <div className="settings__right">
+        <div className="settings__user-image">
+         <UserImage
+          style={{
+           width: "150px",
+           height: "150px",
+           fontSize: "50px",
+           backgroundColor: modifedUser.userImage,
+           marginBottom: "30px",
+          }}
+         />
+        </div>
+        <CirclePicker
+         onChange={(color: any) =>
+          setModifedUser({
+           ...modifedUser,
+           userImage: color.hex,
+          })
+         }
+        />
+       </div>
       </div>
-      <CirclePicker
-       onChange={(color: any) =>
-        setModifedUser({
-         ...modifedUser,
-         userImage: color.hex,
-        })
-       }
-      />
      </div>
     </div>
-   </div>
-  </div>
+   )}
+  </>
  );
 }

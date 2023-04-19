@@ -1,6 +1,7 @@
 import React from "react";
 import { useFetchCities } from "../../hooks/useFetchCities";
 import { Input } from "../Input";
+import _ from "lodash";
 import "./index.scss";
 import "../../index.css";
 
@@ -20,12 +21,19 @@ export function Autocomplete({
  const [city, setCity] = React.useState(value);
 
  let matchingCities = uniqueCities.filter(element => {
-  return element.toUpperCase().includes(city.toUpperCase());
+  return element.name.toUpperCase().includes(city.toUpperCase());
  });
+
+ let regions = matchingCities.map(elem => elem.region);
+ regions = regions.filter((item, pos) => {
+  return regions.indexOf(item) === pos;
+ });
+
  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
   setCity(event.target.value);
   setValue(event.target.value);
  };
+
  const cityClicked = (event: React.MouseEvent) => {
   const element = event.target as HTMLElement;
   setValue(element.textContent!);
@@ -45,10 +53,18 @@ export function Autocomplete({
    />
    {isOpen && city && (
     <div className="suggestions">
-     {matchingCities?.map(city => (
-      <div className="suggestion" onClick={cityClicked}>
-       {city}
-      </div>
+     {regions.map(region => (
+      <>
+       <div className="region">{region}</div>
+       {matchingCities.map(
+        elem =>
+         elem.region === region && (
+          <div className="suggestion" onClick={cityClicked}>
+           {elem.name}
+          </div>
+         )
+       )}
+      </>
      ))}
     </div>
    )}
