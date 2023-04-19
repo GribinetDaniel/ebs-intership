@@ -9,6 +9,8 @@ export function Homepage() {
   const { data, isLoading, error } = useQuery('posts', () => {
     return mainAxios.get('/posts');
   });
+
+  consolen.log(data?.data);
   return (
     <>
       {isLoading && <Loading />}
