@@ -5,6 +5,20 @@
   height: 430px;
   border-radius: 20px;
   padding: 20px 50px;
+  cursor: pointer;
+  transition: all 1s ease;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 45px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px 12px 13px,
+      rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    .post-card__icon--arrow {
+      animation-name: appear, move-right;
+      animation-duration: 1s, 1s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+    }
+  }
+
   &__label {
     padding-top: 10px;
     font-size: 20px;
@@ -27,7 +41,6 @@
   }
 
   &__body {
-    // font-family: cursive;
     font-family: 'Lucida Console', Courier, monospace;
     font-size: 20px;
     font-weight: 500;
@@ -60,17 +73,37 @@
     color: #7e56da;
   }
 
-  &__button {
-    width: 100px;
-    height: 50px;
-    background-color: #7e56da;
-    color: white;
-    // padding: 10px 20px;
-    // margin: 20px 0px;
-    border-radius: 15px;
-    border: none;
-    &:hover {
-      background-color: #764ed4;
-    }
+  &__icon-box {
+    position: relative;
+    width: 30%;
+    height: 100%;
+  }
+
+  &__icon--arrow {
+    position: absolute;
+    opacity: 0;
+    bottom: 35%;
+    left: 0;
+    transition: transform 0.5s ease;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes move-right {
+  from {
+    transform: translate(0px);
+  }
+
+  to {
+    transform: translate(100px);
   }
 }

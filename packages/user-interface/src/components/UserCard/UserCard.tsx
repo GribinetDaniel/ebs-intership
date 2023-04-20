@@ -25,6 +25,7 @@ export function UserCard({
           {user.name}
           <div className='user-card__icons'>
             <FontAwesomeIcon
+              className='user-card__icon'
               icon={faTrashCan}
               style={{ color: '#C21807', cursor: 'pointer' }}
               onClick={() => {
@@ -33,6 +34,7 @@ export function UserCard({
               }}
             />
             <FontAwesomeIcon
+              className='user-card__icon'
               icon={faUserPen}
               style={{ color: '#7e56da', cursor: 'pointer' }}
               onClick={() => {

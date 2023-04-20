@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user-context';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { mainAxios } from '../../utils';
 import { useQuery } from 'react-query';
 
@@ -18,7 +18,10 @@ export function PostCard(props: Post) {
   return (
     <>
       {data && (
-        <div className='post-card'>
+        <div
+          className='post-card'
+          onClick={() => navigate(`/posts/${props.id}`)}
+        >
           <div className='post-card__label'>Name</div>
           <div className='post-card__title'>{props.title}</div>
           {(user?.permission === 'admin' ||
@@ -36,17 +39,18 @@ export function PostCard(props: Post) {
               <div className='post-card__label'>Author</div>
               <div className='post-card__author'>{data.data.username}</div>
             </div>
-            <button
-              className='post-card__button'
-              onClick={() => navigate(`/posts/${props.id}`)}
-            >
-              Read More
-            </button>
+
+            <div className='post-card__icon-box'>
+              <FontAwesomeIcon
+                className='post-card__icon--arrow'
+                icon={faAngleRight}
+                size='2xl'
+                style={{ color: '#c5c5c5' }}
+              />
+            </div>
           </div>
         </div>
       )}
     </>
-
-    // </div>
   );
 }
