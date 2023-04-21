@@ -72,7 +72,6 @@ export function Account() {
  return (
   <>
    {user && (
-    // {user}
     <div className="content">
      <Header />
      <div className="settings">
@@ -93,101 +92,68 @@ export function Account() {
          </p>
         </div>
         <form autoComplete="off">
-         <div
-          style={{
-           display: "flex",
-           gap: "70px",
-           marginTop: "30px",
-          }}
-         >
-          <div style={{ width: "50%" }}>
-           <Input
-            label="Email"
-            name="email"
-            type="email"
-            value={modifedUser.email}
-            onChange={handleInput}
-            errors={errors.email}
-           />
-          </div>
-          <div style={{ width: "50%" }}>
-           <Input
-            label="Phone"
-            name="phone"
-            type="text"
-            value={modifedUser.phone}
-            onChange={handleInput}
-           />
-          </div>
+         <div className="settings__row">
+          <Input
+           label="Email"
+           name="email"
+           type="email"
+           value={modifedUser.email}
+           onChange={handleInput}
+           errors={errors.email}
+          />
+          <Input
+           label="Phone"
+           name="phone"
+           type="text"
+           value={modifedUser.phone}
+           onChange={handleInput}
+          />
          </div>
-         <div
-          style={{
-           display: "flex",
-           gap: "70px",
-           marginTop: "20px",
-          }}
-         >
-          <div style={{ width: "50%" }}>
-           <Input
-            label="Name"
-            name="name"
-            type="text"
-            value={modifedUser.name}
-            onChange={handleInput}
-            errors={errors.name}
-           />
-          </div>
-          <div style={{ width: "50%" }}>
-           <Input
-            label="Username"
-            name="username"
-            type="text"
-            value={modifedUser.username}
-            onChange={handleInput}
-            errors={errors.username}
-           />
-          </div>
+         <div className="settings__row">
+          <Input
+           label="Name"
+           name="name"
+           type="text"
+           value={modifedUser.name}
+           onChange={handleInput}
+           errors={errors.name}
+          />
+          <Input
+           label="Username"
+           name="username"
+           type="text"
+           value={modifedUser.username}
+           onChange={handleInput}
+           errors={errors.username}
+          />
          </div>
-         <div
-          style={{
-           display: "flex",
-           gap: "70px",
-           marginTop: "20px",
-          }}
-         >
-          <div style={{ width: "33%" }}>
-           <Autocomplete
-            // value={modifedUser.address.city}
-            setValue={(value: string) =>
-             setModifedUser({
-              ...modifedUser,
-              address: {
-               ...modifedUser.address,
-               city: value,
-              },
-             })
-            }
-            value={user.address.city}
-           />
-          </div>
-          <div style={{ width: "33%" }}>
-           <Input
-            label="Street"
-            name="street"
-            type="text"
-            value={modifedUser.address.street}
-            onChange={addressInput}
-           />
-          </div>
-          <div style={{ width: "33%" }}>
-           <Input
-            label="Suite"
-            name="suite"
-            type="text"
-            value={modifedUser.address.suite}
-            onChange={addressInput}
-           />
-          </div>
+         <div className="settings__row">
+          <Autocomplete
+           setValue={(value: string) =>
+            setModifedUser({
+             ...modifedUser,
+             address: {
+              ...modifedUser.address,
+              city: value,
+             },
+            })
+           }
+           value={user.address.city}
+          />
+          <Input
+           label="Street"
+           name="street"
+           type="text"
+           value={modifedUser.address.street}
+           onChange={addressInput}
+          />
+          <Input
+           label="Suite"
+           name="suite"
+           type="text"
+           value={modifedUser.address.suite}
+           onChange={addressInput}
+          />
          </div>
         </form>
         <div style={{ textAlign: "right" }}>

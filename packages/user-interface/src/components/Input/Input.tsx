@@ -26,7 +26,7 @@ export function Input({
  let className = "input";
  errors && (className += " error");
  return (
-  <div>
+  <div style={{ width: "100%" }}>
    {label && <label>{label}</label>}
    <input
     type={type}
