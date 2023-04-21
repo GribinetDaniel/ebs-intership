@@ -1,10 +1,11 @@
 import React from 'react';
 import { useQueryClient, useMutation } from 'react-query';
-import { mainAxios } from '../../utils';
+import { mainAxios, catchAxiosError } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
 import { Input } from '../Input';
 import { User } from '../../types';
 import { Button } from '../Button';
+import { isAxiosError } from 'axios';
 
 export interface EditUserModalProps {
   user: User;
@@ -49,13 +50,9 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
         queryClient.refetchQueries('users');
         setShowModal(false);
       },
-      onError: (err: any) => {
-        console.log(err);
-        let errs: Array<any> = [];
-        const obj: any = {};
-        errs = err.response.data.errors;
-        errs.forEach((err) => (obj[err.param] = err.msg));
-        setErrors(obj);
+      onError: (err) => {
+        if (isAxiosError(err)) setErrors(catchAxiosError(err));
+        else console.log(err);
       },
     });
   }

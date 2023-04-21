@@ -20,9 +20,13 @@ router.post('/login', async (req, res) => {
   });
 
   if (!usernameResult)
-    res.status(400).json({ param: 'username', msg: 'Inccorect Username' });
+    res
+      .status(400)
+      .json({ errors: [{ param: 'username', msg: 'Inccorect Username' }] });
   else if (result == undefined)
-    res.status(400).json({ param: 'password', msg: 'Incorrect password' });
+    res
+      .status(400)
+      .json({ errors: [{ param: 'password', msg: 'Incorrect password' }] });
   else {
     let token = createToken(result);
     res.json({ token });

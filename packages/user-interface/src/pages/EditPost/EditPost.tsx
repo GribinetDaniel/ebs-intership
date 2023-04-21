@@ -3,10 +3,11 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { ErrorPage } from '../../components/ErrorPage';
 import { Header } from '../../components/Header';
 import { Loading } from '../../components/Loading';
-import { mainAxios } from '../../utils';
+import { mainAxios, catchAxiosError } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { PostContent } from '../../components/PostContent';
 import { defaultPost, Post } from '../../types';
+import { isAxiosError } from 'axios';
 
 export function EditPost() {
   const navigate = useNavigate();
@@ -53,12 +54,9 @@ export function EditPost() {
         navigate('/own-posts');
       },
 
-      onError: (error: any) => {
-        let errs: Array<{ msg: string; param: string }> = [];
-        const obj: any = {};
-        errs = error!.response!.data.errors;
-        errs.forEach((err) => (obj[err.param] = err.msg));
-        setErrors(obj);
+      onError: (error) => {
+        if (isAxiosError(error)) setErrors(catchAxiosError(error));
+        else console.log(error);
       },
     });
   };

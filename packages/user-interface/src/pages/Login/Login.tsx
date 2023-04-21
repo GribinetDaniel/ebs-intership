@@ -6,6 +6,7 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { isAxiosError } from 'axios';
 import { useMutation } from 'react-query';
+import { catchAxiosError } from '../../utils';
 import './index.scss';
 
 export function Login() {
@@ -53,10 +54,8 @@ export function Login() {
         });
       },
       onError(err) {
-        if (isAxiosError(err)) {
-          const errs = err!.response!.data;
-          setErrors({ ...errors, [errs.param]: errs.msg });
-        } else console.log(err);
+        if (isAxiosError(err)) setErrors(catchAxiosError(err));
+        else console.log(err);
         setNewUser({ ...newUser, password: '' });
       },
     });

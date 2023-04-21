@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, ModalFooter } from '../Modal';
 import { Input } from '../Input';
 import { useMutation, useQueryClient } from 'react-query';
-import { mainAxios } from '../../utils';
+import { mainAxios, catchAxiosError } from '../../utils';
 import { ModalContent } from '../Modal';
 import { isAxiosError } from 'axios';
 import { defaultUser, User } from '../../types';
@@ -53,13 +53,8 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
         queryClient.refetchQueries('users');
       },
       onError: (error) => {
-        if (isAxiosError(error)) {
-          let errs: Array<any> = [];
-          const obj: any = {};
-          errs = error!.response!.data.errors;
-          errs.forEach((err) => (obj[err.param] = err.msg));
-          setErrors(obj);
-        } else console.log(error);
+        if (isAxiosError(error)) setErrors(catchAxiosError(error));
+        else console.log(error);
       },
     });
   }

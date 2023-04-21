@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { mainAxios } from '../../utils';
+import { catchAxiosError, mainAxios } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
@@ -77,10 +77,7 @@ export function Register() {
         },
         onError(err) {
           if (isAxiosError(err)) {
-            let errs: Array<{ msg: string; param: string }> = [];
-            const obj: any = {};
-            errs = err!.response!.data.errors;
-            errs.forEach((err) => (obj[err.param] = err.msg));
+            const obj = catchAxiosError(err);
             setErrors(obj);
             if (obj.username || obj.name || obj.email || obj.password)
               setCurrentStep(0);

@@ -5,7 +5,7 @@ import { Header } from '../../components/Header';
 import { PostContent } from '../../components/PostContent';
 import { UserContext } from '../../context/user-context';
 import { defaultPost, Post } from '../../types';
-import { mainAxios } from '../../utils';
+import { catchAxiosError, mainAxios } from '../../utils';
 import { isAxiosError } from 'axios';
 
 export function NewPost() {
@@ -43,13 +43,8 @@ export function NewPost() {
         navigate('/own-posts');
       },
       onError: (err) => {
-        if (isAxiosError(err)) {
-          let errs: Array<{ msg: string; param: string }> = [];
-          const obj: any = {};
-          errs = err!.response!.data.errors;
-          errs.forEach((err) => (obj[err.param] = err.msg));
-          setErrors(obj);
-        } else console.log(err);
+        if (isAxiosError(err)) setErrors(catchAxiosError(err));
+        else console.log(err);
       },
     });
   }
