@@ -5,6 +5,7 @@ import { UserContext } from '../../context/user-context';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { isAxiosError } from 'axios';
+import { useMutation } from 'react-query';
 import './index.scss';
 
 export function Login() {
@@ -19,28 +20,47 @@ export function Login() {
     password: '',
   });
 
+  const loginMutation = useMutation({
+    mutationFn: (newUser: { username: string; password: string }) => {
+      return mainAxios.post('/auth/login', newUser);
+    },
+  });
+
+  const accountMutation = useMutation({
+    mutationFn: (data: any) => {
+      return mainAxios.get('/account');
+    },
+  });
+
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
   };
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      const loginResponse = await mainAxios.post('/auth/login', newUser);
-      localStorage.setItem('token', loginResponse.data.token);
-      const accountResponse = await mainAxios.get('/account');
-      setUser(accountResponse.data);
-      setIsAuth(true);
-      navigate('/');
-    } catch (err) {
-      if (isAxiosError(err)) {
-        const errs = err!.response!.data;
-        setErrors({ ...errors, [errs.param]: errs.msg });
-      } else console.log(err);
-      setNewUser({ ...newUser, password: '' });
-    }
+    loginMutation.mutate(newUser, {
+      onSuccess(data) {
+        localStorage.setItem('token', data.data.token);
+        accountMutation.mutate(data, {
+          onSuccess(data) {
+            setUser(data.data);
+            setIsAuth(true);
+            navigate('/');
+          },
+          onError(err) {
+            console.log(err);
+          },
+        });
+      },
+      onError(err) {
+        if (isAxiosError(err)) {
+          const errs = err!.response!.data;
+          setErrors({ ...errors, [errs.param]: errs.msg });
+        } else console.log(err);
+        setNewUser({ ...newUser, password: '' });
+      },
+    });
   }
-  console.log(errors);
   return (
     <div className='login'>
       <div className='login__left-part'>
@@ -71,6 +91,7 @@ export function Login() {
               text='Sign in'
               onClick={handleSubmit}
               style={{ padding: '10px 20px', margin: '20px 0px' }}
+              disabled={loginMutation.isLoading || accountMutation.isLoading}
             />
             <p>
               Don't have an account?{' '}

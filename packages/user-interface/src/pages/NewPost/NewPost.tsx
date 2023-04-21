@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { PostContent } from '../../components/PostContent';
@@ -14,9 +14,14 @@ export function NewPost() {
   const navigate = useNavigate();
   const [post, setPost] = React.useState<Post>(defaultPost);
 
+  const createMutation = useMutation({
+    mutationFn: (post: Post) => {
+      return mainAxios.post('/posts', post);
+    },
+  });
+
   React.useEffect(() => {
-    if (user) setPost({ ...post, userId: user.id });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (user) setPost({ ...post, userId: user.id! });
   }, [user]);
 
   const [errors, setErrors] = React.useState({
@@ -32,19 +37,21 @@ export function NewPost() {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      await mainAxios.post('/posts', post);
-      queryClient.refetchQueries('posts');
-      navigate('/own-posts');
-    } catch (err) {
-      if (isAxiosError(err)) {
-        let errs: Array<{ msg: string; param: string }> = [];
-        const obj: any = {};
-        errs = err!.response!.data.errors;
-        errs.forEach((err) => (obj[err.param] = err.msg));
-        setErrors(obj);
-      } else console.log(err);
-    }
+    createMutation.mutate(post, {
+      onSuccess: () => {
+        queryClient.refetchQueries('posts');
+        navigate('/own-posts');
+      },
+      onError: (err) => {
+        if (isAxiosError(err)) {
+          let errs: Array<{ msg: string; param: string }> = [];
+          const obj: any = {};
+          errs = err!.response!.data.errors;
+          errs.forEach((err) => (obj[err.param] = err.msg));
+          setErrors(obj);
+        } else console.log(err);
+      },
+    });
   }
   return (
     <div className='content'>
@@ -55,6 +62,7 @@ export function NewPost() {
         onChange={handleInput}
         onSubmit={handleSubmit}
         action='create'
+        disabled={createMutation.isLoading}
       />
     </div>
   );

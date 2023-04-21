@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, ModalFooter } from '../Modal';
 import { Input } from '../Input';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { mainAxios } from '../../utils';
 import { ModalContent } from '../Modal';
 import { isAxiosError } from 'axios';
@@ -23,6 +23,12 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
     password: '',
   });
 
+  const createMutation = useMutation({
+    mutationFn: (newUser: User) => {
+      return mainAxios.post('/users', newUser);
+    },
+  });
+
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
   };
@@ -41,19 +47,21 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      await mainAxios.post('/users', newUser);
-      setShowModal(false);
-      queryClient.refetchQueries('users');
-    } catch (err) {
-      if (isAxiosError(err)) {
-        let errs: Array<any> = [];
-        const obj: any = {};
-        errs = err!.response!.data.errors;
-        errs.forEach((err) => (obj[err.param] = err.msg));
-        setErrors(obj);
-      } else console.log(err);
-    }
+    createMutation.mutate(newUser, {
+      onSuccess: () => {
+        setShowModal(false);
+        queryClient.refetchQueries('users');
+      },
+      onError: (error) => {
+        if (isAxiosError(error)) {
+          let errs: Array<any> = [];
+          const obj: any = {};
+          errs = error!.response!.data.errors;
+          errs.forEach((err) => (obj[err.param] = err.msg));
+          setErrors(obj);
+        } else console.log(error);
+      },
+    });
   }
 
   return (
@@ -170,7 +178,12 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
           type='secondary'
           onClick={() => setShowModal(false)}
         />
-        <Button type='primary' onClick={handleSubmit} text='Create' />
+        <Button
+          type='primary'
+          onClick={handleSubmit}
+          text='Create'
+          disabled={createMutation.isLoading}
+        />
       </ModalFooter>
     </Modal>
   );

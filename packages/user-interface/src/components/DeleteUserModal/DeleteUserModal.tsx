@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { User } from '../../types';
 import { mainAxios } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
@@ -13,15 +13,23 @@ interface DeleteUserModalProps {
 export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
   const queryClient = useQueryClient();
 
+  const deleteMutaion = useMutation({
+    mutationFn: (userId: number) => {
+      return mainAxios.delete(`/users/${userId}`);
+    },
+  });
+
   const deleteUser = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    try {
-      await mainAxios.delete(`/users/${user.id}`);
-      queryClient.refetchQueries('users');
-      setShowModal(false);
-    } catch (err) {
-      console.log(err);
-    }
+    deleteMutaion.mutate(user.id!, {
+      onSuccess: () => {
+        queryClient.refetchQueries('users');
+        setShowModal(false);
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
   };
 
   return (
@@ -38,7 +46,12 @@ export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
           type='secondary'
           onClick={() => setShowModal(false)}
         />
-        <Button text='Delete' type='primary' onClick={deleteUser} />
+        <Button
+          text='Delete'
+          type='primary'
+          onClick={deleteUser}
+          disabled={deleteMutaion.isLoading}
+        />
       </ModalFooter>
     </Modal>
   );

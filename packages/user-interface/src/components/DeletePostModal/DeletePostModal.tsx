@@ -1,16 +1,37 @@
 import React from 'react';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
 import { Button } from '../Button';
+import { useMutation, useQueryClient } from 'react-query';
+import { mainAxios } from '../../utils';
+import { useNavigate } from 'react-router-dom';
 
 interface DeletePostModalProps {
-  deletePost?: (e: React.SyntheticEvent) => void;
   setShowModal: (arg: boolean) => void;
 }
 
-export function DeletePostModal({
-  deletePost,
-  setShowModal,
-}: DeletePostModalProps) {
+export function DeletePostModal({ setShowModal }: DeletePostModalProps) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const path = window.location.pathname;
+
+  const deleteMutation = useMutation({
+    mutationFn: (path: string) => {
+      return mainAxios.delete(path);
+    },
+  });
+
+  const deletePost = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    deleteMutation.mutate(path, {
+      onSuccess: () => {
+        queryClient.refetchQueries('posts');
+        navigate('/own-posts');
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+  };
   return (
     <Modal title='Are you sure?'>
       <ModalContent>
@@ -26,7 +47,12 @@ export function DeletePostModal({
           text='Close'
           onClick={() => setShowModal(false)}
         />
-        <Button type='primary' text='Delete' onClick={deletePost} />
+        <Button
+          type='primary'
+          text='Delete'
+          onClick={deletePost}
+          disabled={deleteMutation.isLoading}
+        />
       </ModalFooter>
     </Modal>
   );

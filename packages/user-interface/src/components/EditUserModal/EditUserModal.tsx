@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQueryClient } from 'react-query';
+import { useQueryClient, useMutation } from 'react-query';
 import { mainAxios } from '../../utils';
 import { Modal, ModalContent, ModalFooter } from '../Modal';
 import { Input } from '../Input';
@@ -22,6 +22,12 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
 
   const queryClient = useQueryClient();
 
+  const patchMutation = useMutation({
+    mutationFn: (modifedUser: User) => {
+      return mainAxios.patch(`users/${user.id}`, modifedUser);
+    },
+  });
+
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setModifedUser({ ...modifedUser, [event.target.name]: event.target.value });
   };
@@ -38,18 +44,20 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      await mainAxios.patch(`users/${user.id}`, modifedUser);
-      queryClient.refetchQueries('users');
-      setShowModal(false);
-    } catch (err: any) {
-      console.log(err);
-      let errs: Array<any> = [];
-      const obj: any = {};
-      errs = err.response.data.errors;
-      errs.forEach((err) => (obj[err.param] = err.msg));
-      setErrors(obj);
-    }
+    patchMutation.mutate(modifedUser, {
+      onSuccess: () => {
+        queryClient.refetchQueries('users');
+        setShowModal(false);
+      },
+      onError: (err: any) => {
+        console.log(err);
+        let errs: Array<any> = [];
+        const obj: any = {};
+        errs = err.response.data.errors;
+        errs.forEach((err) => (obj[err.param] = err.msg));
+        setErrors(obj);
+      },
+    });
   }
 
   return (
@@ -156,7 +164,12 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
           text='Close'
           onClick={() => setShowModal(false)}
         />
-        <Button type='primary' text='Edit' onClick={handleSubmit} />
+        <Button
+          type='primary'
+          text='Edit'
+          onClick={handleSubmit}
+          disabled={patchMutation.isLoading}
+        />
       </ModalFooter>
     </Modal>
   );

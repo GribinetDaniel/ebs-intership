@@ -7,8 +7,9 @@ import { SignUp } from '../../components/SignUp';
 import { PersonalInfo } from '../../components/PersonalInfo';
 import { defaultUser, User } from '../../types';
 import { isAxiosError } from 'axios';
-import './index.scss';
 import { Button } from '../../components/Button';
+import { useMutation } from 'react-query';
+import './index.scss';
 
 export function Register() {
   const navigate = useNavigate();
@@ -20,6 +21,18 @@ export function Register() {
     email: '',
     password: '',
     confirmPassword: '',
+  });
+
+  const registerMutation = useMutation({
+    mutationFn: (newUser: User) => {
+      return mainAxios.post('/auth/register', newUser);
+    },
+  });
+
+  const accountMutation = useMutation({
+    mutationFn: (data1: any) => {
+      return mainAxios.get('/account');
+    },
   });
 
   const { currentStep, setCurrentStep, next, back } = useMultistepForm();
@@ -48,27 +61,32 @@ export function Register() {
         setErrors({ ...errors, confirmPassword: "Password didn't match" });
       }
     } else {
-      try {
-        const registerResponse = await mainAxios.post(
-          '/auth/register',
-          newUser
-        );
-        localStorage.setItem('token', registerResponse.data.token);
-        const accountResponse = await mainAxios.get('/account');
-        setUser(accountResponse.data);
-        setIsAuth(true);
-        navigate('/');
-      } catch (err) {
-        if (isAxiosError(err)) {
-          let errs: Array<{ msg: string; param: string }> = [];
-          const obj: any = {};
-          errs = err!.response!.data.errors;
-          errs.forEach((err) => (obj[err.param] = err.msg));
-          setErrors(obj);
-          if (obj.username || obj.name || obj.email || obj.password)
-            setCurrentStep(0);
-        } else console.log(err);
-      }
+      registerMutation.mutate(newUser, {
+        onSuccess(data1) {
+          localStorage.setItem('token', data1.data.token);
+          accountMutation.mutate(data1, {
+            onSuccess(data) {
+              setUser(data.data);
+              setIsAuth(true);
+              navigate('/');
+            },
+            onError(err) {
+              console.log(err);
+            },
+          });
+        },
+        onError(err) {
+          if (isAxiosError(err)) {
+            let errs: Array<{ msg: string; param: string }> = [];
+            const obj: any = {};
+            errs = err!.response!.data.errors;
+            errs.forEach((err) => (obj[err.param] = err.msg));
+            setErrors(obj);
+            if (obj.username || obj.name || obj.email || obj.password)
+              setCurrentStep(0);
+          } else console.log(err);
+        },
+      });
     }
   }
 
@@ -128,9 +146,6 @@ export function Register() {
             )}
             <div className='register__button'>
               {currentStep === 1 && (
-                // <button className='register__button--secondary' onClick={back}>
-                //   Back
-                // </button>
                 <Button
                   type='secondary'
                   text='Back'
@@ -138,17 +153,14 @@ export function Register() {
                   style={{ padding: '10px 20px', margin: '20px 0px' }}
                 />
               )}
-              {/* <button
-                className='register__button--primary'
-                onClick={handleSubmit}
-              >
-                {currentStep === 0 ? 'Next' : 'Sign Up'}
-              </button> */}
               <Button
                 type='primary'
                 text={currentStep === 0 ? 'Next' : 'Sign Up'}
                 onClick={handleSubmit}
                 style={{ padding: '10px 20px', margin: '20px 0px' }}
+                disabled={
+                  registerMutation.isLoading || accountMutation.isLoading
+                }
               />
             </div>
           </div>

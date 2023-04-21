@@ -18,7 +18,7 @@ interface Company {
 }
 
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   username: string;
   email: string;
@@ -32,13 +32,12 @@ export interface User {
 }
 
 export const defaultUser = {
-  id: 0,
   name: '',
   username: '',
   email: '',
   password: '',
   confirmPassword: '',
-  permission: '',
+  permission: 'user',
   address: {
     city: '',
     street: '',

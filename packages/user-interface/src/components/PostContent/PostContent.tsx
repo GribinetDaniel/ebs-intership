@@ -3,6 +3,7 @@ import { Input } from '../Input';
 import { TextArea } from '../TextArea';
 import { DeletePostModal } from '../DeletePostModal';
 import { Post } from '../../types';
+
 import './index.scss';
 import { Button } from '../Button';
 
@@ -12,7 +13,6 @@ interface PostErrors {
 }
 
 interface PostContentProps {
-  deletePost?: (e: React.SyntheticEvent) => void;
   onChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -22,15 +22,16 @@ interface PostContentProps {
   post: Post;
   errors: PostErrors;
   action: string;
+  disabled?: boolean;
 }
 
 export function PostContent({
-  deletePost,
   onChange,
   onSubmit,
   post,
   errors,
   action,
+  disabled,
 }: PostContentProps) {
   const [showModal, setShowModal] = React.useState(false);
 
@@ -67,12 +68,11 @@ export function PostContent({
             text={action}
             style={{ marginLeft: 'auto', width: '100px' }}
             onClick={onSubmit}
+            disabled={disabled}
           />
         </div>
       </div>
-      {showModal && (
-        <DeletePostModal setShowModal={setShowModal} deletePost={deletePost} />
-      )}
+      {showModal && <DeletePostModal setShowModal={setShowModal} />}
     </div>
   );
 }
