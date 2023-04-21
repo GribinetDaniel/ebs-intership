@@ -6,10 +6,10 @@ import { mainAxios } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 
 interface DeletePostModalProps {
-  setShowModal: (arg: boolean) => void;
+  onClose: () => void;
 }
 
-export function DeletePostModal({ setShowModal }: DeletePostModalProps) {
+export function DeletePostModal({ onClose }: DeletePostModalProps) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const path = window.location.pathname;
@@ -42,11 +42,7 @@ export function DeletePostModal({ setShowModal }: DeletePostModalProps) {
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button
-          type='secondary'
-          text='Close'
-          onClick={() => setShowModal(false)}
-        />
+        <Button type='secondary' text='Close' onClick={onClose} />
         <Button
           type='primary'
           text='Delete'

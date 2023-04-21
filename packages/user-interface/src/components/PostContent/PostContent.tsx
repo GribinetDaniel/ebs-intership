@@ -72,7 +72,7 @@ export function PostContent({
           />
         </div>
       </div>
-      {showModal && <DeletePostModal setShowModal={setShowModal} />}
+      {showModal && <DeletePostModal onClose={() => setShowModal(false)} />}
     </div>
   );
 }

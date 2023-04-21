@@ -7,17 +7,12 @@ import { faUserPen } from '@fortawesome/free-solid-svg-icons';
 
 interface UserCardProps {
   user: User;
-  setShowModalEdit: (arg: boolean) => void;
-  setShowModalDelete: (arg: boolean) => void;
-  setSelectedUser: (arg: User) => void;
+  onEdit: () => void;
+  onDelete: () => void;
+  onSelect: (user: User) => void;
 }
 
-export function UserCard({
-  user,
-  setShowModalEdit,
-  setSelectedUser,
-  setShowModalDelete,
-}: UserCardProps) {
+export function UserCard({ user, onEdit, onDelete, onSelect }: UserCardProps) {
   return (
     <div className='col-md-3'>
       <div className='user-card'>
@@ -28,16 +23,16 @@ export function UserCard({
               icon={faTrashCan}
               style={{ color: '#C21807', cursor: 'pointer' }}
               onClick={() => {
-                setShowModalDelete(true);
-                setSelectedUser(user);
+                onDelete();
+                onSelect(user);
               }}
             />
             <FontAwesomeIcon
               icon={faUserPen}
               style={{ color: '#7e56da', cursor: 'pointer' }}
               onClick={() => {
-                setShowModalEdit(true);
-                setSelectedUser(user);
+                onEdit();
+                onSelect(user);
               }}
             />
           </div>

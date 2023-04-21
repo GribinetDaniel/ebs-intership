@@ -9,10 +9,10 @@ import { isAxiosError } from 'axios';
 
 export interface EditUserModalProps {
   user: User;
-  setShowModal: (arg: boolean) => void;
+  onClose: () => void;
 }
 
-export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
+export function EditUserModal({ onClose, user }: EditUserModalProps) {
   const [modifedUser, setModifedUser] = React.useState(user);
   const [errors, setErrors] = React.useState({
     name: '',
@@ -48,7 +48,7 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
     patchMutation.mutate(modifedUser, {
       onSuccess: () => {
         queryClient.refetchQueries('users');
-        setShowModal(false);
+        onClose();
       },
       onError: (err) => {
         if (isAxiosError(err)) setErrors(catchAxiosError(err));
@@ -156,11 +156,7 @@ export function EditUserModal({ setShowModal, user }: EditUserModalProps) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <Button
-          type='secondary'
-          text='Close'
-          onClick={() => setShowModal(false)}
-        />
+        <Button type='secondary' text='Close' onClick={onClose} />
         <Button
           type='primary'
           text='Edit'

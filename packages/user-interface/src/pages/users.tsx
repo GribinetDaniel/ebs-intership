@@ -33,26 +33,28 @@ export function Users() {
               {data?.data.map((user: User) => (
                 <UserCard
                   user={user}
-                  setShowModalEdit={setShowModalEdit}
-                  setShowModalDelete={setShowModalDelete}
-                  setSelectedUser={setSelectedUser}
+                  onEdit={() => setShowModalEdit(true)}
+                  onDelete={() => setShowModalDelete(true)}
+                  onSelect={(user: User) => setSelectedUser(user)}
                 />
               ))}
             </div>
           </div>
           {showModalEdit && (
             <EditUserModal
-              setShowModal={setShowModalEdit}
+              onClose={() => setShowModalEdit(false)}
               user={selectedUser}
             />
           )}
           <PlusButton onClick={() => setShowModalAdd(true)} />
-          {showModalAdd && <AddUserModal setShowModal={setShowModalAdd} />}
+          {showModalAdd && (
+            <AddUserModal onClose={() => setShowModalAdd(false)} />
+          )}
 
           {showModalDelete && (
             <DeleteUserModal
               user={selectedUser}
-              setShowModal={setShowModalDelete}
+              onClose={() => setShowModalDelete(false)}
             />
           )}
         </div>

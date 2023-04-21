@@ -9,10 +9,10 @@ import { defaultUser, User } from '../../types';
 import { Button } from '../Button';
 
 export interface AddUserModalProps {
-  setShowModal: (arg0: boolean) => void;
+  onClose: () => void;
 }
 
-export function AddUserModal({ setShowModal }: AddUserModalProps) {
+export function AddUserModal({ onClose }: AddUserModalProps) {
   const [newUser, setNewUser] = React.useState<User>(defaultUser);
 
   const [errors, setErrors] = React.useState({
@@ -49,7 +49,7 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
     event.preventDefault();
     createMutation.mutate(newUser, {
       onSuccess: () => {
-        setShowModal(false);
+        onClose();
         queryClient.refetchQueries('users');
       },
       onError: (error) => {
@@ -168,11 +168,7 @@ export function AddUserModal({ setShowModal }: AddUserModalProps) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <Button
-          text='Close'
-          type='secondary'
-          onClick={() => setShowModal(false)}
-        />
+        <Button text='Close' type='secondary' onClick={onClose} />
         <Button
           type='primary'
           onClick={handleSubmit}

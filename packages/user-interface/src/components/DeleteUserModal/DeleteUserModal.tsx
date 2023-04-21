@@ -7,10 +7,10 @@ import { Button } from '../Button';
 
 interface DeleteUserModalProps {
   user: User;
-  setShowModal: (arg: boolean) => void;
+  onClose: () => void;
 }
 
-export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
+export function DeleteUserModal({ user, onClose }: DeleteUserModalProps) {
   const queryClient = useQueryClient();
 
   const deleteMutaion = useMutation({
@@ -24,7 +24,7 @@ export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
     deleteMutaion.mutate(user.id!, {
       onSuccess: () => {
         queryClient.refetchQueries('users');
-        setShowModal(false);
+        onClose();
       },
       onError: (err) => {
         console.log(err);
@@ -41,11 +41,7 @@ export function DeleteUserModal({ user, setShowModal }: DeleteUserModalProps) {
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button
-          text='Close'
-          type='secondary'
-          onClick={() => setShowModal(false)}
-        />
+        <Button text='Close' type='secondary' onClick={onClose} />
         <Button
           text='Delete'
           type='primary'
