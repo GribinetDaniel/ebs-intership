@@ -33,7 +33,7 @@ export function DeletePostModal({ onClose }: DeletePostModalProps) {
     });
   };
   return (
-    <Modal title='Are you sure?'>
+    <Modal title='Are you sure?' onClickOutside={onClose}>
       <ModalContent>
         <div className='modal__confirm-text'>
           Do you really want to delete this post?

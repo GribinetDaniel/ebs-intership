@@ -58,7 +58,7 @@ export function EditUserModal({ onClose, user }: EditUserModalProps) {
   }
 
   return (
-    <Modal title='Edit User'>
+    <Modal title='Edit User' onClickOutside={onClose}>
       <ModalContent>
         <form autoComplete='off'>
           <div

@@ -33,7 +33,7 @@ export function DeleteUserModal({ user, onClose }: DeleteUserModalProps) {
   };
 
   return (
-    <Modal title='Are you sure?'>
+    <Modal title='Are you sure?' onClickOutside={onClose}>
       <ModalContent>
         <div className='modal__confirm-text'>
           Are you sure you want to delete this user.

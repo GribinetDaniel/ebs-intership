@@ -60,7 +60,7 @@ export function AddUserModal({ onClose }: AddUserModalProps) {
   }
 
   return (
-    <Modal title='Create new User'>
+    <Modal title='Create new User' onClickOutside={onClose}>
       <ModalContent>
         <form autoComplete='off'>
           <div
