@@ -20,7 +20,7 @@ interface PostContentProps {
   onSubmit?: (e: React.SyntheticEvent) => void;
   post: Post;
   errors?: PostErrors;
-  action?: string;
+  action?: 'view' | 'edit' | 'create';
 }
 
 export function PostContent({

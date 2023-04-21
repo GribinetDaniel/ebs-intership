@@ -16,7 +16,6 @@ export function NewPost() {
 
   React.useEffect(() => {
     if (user) setPost({ ...post, userId: user.id });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const [errors, setErrors] = React.useState({
