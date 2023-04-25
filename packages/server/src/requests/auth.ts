@@ -9,12 +9,24 @@ router.post('/login', async (req, res) => {
   const username: string = req.body.username;
   const password: string = req.body.password;
   let users = (await mainAxios.get('/users')).data;
+
+  let usernameResult = users.find((elem: User) => {
+    if (elem.username == username) return elem;
+  });
+
   let result = users.find((element: User) => {
     if (element.username == username && element.password == password)
       return element;
   });
-  if (result == undefined)
-    res.status(400).json({ message: 'Incorrect username or password' });
+
+  if (!usernameResult)
+    res
+      .status(400)
+      .json({ errors: [{ param: 'username', msg: 'Inccorect Username' }] });
+  else if (result == undefined)
+    res
+      .status(400)
+      .json({ errors: [{ param: 'password', msg: 'Incorrect password' }] });
   else {
     let token = createToken(result);
     res.json({ token });

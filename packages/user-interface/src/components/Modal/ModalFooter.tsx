@@ -1,5 +1,9 @@
 import React from 'react';
 
-export function ModalFooter({ children }: { children: React.ReactNode }) {
+export interface ModalFooterProps {
+  children: React.ReactNode;
+}
+
+export function ModalFooter({ children }: ModalFooterProps) {
   return <div className='modal__button'>{children}</div>;
 }

@@ -1,4 +1,4 @@
-interface Adress {
+interface Address {
   street: string;
   suite: string;
   city: string;
@@ -18,15 +18,41 @@ interface Company {
 }
 
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   username: string;
   email: string;
   password: string;
   confirmPassword?: string;
   permission: string;
-  adress: Adress;
+  address: Address;
   phone: string;
   website: string;
   company: Company;
 }
+
+export const defaultUser = {
+  name: '',
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  permission: 'user',
+  address: {
+    city: '',
+    street: '',
+    suite: '',
+    zipcode: '',
+    geo: {
+      lat: '',
+      lng: '',
+    },
+  },
+  phone: '',
+  website: '',
+  company: {
+    name: '',
+    catchPhrase: '',
+    bs: '',
+  },
+};

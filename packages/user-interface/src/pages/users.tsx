@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../components/Header';
-import { User } from '../types';
+import { User, defaultUser } from '../types';
 import { UserCard } from '../components/UserCard';
 import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
@@ -19,19 +19,7 @@ export function Users() {
   const [showModalEdit, setShowModalEdit] = React.useState(false);
   const [showModalAdd, setShowModalAdd] = React.useState(false);
   const [showModalDelete, setShowModalDelete] = React.useState(false);
-  const [selectedUser, setSelectedUser] = React.useState({
-    name: '',
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
-    permission: '',
-    address: {
-      street: '',
-      suite: '',
-      city: '',
-    },
-  });
+  const [selectedUser, setSelectedUser] = React.useState<User>(defaultUser);
 
   return (
     <>
@@ -41,31 +29,32 @@ export function Users() {
         <div className='content'>
           <Header />
           <div className='home-page'>
-            <h2>Users</h2>
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {data?.data.map((user: User) => (
                 <UserCard
                   user={user}
-                  setShowModalEdit={setShowModalEdit}
-                  setShowModalDelete={setShowModalDelete}
-                  setSelectedUser={setSelectedUser}
+                  onEdit={() => setShowModalEdit(true)}
+                  onDelete={() => setShowModalDelete(true)}
+                  onSelect={(user: User) => setSelectedUser(user)}
                 />
               ))}
             </div>
           </div>
           {showModalEdit && (
             <EditUserModal
-              setShowModal={setShowModalEdit}
+              onClose={() => setShowModalEdit(false)}
               user={selectedUser}
             />
           )}
           <PlusButton onClick={() => setShowModalAdd(true)} />
-          {showModalAdd && <AddUserModal setShowModal={setShowModalAdd} />}
+          {showModalAdd && (
+            <AddUserModal onClose={() => setShowModalAdd(false)} />
+          )}
 
           {showModalDelete && (
             <DeleteUserModal
               user={selectedUser}
-              setShowModal={setShowModalDelete}
+              onClose={() => setShowModalDelete(false)}
             />
           )}
         </div>

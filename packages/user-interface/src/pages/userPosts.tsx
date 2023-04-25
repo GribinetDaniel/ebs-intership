@@ -7,7 +7,11 @@ import { useQuery } from 'react-query';
 import { mainAxios } from '../utils';
 import { Loading } from '../components/Loading';
 import { ErrorPage } from '../components/ErrorPage/ErrorPage';
+import { PlusButton } from '../components/PlusButton';
+import { useNavigate } from 'react-router-dom';
+
 export function UserPosts() {
+  const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
 
   const { isLoading, error, data } = useQuery('user-posts', () => {
@@ -23,13 +27,13 @@ export function UserPosts() {
         <div className='content'>
           <Header />
           <div className='home-page'>
-            <h2>{userPosts.length} Posts</h2>
             <div className='row justify-content-center' style={{ gap: '80px' }}>
               {userPosts?.map((post: Post) => (
                 <PostCard {...post} />
               ))}
             </div>
           </div>
+          <PlusButton onClick={() => navigate('/new-post')} />
         </div>
       )}
     </>

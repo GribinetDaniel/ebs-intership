@@ -1,24 +1,19 @@
 import React from 'react';
 import { Modal, ModalFooter } from '../Modal';
 import { Input } from '../Input';
-import { useQueryClient } from 'react-query';
-import { mainAxios } from '../../utils';
+import { useMutation, useQueryClient } from 'react-query';
+import { mainAxios, catchAxiosError } from '../../utils';
 import { ModalContent } from '../Modal';
+import { isAxiosError } from 'axios';
+import { defaultUser, User } from '../../types';
+import { Button } from '../Button';
 
-export function AddUserModal({ setShowModal }: any) {
-  const [newUser, setNewUser] = React.useState({
-    name: '',
-    username: '',
-    password: '',
-    phone: '',
-    email: '',
-    permission: '',
-    address: {
-      city: '',
-      suite: '',
-      street: '',
-    },
-  });
+export interface AddUserModalProps {
+  onClose: () => void;
+}
+
+export function AddUserModal({ onClose }: AddUserModalProps) {
+  const [newUser, setNewUser] = React.useState<User>(defaultUser);
 
   const [errors, setErrors] = React.useState({
     name: '',
@@ -26,6 +21,12 @@ export function AddUserModal({ setShowModal }: any) {
     permission: '',
     email: '',
     password: '',
+  });
+
+  const createMutation = useMutation({
+    mutationFn: (newUser: User) => {
+      return mainAxios.post('/users', newUser);
+    },
   });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,47 +47,41 @@ export function AddUserModal({ setShowModal }: any) {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      await mainAxios.post('/users', newUser);
-      setShowModal(false);
-      queryClient.refetchQueries('users');
-    } catch (err: any) {
-      let errs: Array<any> = [];
-      const obj: any = {};
-      errs = err.response.data.errors;
-      errs.forEach((err) => (obj[err.param] = err.msg));
-      setErrors(obj);
-    }
+    createMutation.mutate(newUser, {
+      onSuccess: () => {
+        onClose();
+        queryClient.refetchQueries('users');
+      },
+      onError: (error) => {
+        if (isAxiosError(error)) setErrors(catchAxiosError(error));
+        else console.log(error);
+      },
+    });
   }
 
   return (
-    <Modal title='Create new User'>
+    <Modal title='Create new User' onClickOutside={onClose}>
       <ModalContent>
         <form autoComplete='off'>
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
               label='Name'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='name'
-              id='name'
               value={newUser.name}
               onChange={handleInput}
               errors={errors.name}
             />
             <Input
               label='Username'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='username'
-              id='username'
               value={newUser.username}
               onChange={handleInput}
               errors={errors.username}
@@ -95,27 +90,22 @@ export function AddUserModal({ setShowModal }: any) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
               label='Password'
-              classNameLabel='modal__label'
-              type='text'
-              className='edit-user__input'
+              type='password'
               name='password'
-              id='passwword'
               value={newUser.password}
               onChange={handleInput}
               errors={errors.password}
             />
             <Input
               label='Email'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='email'
-              id='email'
               value={newUser.email}
               onChange={handleInput}
               errors={errors.email}
@@ -124,26 +114,21 @@ export function AddUserModal({ setShowModal }: any) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
               label='Street'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='street'
-              id='street'
               value={newUser.address.street}
               onChange={addressInput}
             />
             <Input
               label='Suite'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='suite'
-              id='suite'
               value={newUser.address.suite}
               onChange={addressInput}
             />
@@ -151,38 +136,30 @@ export function AddUserModal({ setShowModal }: any) {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
+              gap: '30px',
             }}
           >
             <Input
               label='City'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='city'
-              id='city'
               value={newUser.address.city}
               onChange={addressInput}
             />
             <Input
               label='Phone'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='phone'
-              id='phone'
               value={newUser.phone}
               onChange={handleInput}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'left' }}>
+          <div style={{ display: 'flex', paddingLeft: '16px' }}>
             <Input
               label='Permission'
-              classNameLabel='modal__label'
               type='text'
-              className='edit-user__input'
               name='permission'
-              id='permission'
               value={newUser.permission}
               onChange={handleInput}
               errors={errors.permission}
@@ -191,15 +168,13 @@ export function AddUserModal({ setShowModal }: any) {
         </form>
       </ModalContent>
       <ModalFooter>
-        <button
-          className='modal__button--secondary'
-          onClick={() => setShowModal(false)}
-        >
-          Close
-        </button>
-        <button className='modal__button--primary' onClick={handleSubmit}>
-          Create
-        </button>
+        <Button text='Close' type='secondary' onClick={onClose} />
+        <Button
+          type='primary'
+          onClick={handleSubmit}
+          text='Create'
+          disabled={createMutation.isLoading}
+        />
       </ModalFooter>
     </Modal>
   );

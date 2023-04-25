@@ -3,11 +3,12 @@ import { Post } from '../types';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { UserContext } from '../context/user-context';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function PostCard(props: Post) {
   const { user } = React.useContext(UserContext);
   const pathname = useLocation().pathname;
+  const navigate = useNavigate();
   return (
     <Card className='col-md-3'>
       <Card.Body>
@@ -17,7 +18,10 @@ export function PostCard(props: Post) {
       {(user?.permission === 'admin' ||
         (pathname === '/own-posts' && user?.id === props.userId)) && (
         <Card.Footer>
-          <Button className='' variant='primary'>
+          <Button
+            variant='primary'
+            onClick={() => navigate(`/posts/${props.id}`)}
+          >
             Edit
           </Button>
         </Card.Footer>

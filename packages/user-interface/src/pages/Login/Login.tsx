@@ -3,6 +3,10 @@ import { mainAxios } from '../../utils/main-axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
+import { isAxiosError } from 'axios';
+import { useMutation } from 'react-query';
+import { catchAxiosError } from '../../utils';
 import './index.scss';
 
 export function Login() {
@@ -12,6 +16,22 @@ export function Login() {
     username: '',
     password: '',
   });
+  const [errors, setErrors] = React.useState({
+    username: '',
+    password: '',
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: (newUser: { username: string; password: string }) => {
+      return mainAxios.post('/auth/login', newUser);
+    },
+  });
+
+  const accountMutation = useMutation({
+    mutationFn: (data: any) => {
+      return mainAxios.get('/account');
+    },
+  });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
@@ -19,57 +39,60 @@ export function Login() {
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    try {
-      const loginResponse = await mainAxios.post('/auth/login', newUser);
-      localStorage.setItem('token', loginResponse.data.token);
-      const accountResponse = await mainAxios.get('/account');
-      setUser(accountResponse.data);
-      setIsAuth(true);
-      navigate('/');
-    } catch (err) {
-      console.log(err);
-      setNewUser({
-        username: '',
-        password: '',
-      });
-    }
+    loginMutation.mutate(newUser, {
+      onSuccess(data) {
+        localStorage.setItem('token', data.data.token);
+        accountMutation.mutate(data, {
+          onSuccess(data) {
+            setUser(data.data);
+            setIsAuth(true);
+            navigate('/');
+          },
+          onError(err) {
+            console.log(err);
+          },
+        });
+      },
+      onError(err) {
+        if (isAxiosError(err)) setErrors(catchAxiosError(err));
+        else console.log(err);
+        setNewUser({ ...newUser, password: '' });
+      },
+    });
   }
-
   return (
     <div className='login'>
       <div className='login__left-part'>
         <div>
           <h2>Welcome back</h2>
           <p className='login__text'>Welcome back! Please enter our details</p>
-          <form onSubmit={handleSubmit}>
+          <form>
             <Input
               label='Username'
-              classNameLabel='login__label'
               type='text'
-              id='username'
               name='username'
               placeholder='Enter your username'
-              className='auth__input'
               value={newUser.username}
               onChange={handleInput}
+              errors={errors.username}
             />
             <Input
               label='Password'
-              classNameLabel='login__label'
               type='password'
-              id='password'
               name='password'
               placeholder='********'
-              className='auth__input'
               value={newUser.password}
               onChange={handleInput}
+              errors={errors.password}
             />
-            <input
-              type='submit'
-              value='Sign In'
-              className='auth__input--submit'
+            <Button
+              type='primary'
+              text='Sign in'
+              onClick={handleSubmit}
+              style={{ padding: '10px 20px', margin: '20px 0px' }}
+              disabled={loginMutation.isLoading || accountMutation.isLoading}
             />
-            <p className='subtitle'>
+            <p>
               Don't have an account?{' '}
               <Link to={'/register'} className='login__link'>
                 Sign Up

@@ -1,32 +1,39 @@
 import React, { useState } from 'react';
-import { mainAxios } from '../../utils';
+import { catchAxiosError, mainAxios } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SignUp } from '../../components/SignUp';
 import { PersonalInfo } from '../../components/PersonalInfo';
+import { defaultUser, User } from '../../types';
+import { isAxiosError } from 'axios';
+import { Button } from '../../components/Button';
+import { useMutation } from 'react-query';
 import './index.scss';
-
-type Err = { [key: string]: string };
 
 export function Register() {
   const navigate = useNavigate();
   const { setIsAuth, setUser } = React.useContext(UserContext);
-  const [newUser, setNewUser] = useState({
+  const [newUser, setNewUser] = useState<User>(defaultUser);
+  const [errors, setErrors] = useState({
     name: '',
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
-    permission: 'user',
-    address: {
-      city: '',
-      street: '',
-      suite: '',
-    },
-    phone: '',
   });
-  const [errors, setErrors] = useState({});
+
+  const registerMutation = useMutation({
+    mutationFn: (newUser: User) => {
+      return mainAxios.post('/auth/register', newUser);
+    },
+  });
+
+  const accountMutation = useMutation({
+    mutationFn: (data1: any) => {
+      return mainAxios.get('/account');
+    },
+  });
 
   const { currentStep, setCurrentStep, next, back } = useMultistepForm();
 
@@ -54,25 +61,29 @@ export function Register() {
         setErrors({ ...errors, confirmPassword: "Password didn't match" });
       }
     } else {
-      try {
-        const registerResponse = await mainAxios.post(
-          '/auth/register',
-          newUser
-        );
-        localStorage.setItem('token', registerResponse.data.token);
-        const accountResponse = await mainAxios.get('/account');
-        setUser(accountResponse.data);
-        setIsAuth(true);
-        navigate('/');
-      } catch (err: any) {
-        let errs: Array<any> = [];
-        const obj: Err = {};
-        errs = err.response.data.errors;
-        errs.forEach((err) => (obj[err.param] = err.msg));
-        setErrors(obj);
-        if (obj.username || obj.name || obj.email || obj.password)
-          setCurrentStep(0);
-      }
+      registerMutation.mutate(newUser, {
+        onSuccess(data1) {
+          localStorage.setItem('token', data1.data.token);
+          accountMutation.mutate(data1, {
+            onSuccess(data) {
+              setUser(data.data);
+              setIsAuth(true);
+              navigate('/');
+            },
+            onError(err) {
+              console.log(err);
+            },
+          });
+        },
+        onError(err) {
+          if (isAxiosError(err)) {
+            const obj = catchAxiosError(err);
+            setErrors(obj);
+            if (obj.username || obj.name || obj.email || obj.password)
+              setCurrentStep(0);
+          } else console.log(err);
+        },
+      });
     }
   }
 
@@ -116,11 +127,15 @@ export function Register() {
               )}
             </div>
             {currentStep === 0 && (
-              <SignUp {...newUser} handleInput={handleInput} errors={errors} />
+              <SignUp
+                user={newUser}
+                handleInput={handleInput}
+                errors={errors}
+              />
             )}
             {currentStep === 1 && (
               <PersonalInfo
-                {...newUser}
+                user={newUser}
                 handleInput={handleInput}
                 cityInput={cityInput}
                 addressInput={addressInput}
@@ -128,16 +143,22 @@ export function Register() {
             )}
             <div className='register__button'>
               {currentStep === 1 && (
-                <button className='register__button--secondary' onClick={back}>
-                  Back
-                </button>
+                <Button
+                  type='secondary'
+                  text='Back'
+                  onClick={back}
+                  style={{ padding: '10px 20px', margin: '20px 0px' }}
+                />
               )}
-              <button
-                className='register__button--primary'
+              <Button
+                type='primary'
+                text={currentStep === 0 ? 'Next' : 'Sign Up'}
                 onClick={handleSubmit}
-              >
-                {currentStep === 0 ? 'Next' : 'Submit'}
-              </button>
+                style={{ padding: '10px 20px', margin: '20px 0px' }}
+                disabled={
+                  registerMutation.isLoading || accountMutation.isLoading
+                }
+              />
             </div>
           </div>
         </div>

@@ -3,16 +3,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
+
+  &__backdrop {
+    z-index: -1;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+  }
   &__content {
     width: 600px;
     max-height: 500px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: 10px;
+    animation: appear 0.5s;
+
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -20,6 +27,7 @@
 
   &__header {
     display: block;
+    padding-top: 10px;
     width: 100%;
     font-weight: bold;
     font-size: 30px;
@@ -74,13 +82,19 @@
     }
   }
 
-  &__label {
-    font-size: 15px;
-    margin-top: 10px;
-  }
-
   &__confirm-text {
     font-size: 18px;
     text-align: center;
+  }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: scale(0.5, 0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
   }
 }
