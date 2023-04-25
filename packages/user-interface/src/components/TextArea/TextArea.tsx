@@ -6,7 +6,7 @@ interface TextAreaProps {
   error: string;
   value?: string;
   name: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export function TextArea({ error, value, name, onChange }: TextAreaProps) {

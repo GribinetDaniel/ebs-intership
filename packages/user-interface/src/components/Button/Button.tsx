@@ -4,7 +4,7 @@ interface ButtonProps {
   text: string;
   type: string;
   style?: any;
-  onClick?: (e: React.SyntheticEvent) => void;
+  onClick: () => void;
   disabled?: boolean;
 }
 

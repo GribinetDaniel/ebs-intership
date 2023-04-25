@@ -20,8 +20,7 @@ export function DeletePostModal({ onClose }: DeletePostModalProps) {
     },
   });
 
-  const deletePost = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const deletePost = () => {
     deleteMutation.mutate(path, {
       onSuccess: () => {
         queryClient.refetchQueries('posts');

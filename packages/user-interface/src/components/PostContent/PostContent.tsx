@@ -1,8 +1,9 @@
 import React from 'react';
-import { Input } from '../Input';
-import { TextArea } from '../TextArea';
+import { InputForm } from '../Input';
+import { TextAreaForm } from '../TextArea';
 import { DeletePostModal } from '../DeletePostModal';
 import { Post } from '../../types';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import './index.scss';
 import { Button } from '../Button';
@@ -13,45 +14,53 @@ interface PostErrors {
 }
 
 interface PostContentProps {
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => void;
-  onSubmit: (e: React.SyntheticEvent) => void;
+  onSubmit: SubmitHandler<Post>;
   post: Post;
-  errors: PostErrors;
+  serverErrors: PostErrors;
   action: string;
   disabled?: boolean;
 }
 
 export function PostContent({
-  onChange,
   onSubmit,
   post,
-  errors,
   action,
   disabled,
 }: PostContentProps) {
   const [showModal, setShowModal] = React.useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Post>({ defaultValues: post });
+
+  React.useEffect(() => {
+    if (post.id) {
+      let defaultValues = post;
+      reset({ ...defaultValues });
+    }
+  }, [post.id]);
 
   return (
     <div className='edit-post'>
       <div className='edit-post__items'>
         <form>
           <label className='edit-post__label'>Title</label>
-          <Input
-            value={post.title}
-            onChange={onChange}
+          <InputForm
             name='title'
-            errors={errors.title}
+            register={register}
+            required
+            error={errors.title}
+            errorMessage='Title is required'
           />
           <label className='edit-post__label'>Body</label>
-          <TextArea
+          <TextAreaForm
             name='body'
+            register={register}
             error={errors.body}
-            value={post.body}
-            onChange={onChange}
+            errorMessage='Body is required'
+            required
           />
         </form>
         <div className='edit-post__button'>
@@ -67,7 +76,7 @@ export function PostContent({
             type='primary'
             text={action}
             style={{ marginLeft: 'auto', width: '100px' }}
-            onClick={onSubmit}
+            onClick={handleSubmit(onSubmit)}
             disabled={disabled}
           />
         </div>

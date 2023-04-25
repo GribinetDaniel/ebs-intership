@@ -45,8 +45,7 @@ export function AddUserModal({ onClose }: AddUserModalProps) {
 
   const queryClient = useQueryClient();
 
-  async function handleSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  async function handleSubmit() {
     createMutation.mutate(newUser, {
       onSuccess: () => {
         onClose();

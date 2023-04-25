@@ -19,8 +19,7 @@ export function DeleteUserModal({ user, onClose }: DeleteUserModalProps) {
     },
   });
 
-  const deleteUser = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const deleteUser = () => {
     deleteMutaion.mutate(user.id!, {
       onSuccess: () => {
         queryClient.refetchQueries('users');

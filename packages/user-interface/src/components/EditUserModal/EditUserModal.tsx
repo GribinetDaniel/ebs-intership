@@ -43,8 +43,7 @@ export function EditUserModal({ onClose, user }: EditUserModalProps) {
     });
   };
 
-  async function handleSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  function handleSubmit() {
     patchMutation.mutate(modifedUser, {
       onSuccess: () => {
         queryClient.refetchQueries('users');

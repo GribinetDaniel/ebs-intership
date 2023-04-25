@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { PostContent } from '../../components/PostContent';
 import { defaultPost, Post } from '../../types';
 import { isAxiosError } from 'axios';
+import { SubmitHandler } from 'react-hook-form';
 
 export function EditPost() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export function EditPost() {
   });
 
   const { isLoading, error, data } = useQuery(
-    `edit-post`,
+    `${path}`,
     () => {
       return mainAxios.get(`${path}`);
     },
@@ -38,17 +39,8 @@ export function EditPost() {
     body: '',
   });
 
-  const handleInput = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setPost({ ...post, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    patchMutation.mutate(post, {
+  const onSubmit: SubmitHandler<Post> = (data) => {
+    patchMutation.mutate(data, {
       onSuccess: () => {
         queryClient.refetchQueries('posts');
         navigate('/own-posts');
@@ -69,10 +61,9 @@ export function EditPost() {
         <div className='content'>
           <Header />
           <PostContent
-            onChange={handleInput}
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
             post={post}
-            errors={errors}
+            serverErrors={errors}
             action='edit'
             disabled={patchMutation.isLoading}
           />

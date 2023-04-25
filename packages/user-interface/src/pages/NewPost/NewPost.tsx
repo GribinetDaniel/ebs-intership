@@ -29,14 +29,7 @@ export function NewPost() {
     body: '',
   });
 
-  const handleInput = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setPost({ ...post, [event.target.name]: event.target.value });
-  };
-
-  async function handleSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  const onSubmit = (post: Post) => {
     createMutation.mutate(post, {
       onSuccess: () => {
         queryClient.refetchQueries('posts');
@@ -47,15 +40,14 @@ export function NewPost() {
         else console.log(err);
       },
     });
-  }
+  };
   return (
     <div className='content'>
       <Header />
       <PostContent
         post={post}
-        errors={errors}
-        onChange={handleInput}
-        onSubmit={handleSubmit}
+        serverErrors={errors}
+        onSubmit={onSubmit}
         action='create'
         disabled={createMutation.isLoading}
       />
