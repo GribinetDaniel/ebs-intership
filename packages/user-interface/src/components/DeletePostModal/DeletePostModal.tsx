@@ -42,13 +42,12 @@ export function DeletePostModal({ onClose }: DeletePostModalProps) {
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button type='secondary' text='Close' onClick={onClose} />
-        <Button
-          type='primary'
-          text='Delete'
-          onClick={deletePost}
-          disabled={deleteMutation.isLoading}
-        />
+        <Button type='secondary' onClick={onClose}>
+          Close
+        </Button>
+        <Button type='primary' onClick={deletePost}>
+          Delete
+        </Button>
       </ModalFooter>
     </Modal>
   );

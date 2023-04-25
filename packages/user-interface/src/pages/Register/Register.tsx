@@ -12,16 +12,32 @@ import { useMutation } from 'react-query';
 import './index.scss';
 
 export function Register() {
-  const navigate = useNavigate();
-  const { setIsAuth, setUser } = React.useContext(UserContext);
-  const [newUser, setNewUser] = useState<User>(defaultUser);
-  const [errors, setErrors] = useState({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+ const navigate = useNavigate();
+ const { setIsAuth, setUser } = React.useContext(UserContext);
+ const [newUser, setNewUser] = useState<User>(defaultUser);
+ const [errors, setErrors] = useState({
+  name: "",
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+ });
+
+ const { currentStep, setCurrentStep, next, back } = useMultistepForm();
+
+ const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setNewUser({ ...newUser, [event.target.name]: event.target.value });
+ };
+
+ const addressInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setNewUser({
+   ...newUser,
+   address: {
+    ...newUser.address,
+    [event.target.name]: event.target.value,
+   },
   });
+ };
 
   const registerMutation = useMutation({
     mutationFn: (newUser: User) => {
@@ -86,6 +102,7 @@ export function Register() {
       });
     }
   }
+ }
 
   return (
     <div className='register'>
@@ -164,5 +181,82 @@ export function Register() {
         </div>
       </div>
     </div>
-  );
+    <div className="register__bottom-half">
+     <div className="half-circle"></div>
+    </div>
+   </div>
+   <div className="register__right-part">
+    <div className="register__items">
+     <div className="register__right-left-part">
+      {currentStep === 0 ? (
+       <>
+        <h2>Hello!</h2>
+        <p>Hi! Please enter information to create an account</p>
+       </>
+      ) : (
+       <>
+        <h2>Adress</h2>
+        <p>Enter some additional information about you</p>
+       </>
+      )}
+     </div>
+     <div className="register__right-right-part">
+      <div className="register__progress-bar">
+       {currentStep === 0 ? (
+        <div className="register__progress-done" style={{ width: "55%" }}></div>
+       ) : (
+        <div
+         className="register__progress-done"
+         style={{ width: "100%" }}
+        ></div>
+       )}
+      </div>
+      {currentStep === 0 && (
+       <SignUp user={newUser} handleInput={handleInput} errors={errors} />
+      )}
+      {currentStep === 1 && (
+       <PersonalInfo
+        user={newUser}
+        handleInput={handleInput}
+        setValue={(value: string) =>
+         setNewUser({
+          ...newUser,
+          address: {
+           ...newUser.address,
+           city: value,
+          },
+         })
+        }
+        addressInput={addressInput}
+       />
+      )}
+      <div className="register__button">
+       {currentStep === 1 && (
+        <Button
+         type="secondary"
+         onClick={back}
+         style={{
+          padding: "10px 20px",
+          margin: "20px 0px",
+         }}
+        >
+         Back
+        </Button>
+       )}
+       <Button
+        type="primary"
+        onClick={handleSubmit}
+        style={{
+         padding: "10px 20px",
+         margin: "20px 0px",
+        }}
+       >
+        {currentStep === 0 ? "Next" : "Sign Up"}
+       </Button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ );
 }

@@ -20,8 +20,17 @@ export function EditUserModal({ onClose, user }: EditUserModalProps) {
     permission: '',
     email: '',
   });
+ };
 
-  const queryClient = useQueryClient();
+ const addressInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setModifedUser({
+   ...modifedUser,
+   address: {
+    ...modifedUser.address,
+    [event.target.name]: event.target.value,
+   },
+  });
+ };
 
   const patchMutation = useMutation({
     mutationFn: (modifedUser: User) => {
@@ -33,15 +42,7 @@ export function EditUserModal({ onClose, user }: EditUserModalProps) {
     setModifedUser({ ...modifedUser, [event.target.name]: event.target.value });
   };
 
-  const addressInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setModifedUser({
-      ...modifedUser,
-      address: {
-        ...modifedUser.address,
-        [event.target.name]: event.target.value,
-      },
-    });
-  };
+
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -56,6 +57,7 @@ export function EditUserModal({ onClose, user }: EditUserModalProps) {
       },
     });
   }
+ }
 
   return (
     <Modal title='Edit User' onClickOutside={onClose}>

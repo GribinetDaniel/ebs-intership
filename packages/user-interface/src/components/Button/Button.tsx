@@ -1,22 +1,20 @@
 import React from 'react';
 import './index.scss';
 interface ButtonProps {
-  text: string;
   type: string;
   style?: any;
   onClick?: (e: React.SyntheticEvent) => void;
+  children: React.ReactNode;
   disabled?: boolean;
+  
 }
 
-export function Button({ text, type, onClick, style, disabled }: ButtonProps) {
+export function Button({ type, onClick, style, children }: ButtonProps) {
   let className = 'button';
   if (type) className += ` button--${type}`;
   return (
-    <button
-      className={className}
-      style={style}
-      onClick={onClick}
-      disabled={disabled}
+    <button className={className} style={style} onClick={onClick} 
+    disabled={disabled}
     >
       {disabled ? (
         <div className='loading'>
@@ -26,7 +24,7 @@ export function Button({ text, type, onClick, style, disabled }: ButtonProps) {
           <div></div>
         </div>
       ) : (
-        text
+        {children}
       )}
     </button>
   );

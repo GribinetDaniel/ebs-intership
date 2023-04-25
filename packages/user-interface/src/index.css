@@ -6,6 +6,7 @@
 
 .home-page {
   width: 93%;
+  min-height: 95vh;
   margin-left: 6vw;
   margin-top: 5vh;
   float: right;

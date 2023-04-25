@@ -61,11 +61,12 @@ export function PostContent({
         <div className='edit-post__button'>
           {action === 'edit' && (
             <Button
-              text='Delete'
               type='secondary'
               style={{ width: '100px' }}
               onClick={() => setShowModal(true)}
-            />
+            >
+              Delete
+            </Button>
           )}
           {action !== 'view' && (
             <button className='edit-post__button--primary' onClick={onSubmit}>

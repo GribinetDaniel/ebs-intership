@@ -1,5 +1,6 @@
-import { ErrorMessage } from '../ErrorMessage';
-import './index.scss';
+import React from "react";
+import { ErrorMessage } from "../ErrorMessage";
+import "./index.scss";
 
 export interface InputProps {
   type?: string;

@@ -41,13 +41,12 @@ export function DeleteUserModal({ user, onClose }: DeleteUserModalProps) {
         </div>
       </ModalContent>
       <ModalFooter>
-        <Button text='Close' type='secondary' onClick={onClose} />
-        <Button
-          text='Delete'
-          type='primary'
-          onClick={deleteUser}
-          disabled={deleteMutaion.isLoading}
-        />
+        <Button type='secondary' onClick={onClose}>
+          Close
+        </Button>
+        <Button type='primary' onClick={deleteUser}>
+          Delete
+        </Button>
       </ModalFooter>
     </Modal>
   );

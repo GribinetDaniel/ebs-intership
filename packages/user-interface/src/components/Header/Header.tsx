@@ -25,8 +25,8 @@ export function Header() {
     <div className='navbar'>
       <ul className='navbar__list'>
         <li className='navbar__list-item'>
-          <Link to={'/account'} className='navbar__link navbar__link--logo'>
-            <UserImage />
+          <Link to={'/settings'} className='navbar__link navbar__link--logo'>
+            <UserImage style={{ backgroundColor: user?.userImage }} />
             <span className='navbar__text--logo'>{user?.username}</span>
           </Link>
         </li>
@@ -47,7 +47,7 @@ export function Header() {
           </Link>
         </li>
         <li className='navbar__list-item'>
-          <Link to='/account' className='navbar__link'>
+          <Link to='/settings' className='navbar__link'>
             <FontAwesomeIcon
               icon={faGears}
               size='xl'

@@ -1,20 +1,20 @@
 interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
+ street: string;
+ suite: string;
+ city: string;
+ zipcode: string;
+ geo: Geo;
 }
 
 interface Geo {
-  lat: string;
-  lng: string;
+ lat: string;
+ lng: string;
 }
 
 interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
+ name: string;
+ catchPhrase: string;
+ bs: string;
 }
 
 export interface User {
@@ -55,4 +55,5 @@ export const defaultUser = {
     catchPhrase: '',
     bs: '',
   },
-};
+  userImage: "#ffd847",
+ }

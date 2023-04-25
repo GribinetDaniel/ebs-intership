@@ -9,10 +9,10 @@ import { catchAxiosError, mainAxios } from '../../utils';
 import { isAxiosError } from 'axios';
 
 export function NewPost() {
-  const { user } = React.useContext(UserContext);
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  const [post, setPost] = React.useState<Post>(defaultPost);
+ const { user } = React.useContext(UserContext);
+ const queryClient = useQueryClient();
+ const navigate = useNavigate();
+ const [post, setPost] = React.useState<Post>(defaultPost);
 
   const createMutation = useMutation({
     mutationFn: (post: Post) => {
@@ -24,16 +24,16 @@ export function NewPost() {
     if (user) setPost({ ...post, userId: user.id! });
   }, [user]);
 
-  const [errors, setErrors] = React.useState({
-    title: '',
-    body: '',
-  });
+ const [errors, setErrors] = React.useState({
+  title: "",
+  body: "",
+ });
 
-  const handleInput = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setPost({ ...post, [event.target.name]: event.target.value });
-  };
+ const handleInput = (
+  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+ ) => {
+  setPost({ ...post, [event.target.name]: event.target.value });
+ };
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();

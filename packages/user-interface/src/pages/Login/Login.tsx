@@ -10,16 +10,16 @@ import { catchAxiosError } from '../../utils';
 import './index.scss';
 
 export function Login() {
-  const navigate = useNavigate();
-  const { setIsAuth, setUser } = useContext(UserContext);
-  const [newUser, setNewUser] = useState({
-    username: '',
-    password: '',
-  });
-  const [errors, setErrors] = React.useState({
-    username: '',
-    password: '',
-  });
+ const navigate = useNavigate();
+ const { setIsAuth, setUser } = useContext(UserContext);
+ const [newUser, setNewUser] = useState({
+  username: "",
+  password: "",
+ });
+ const [errors, setErrors] = React.useState({
+  username: "",
+  password: "",
+ });
 
   const loginMutation = useMutation({
     mutationFn: (newUser: { username: string; password: string }) => {
@@ -110,5 +110,15 @@ export function Login() {
         </div>
       </div>
     </div>
-  );
+   </div>
+   <div className="login__right-part">
+    <div className="login__upper-half">
+     <div className="login__upper-half--half-circle"></div>
+    </div>
+    <div className="login__down-half">
+     <div className="login__down-half--half-circle"></div>
+    </div>
+   </div>
+  </div>
+ );
 }

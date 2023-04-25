@@ -15,13 +15,13 @@ export interface AddUserModalProps {
 export function AddUserModal({ onClose }: AddUserModalProps) {
   const [newUser, setNewUser] = React.useState<User>(defaultUser);
 
-  const [errors, setErrors] = React.useState({
-    name: '',
-    username: '',
-    permission: '',
-    email: '',
-    password: '',
-  });
+ const [errors, setErrors] = React.useState({
+  name: "",
+  username: "",
+  permission: "",
+  email: "",
+  password: "",
+ });
 
   const createMutation = useMutation({
     mutationFn: (newUser: User) => {
@@ -58,6 +58,7 @@ export function AddUserModal({ onClose }: AddUserModalProps) {
       },
     });
   }
+ }
 
   return (
     <Modal title='Create new User' onClickOutside={onClose}>
