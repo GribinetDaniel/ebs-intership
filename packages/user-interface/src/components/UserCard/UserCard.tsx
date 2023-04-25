@@ -20,6 +20,7 @@ export function UserCard({ user, onEdit, onDelete, onSelect }: UserCardProps) {
           {user.name}
           <div className='user-card__icons'>
             <FontAwesomeIcon
+              className='user-card__icon'
               icon={faTrashCan}
               style={{ color: '#C21807', cursor: 'pointer' }}
               onClick={() => {
@@ -28,6 +29,7 @@ export function UserCard({ user, onEdit, onDelete, onSelect }: UserCardProps) {
               }}
             />
             <FontAwesomeIcon
+              className='user-card__icon'
               icon={faUserPen}
               style={{ color: '#7e56da', cursor: 'pointer' }}
               onClick={() => {

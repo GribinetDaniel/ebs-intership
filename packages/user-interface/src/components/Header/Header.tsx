@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 import { UserImage } from '../UserImage';
+
 export function Header() {
   const { user, setUser, setIsAuth } = React.useContext(UserContext);
 

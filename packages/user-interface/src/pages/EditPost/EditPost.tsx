@@ -12,8 +12,8 @@ import { isAxiosError } from 'axios';
 export function EditPost() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const path = window.location.pathname;
-
+  let path = window.location.pathname;
+  path = path.replace('/edit', '');
   const patchMutation = useMutation({
     mutationFn: (post: Post) => {
       return mainAxios.patch(`${path}`, post);

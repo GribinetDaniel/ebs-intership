@@ -9,6 +9,7 @@ export interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errors?: string;
   label?: string;
+  disabled?: boolean;
 }
 
 export function Input({
@@ -19,6 +20,7 @@ export function Input({
   onChange,
   errors,
   label,
+  disabled,
 }: InputProps) {
   let className = 'input';
   errors && (className += ' error');
@@ -32,6 +34,7 @@ export function Input({
         name={name}
         className={className}
         onChange={onChange}
+        disabled={disabled}
       />
       {errors && <ErrorMessage error={errors} />}
     </div>
