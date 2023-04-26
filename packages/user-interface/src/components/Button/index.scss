@@ -1,67 +1,85 @@
 .button {
-  padding: 10px 20px;
-  margin: 0px 30px 20px 30px;
-  border-radius: 5px;
-  text-transform: capitalize;
-  width: 100%;
-  &--primary {
-    border: none;
-    background-color: #7e56da;
-    color: white;
-    &:hover {
-      background-color: #764ed4;
-    }
+ padding: 10px 20px;
+ margin: 0px 30px 20px 30px;
+ border-radius: 5px;
+ text-transform: capitalize;
+ width: 100%;
+ &--primary {
+  border: none;
+  background-color: #7e56da;
+  color: white;
+  &:hover {
+   background-color: #764ed4;
   }
-  &--secondary {
-    border-color: #9675e4;
-    border-width: 1px;
-    background-color: #fff;
-    color: #7e56da;
+ }
+ &--secondary {
+  border-color: #9675e4;
+  border-width: 1px;
+  background-color: #fff;
+  color: #7e56da;
 
-    &:hover {
-      background-color: #f5f5f5;
-    }
+  &:hover {
+   background-color: #f5f5f5;
   }
+ }
+
+ &--circle {
+  width: 50px;
+  padding: 0;
+  margin: 0 15px 0 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 100%;
+  background-color: #f5f5f5;
+  font-size: 25px;
+
+  &:hover {
+   background-color: #edeaea;
+  }
+ }
 }
 
 .loading {
-  display: inline-block;
-  position: relative;
-  width: 20px;
-  height: 20px;
+ display: inline-block;
+ position: relative;
+ width: 20px;
+ height: 20px;
 
-  div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    bottom: -8px;
-    left: -5px;
-    width: 30px;
-    height: 30px;
-    border: 5px solid #fff;
-    border-radius: 50%;
-    animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+ div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  bottom: -8px;
+  left: -5px;
+  width: 30px;
+  height: 30px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
 
-    &:nth-child(1) {
-      animation-delay: -0.45s;
-    }
-
-    &:nth-child(2) {
-      animation-delay: -0.3s;
-    }
-
-    &:nth-child(3) {
-      animation-delay: -0.15s;
-    }
+  &:nth-child(1) {
+   animation-delay: -0.45s;
   }
+
+  &:nth-child(2) {
+   animation-delay: -0.3s;
+  }
+
+  &:nth-child(3) {
+   animation-delay: -0.15s;
+  }
+ }
 }
 
 @keyframes loading {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+ 0% {
+  transform: rotate(0deg);
+ }
+ 100% {
+  transform: rotate(360deg);
+ }
 }
