@@ -15,10 +15,8 @@
  transition: all 0.3s ease-in-out;
 
  &:hover {
-  line-height: 78px;
-  width: 100px;
-  height: 100px;
   background-color: #764ed4;
+  transform: scale(1.05, 1.05);
  }
  &__text {
   color: #fff;

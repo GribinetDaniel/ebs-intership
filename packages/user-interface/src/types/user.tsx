@@ -18,42 +18,43 @@ interface Company {
 }
 
 export interface User {
-  id?: number;
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword?: string;
-  permission: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
+ id?: number;
+ name: string;
+ username: string;
+ email: string;
+ password: string;
+ confirmPassword?: string;
+ permission: string;
+ address: Address;
+ phone: string;
+ website: string;
+ company: Company;
+ userImage: string;
 }
 
 export const defaultUser = {
-  name: '',
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  permission: 'user',
-  address: {
-    city: '',
-    street: '',
-    suite: '',
-    zipcode: '',
-    geo: {
-      lat: '',
-      lng: '',
-    },
+ name: "",
+ username: "",
+ email: "",
+ password: "",
+ confirmPassword: "",
+ permission: "user",
+ address: {
+  city: "",
+  street: "",
+  suite: "",
+  zipcode: "",
+  geo: {
+   lat: "",
+   lng: "",
   },
-  phone: '',
-  website: '',
-  company: {
-    name: '',
-    catchPhrase: '',
-    bs: '',
-  },
-  userImage: "#ffd847",
- }
+ },
+ phone: "",
+ website: "",
+ company: {
+  name: "",
+  catchPhrase: "",
+  bs: "",
+ },
+ userImage: "#ffd847",
+};
