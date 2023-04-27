@@ -1,14 +1,14 @@
 import React from "react";
-import { Input, InputForm } from "../Input";
+import { InputForm } from "../Input";
 import { TextAreaForm } from "../TextArea";
 import { DeletePostModal } from "../DeletePostModal";
 import { Post } from "../../types";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-
 import "./index.scss";
 import { Button } from "../Button";
+import { Tag } from "../Tag";
 
 interface PostErrors {
  title: string;
@@ -50,30 +50,42 @@ export function PostContent({
   }
  }, [post.id]);
 
- console.log(watch("tags"));
+ const onTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  e.target.style.width = 7 + e.target.value.length + "ch";
+ };
+
+ watch("tags");
 
  return (
   <div className="edit-post">
    <div className="edit-post__items">
     <form autoComplete="off" style={{ paddingBottom: "40px" }}>
-     <label className="edit-post__label">Title</label>
-     <InputForm
-      name="title"
-      register={register}
-      required
-      error={errors.title}
-      errorMessage="Title is required"
-      disabled={action === "view"}
-     />
+     {action === "view" ? (
+      <h2 className="edit-post__title">{getValues("title")}</h2>
+     ) : (
+      <>
+       <label className="edit-post__label">Title</label>
+       <InputForm
+        name="title"
+        register={register}
+        required
+        error={errors.title}
+        errorMessage="Title is required"
+       />
+      </>
+     )}
      <div className="d-flex gap-3 flex-wrap" style={{ marginTop: "10px" }}>
       {fields.map((_, index) => {
        return (
         <>
          {action === "view" ? (
-          <p>Danu</p>
+          <Tag
+           name={getValues(`tags.${index}.name`)}
+           color={getValues(`tags.${index}.color`)}
+          />
          ) : (
           <>
-           <div className="position-relative">
+           <div className="position-relative" key={index}>
             <InputForm
              register={register}
              name={`tags.${index}.color`}
@@ -86,23 +98,23 @@ export function PostContent({
               bottom: "0px",
               borderRadius: "100%",
              }}
-             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setValue(`tags.${index}.color`, e.target.value)
-             }
+             onChange={e => setValue(`tags.${index}.color`, e.target.value)}
             />
             <InputForm
              register={register}
              name={`tags.${index}.name`}
              style={{
               backgroundColor: getValues(`tags.${index}.color`),
-              width: "150px",
+              width: "100px",
               height: "30px",
               fontWeight: "bold",
               color: "#fff",
+              paddingRight: "25px",
               paddingLeft: "35px",
               borderRadius: "100px",
               outline: "none",
              }}
+             onChange={onTagChange}
             />
             <div
              className="edit-post__delete-tag-icon"
@@ -117,15 +129,20 @@ export function PostContent({
        );
       })}
      </div>
-     <label className="edit-post__label">Body</label>
-     <TextAreaForm
-      name="body"
-      register={register}
-      error={errors.body}
-      errorMessage="Body is required"
-      required
-      disabled={action === "view"}
-     />
+     {action === "view" ? (
+      <p className="edit-post__body">{getValues("body")}</p>
+     ) : (
+      <>
+       <label className="edit-post__label">Body</label>
+       <TextAreaForm
+        name="body"
+        register={register}
+        error={errors.body}
+        errorMessage="Body is required"
+        required
+       />
+      </>
+     )}
     </form>
     <div className="edit-post__button">
      {action === "edit" && (

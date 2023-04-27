@@ -80,4 +80,15 @@
   justify-content: center;
   cursor: pointer;
  }
+
+ &__title {
+  padding: 16px;
+ }
+
+ &__body {
+  padding: 16px;
+  margin-top: 30px;
+  font-size: 18px;
+  text-indent: 30px;
+ }
 }
