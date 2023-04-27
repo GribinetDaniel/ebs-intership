@@ -12,7 +12,7 @@ interface DeletePostModalProps {
 export function DeletePostModal({ onClose }: DeletePostModalProps) {
  const navigate = useNavigate();
  const queryClient = useQueryClient();
- const path = window.location.pathname;
+ const path = window.location.pathname.replace("/edit", "");
 
  const deleteMutation = useMutation({
   mutationFn: (path: string) => {

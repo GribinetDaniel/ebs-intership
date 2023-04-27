@@ -16,5 +16,5 @@ export const defaultPost: Post = {
  id: 0,
  title: "",
  body: "",
- tags: [{ name: "", color: "" }],
+ tags: [],
 };

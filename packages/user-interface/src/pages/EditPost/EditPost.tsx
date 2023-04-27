@@ -39,7 +39,7 @@ export function EditPost() {
   body: "",
  });
 
- const onSubmit: SubmitHandler<Post> = data => {
+ const onSubmit = (data: Post) => {
   patchMutation.mutate(data, {
    onSuccess: () => {
     queryClient.refetchQueries("posts");

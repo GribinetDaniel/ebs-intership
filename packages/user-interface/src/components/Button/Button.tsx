@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 interface ButtonProps {
- type: string;
+ type?: string;
  style?: any;
  onClick?: (e: React.SyntheticEvent) => void;
  children: React.ReactNode;
@@ -28,6 +28,7 @@ export function Button({
   );
  return (
   <button
+   type="button"
    className={className}
    style={style}
    onClick={onClick}
