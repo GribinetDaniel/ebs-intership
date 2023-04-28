@@ -29,3 +29,39 @@ label {
 .error {
  border: 1px solid red;
 }
+
+.search-field {
+ position: absolute;
+ top: 20px;
+ right: 100px;
+ width: 200px;
+ height: 200px;
+ margin-bottom: 50px;
+ transform: all 1s ease;
+
+ //  background-color: orange;
+
+ &__input {
+  position: absolute;
+  padding-left: 20px;
+  width: 44px;
+  right: 0;
+  border-radius: 100px;
+  transition: all 0.7s ease;
+  outline: none !important;
+ }
+
+ &__icon {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 41px;
+  height: 41px;
+  right: 1.3px;
+  top: 11.4px;
+  border-radius: 100%;
+  background-color: #fff;
+ }
+}
