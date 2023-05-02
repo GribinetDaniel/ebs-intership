@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { mainAxios } from "../../utils";
 import { useQuery } from "react-query";
+import { Tag } from "../Tag";
 
 export function PostCard(props: Post) {
  const { user } = React.useContext(UserContext);
@@ -25,7 +26,13 @@ export function PostCard(props: Post) {
   <>
    {data && (
     <div className="post-card" onClick={() => navigate(`/posts/${props.id}`)}>
-     <div className="post-card__label">Name</div>
+     {props.tags && (
+      <div className="d-flex gap-3 flex-wrap " style={{ width: "90%" }}>
+       {props.tags.map(el => (
+        <Tag name={el.name} color={el.color} />
+       ))}
+      </div>
+     )}
      <div className="post-card__title">{props.title}</div>
      {(user?.permission === "admin" ||
       (pathname === "/own-posts" && user?.id === props.userId)) && (
