@@ -10,8 +10,8 @@ import { ErrorPage } from "../../components/ErrorPage/ErrorPage";
 import { PlusButton } from "../../components/PlusButton";
 import { useNavigate } from "react-router-dom";
 import { SearchField } from "../../components/Input";
-import img from "./image-removebg-preview.png";
 import "./index.scss";
+import { NoFindPosts, NoPostsPage } from "../../components/ErrorPage";
 
 export function UserPosts() {
  const navigate = useNavigate();
@@ -50,27 +50,21 @@ export function UserPosts() {
      <Header />
 
      {userPosts.length === 0 ? (
-      <div className="user-posts">
-       <div className="user-posts__no-posts">
-        <img src={img} alt="err" />
-        <h1>OOOPS...</h1>
-        <p>
-         No posts yet
-         <br />
-         Press plus button to create a post
-        </p>
-       </div>
-      </div>
+      <NoPostsPage />
      ) : (
       <>
        <SearchField setInputText={setInputText} />
-       <div className="home-page">
-        <div className="row justify-content-center" style={{ gap: "80px" }}>
-         {filtredPosts.map((post: Post) => (
-          <PostCard {...post} />
-         ))}
+       {filtredPosts.length === 0 ? (
+        <NoFindPosts />
+       ) : (
+        <div className="home-page">
+         <div className="row justify-content-center" style={{ gap: "80px" }}>
+          {filtredPosts.map((post: Post) => (
+           <PostCard {...post} />
+          ))}
+         </div>
         </div>
-       </div>
+       )}
       </>
      )}
 

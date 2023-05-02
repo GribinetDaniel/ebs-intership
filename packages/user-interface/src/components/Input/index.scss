@@ -42,13 +42,25 @@ label {
  //  background-color: orange;
 
  &__input {
-  position: absolute;
-  padding-left: 20px;
-  width: 44px;
-  right: 0;
-  border-radius: 100px;
-  transition: all 0.7s ease;
-  outline: none !important;
+  &--big {
+   position: absolute;
+   padding-left: 20px;
+   width: 250px;
+   right: 0;
+   border-radius: 100px;
+   transition: all 0.7s ease;
+   outline: none !important;
+  }
+
+  &--small {
+   position: absolute;
+   padding-left: 20px;
+   width: 44px;
+   right: 0;
+   border-radius: 100px;
+   transition: all 0.7s ease;
+   outline: none !important;
+  }
  }
 
  &__icon {

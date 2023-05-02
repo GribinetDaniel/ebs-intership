@@ -12,10 +12,13 @@ export function SearchField({ setInputText }: SearchFieldProps) {
  const [isOpen, setIsOpen] = React.useState(false);
  const input = React.useRef() as MutableRefObject<HTMLInputElement>;
 
- const onIconClick = (e: React.MouseEvent) => {
+ const onIconClick = () => {
+  input.current.className = isOpen
+   ? "search-field__input--small"
+   : "search-field__input--big";
+
+  if (!isOpen) input.current.focus();
   setIsOpen(isOpen ? false : true);
-  input.current.style.width = isOpen ? "250px" : "44px";
-  if (isOpen) input.current.focus();
  };
 
  let timer = React.useRef<NodeJS.Timeout>();
@@ -30,7 +33,7 @@ export function SearchField({ setInputText }: SearchFieldProps) {
   <div className="search-field">
    <input
     type="text"
-    className="search-field__input"
+    className="search-field__input--small"
     ref={input}
     onChange={onInputChange}
    />
