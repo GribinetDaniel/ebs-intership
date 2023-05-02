@@ -4,8 +4,6 @@ import { TextAreaForm } from "../TextArea";
 import { DeletePostModal } from "../DeletePostModal";
 import { Post } from "../../types";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./index.scss";
 import { Button } from "../Button";
 import { Tag, EditTag } from "../Tag";
@@ -51,6 +49,11 @@ export function PostContent({
 
  const onTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   e.target.style.width = 7 + e.target.value.length + "ch";
+ };
+
+ const addTag = () => {
+  if (fields.length === 4) return;
+  else append({ name: "", color: "#2270C3" });
  };
 
  watch("tags");
@@ -125,7 +128,7 @@ export function PostContent({
       <div>
        <Button
         type="primary"
-        onClick={() => append({ name: "", color: "#2270C3" })}
+        onClick={addTag}
         style={{ margin: "0 20px 0 0", width: "100px", padding: "10px" }}
        >
         Add a tag
