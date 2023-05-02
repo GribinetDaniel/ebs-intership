@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./index.scss";
 import { Button } from "../Button";
-import { Tag } from "../Tag";
-
+import { Tag, EditTag } from "../Tag";
 interface PostErrors {
  title: string;
  body: string;
@@ -84,46 +83,14 @@ export function PostContent({
            color={getValues(`tags.${index}.color`)}
           />
          ) : (
-          <>
-           <div className="position-relative" key={index}>
-            <InputForm
-             register={register}
-             name={`tags.${index}.color`}
-             type="color"
-             style={{
-              position: "absolute",
-              left: "0",
-              width: "30px",
-              height: "30px",
-              bottom: "0px",
-              borderRadius: "100%",
-             }}
-             onChange={e => setValue(`tags.${index}.color`, e.target.value)}
-            />
-            <InputForm
-             register={register}
-             name={`tags.${index}.name`}
-             style={{
-              backgroundColor: getValues(`tags.${index}.color`),
-              width: "100px",
-              height: "30px",
-              fontWeight: "bold",
-              color: "#fff",
-              paddingRight: "25px",
-              paddingLeft: "35px",
-              borderRadius: "100px",
-              outline: "none",
-             }}
-             onChange={onTagChange}
-            />
-            <div
-             className="edit-post__delete-tag-icon"
-             onClick={() => remove(index)}
-            >
-             <FontAwesomeIcon icon={faX} size="xs" />
-            </div>
-           </div>
-          </>
+          <EditTag
+           index={index}
+           register={register}
+           remove={remove}
+           getValues={getValues}
+           setValue={setValue}
+           onTagChange={onTagChange}
+          />
          )}
         </>
        );
