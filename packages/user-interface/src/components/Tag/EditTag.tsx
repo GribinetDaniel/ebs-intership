@@ -8,7 +8,8 @@ import {
  UseFormSetValue,
 } from "react-hook-form";
 import { Post } from "../../types";
-import { InputForm } from "../Input";
+import { Draggable } from "react-beautiful-dnd";
+import "./index.scss";
 
 interface EditTagProps {
  index: number;
@@ -28,22 +29,39 @@ export function EditTag({
  onTagChange,
 }: EditTagProps) {
  return (
-  <div className="position-relative">
-   <input
-    {...register(`tags.${index}.color`)}
-    type="color"
-    onChange={e => setValue(`tags.${index}.color`, e.target.value)}
-    className="tag__input--color"
-   />
-   <input
-    {...register(`tags.${index}.name`)}
-    className="tag__input"
-    onChange={onTagChange}
-    style={{ backgroundColor: getValues(`tags.${index}.color`) }}
-   />
-   <div className="edit-post__delete-tag-icon" onClick={() => remove(index)}>
-    <FontAwesomeIcon icon={faX} size="xs" />
-   </div>
-  </div>
+  <Draggable
+   key={getValues(`tags.${index}.name`)}
+   draggableId={getValues(`tags.${index}.name`)}
+   index={index}
+  >
+   {(provided: any, snapshot: any) => (
+    <div
+     className="position-relative d-flex draggable"
+     ref={provided.innerRef}
+     {...provided.draggableProps}
+     {...provided.dragHandleProps}
+    >
+     <input
+      {...register(`tags.${index}.color`)}
+      type="color"
+      onChange={e => setValue(`tags.${index}.color`, e.target.value)}
+      className="tag__input--color"
+     />
+     <input
+      {...register(`tags.${index}.name`)}
+      className="tag__input"
+      onChange={onTagChange}
+      style={{
+       backgroundColor: getValues(`tags.${index}.color`),
+       width: 7 + getValues(`tags.${index}.name`).length + "ch",
+      }}
+     />
+     <div className="tag__delete-icon" onClick={() => remove(index)}>
+      <FontAwesomeIcon icon={faX} size="xs" />
+     </div>
+     {provided.placeholder}
+    </div>
+   )}
+  </Draggable>
  );
 }

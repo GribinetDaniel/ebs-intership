@@ -11,7 +11,7 @@ export interface InputProps {
  errors?: string;
  label?: string;
  disabled?: boolean;
- onClick?: () => void;
+ onClick?: (e: React.MouseEvent) => void;
 }
 
 export function Input({
@@ -20,6 +20,7 @@ export function Input({
  placeholder,
  name,
  onChange,
+ onClick,
  errors,
  label,
  disabled,
@@ -37,6 +38,7 @@ export function Input({
     className={className}
     onChange={onChange}
     disabled={disabled}
+    onClick={onClick}
    />
    {errors && <ErrorMessage error={errors} />}
   </div>

@@ -67,8 +67,6 @@ export function Account() {
   }
  };
 
- console.log(modifedUser);
-
  return (
   <>
    {user && (

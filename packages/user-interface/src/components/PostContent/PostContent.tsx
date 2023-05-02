@@ -7,6 +7,8 @@ import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import "./index.scss";
 import { Button } from "../Button";
 import { Tag, EditTag } from "../Tag";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 interface PostErrors {
  title: string;
  body: string;
@@ -38,7 +40,10 @@ export function PostContent({
   formState: { errors },
  } = useForm<Post>({ defaultValues: post });
 
- const { fields, append, remove } = useFieldArray({ control, name: "tags" });
+ const { fields, append, remove, swap } = useFieldArray({
+  control,
+  name: "tags",
+ });
 
  React.useEffect(() => {
   if (post.id) {
@@ -54,6 +59,12 @@ export function PostContent({
  const addTag = () => {
   if (fields.length === 4) return;
   else append({ name: "", color: "#2270C3" });
+ };
+
+ const onDragEnd = (result: any) => {
+  if (!result.destination) return;
+  swap(result.source.index, result.destination.index);
+  console.log(result);
  };
 
  watch("tags");
@@ -76,29 +87,40 @@ export function PostContent({
        />
       </>
      )}
-     <div className="d-flex gap-3 flex-wrap" style={{ marginTop: "10px" }}>
-      {fields.map((_, index) => {
-       return (
-        <>
-         {action === "view" ? (
-          <Tag
-           name={getValues(`tags.${index}.name`)}
-           color={getValues(`tags.${index}.color`)}
-          />
-         ) : (
-          <EditTag
-           index={index}
-           register={register}
-           remove={remove}
-           getValues={getValues}
-           setValue={setValue}
-           onTagChange={onTagChange}
-          />
-         )}
-        </>
-       );
-      })}
-     </div>
+     <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="tags" direction="horizontal">
+       {(provided: any, snapshot: any) => (
+        <div
+         className="d-flex flex-wrap gap-3 droppable"
+         ref={provided.innerRef}
+         {...provided.droppableProps}
+        >
+         {fields.map((_, index) => {
+          return (
+           <>
+            {action === "view" ? (
+             <Tag
+              name={getValues(`tags.${index}.name`)}
+              color={getValues(`tags.${index}.color`)}
+             />
+            ) : (
+             <EditTag
+              index={index}
+              register={register}
+              remove={remove}
+              getValues={getValues}
+              setValue={setValue}
+              onTagChange={onTagChange}
+             />
+            )}
+           </>
+          );
+         })}
+         {provided.placeholder}
+        </div>
+       )}
+      </Droppable>
+     </DragDropContext>
      {action === "view" ? (
       <p className="edit-post__body">{getValues("body")}</p>
      ) : (
