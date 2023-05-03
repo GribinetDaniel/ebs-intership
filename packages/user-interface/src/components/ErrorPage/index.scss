@@ -10,15 +10,13 @@
 
 .user-posts {
  height: 100vh;
- width: 93.5%;
- margin-left: 6.5%;
+ width: 100vw;
  display: flex;
  align-items: center;
  justify-content: center;
 }
 
 .no-posts {
- //  display: block;
  h1 {
   color: gray;
   font-weight: bold;
@@ -34,4 +32,18 @@
  }
 
  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+ .no-posts {
+  p,
+  h2 {
+   font-size: 20px;
+   line-height: normal;
+  }
+  img {
+   height: 80%;
+   width: 80%;
+  }
+ }
 }

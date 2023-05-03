@@ -178,7 +178,7 @@ export function PostContent({
      {action === "edit" && (
       <Button
        type="secondary"
-       style={{ width: "100px" }}
+       className="edit-post__button--secondary"
        onClick={() => setShowModal(true)}
       >
        Delete
@@ -189,7 +189,7 @@ export function PostContent({
        <Button
         type="primary"
         onClick={addTag}
-        style={{ margin: "0 20px 0 0", width: "100px", padding: "10px" }}
+        style={{ margin: "0 20px 10px 0", width: "100px", padding: "10px" }}
        >
         Add a tag
        </Button>

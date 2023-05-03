@@ -33,13 +33,11 @@ label {
 .search-field {
  position: absolute;
  top: 20px;
- right: 100px;
+ right: 5%;
  width: 200px;
  height: 200px;
  margin-bottom: 50px;
  transform: all 1s ease;
-
- //  background-color: orange;
 
  &__input {
   &--big {
@@ -75,5 +73,14 @@ label {
   top: 11.4px;
   border-radius: 100%;
   background-color: #fff;
+ }
+}
+
+@media only screen and (max-width: 900px) {
+ .search-field {
+  right: 5%;
+  &__input--big {
+   width: 200px;
+  }
  }
 }
