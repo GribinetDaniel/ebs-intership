@@ -7,7 +7,19 @@ import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import "./index.scss";
 import { Button } from "../Button";
 import { Tag, EditTag } from "../Tag";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {
+ DndContext,
+ closestCenter,
+ MouseSensor,
+ TouchSensor,
+ useSensor,
+ useSensors,
+ DragOverlay,
+} from "@dnd-kit/core";
+import {
+ SortableContext,
+ horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 interface PostErrors {
  title: string;
@@ -58,14 +70,25 @@ export function PostContent({
 
  const addTag = () => {
   if (fields.length === 4) return;
-  else append({ name: "", color: "#2270C3" });
+  else append({ name: "", color: "#2270C3", id: fields.length });
  };
 
- const onDragEnd = (result: any) => {
-  if (!result.destination) return;
-  swap(result.source.index, result.destination.index);
-  console.log(result);
- };
+ function handleDragStart(event: any) {
+  setActiveId(event.active.id);
+ }
+
+ function handleDragEnd(event: any) {
+  const { active, over } = event;
+
+  if (active.id !== over.id) {
+   swap(active.id, over.id);
+  }
+
+  setActiveId(-1);
+ }
+
+ const [activeId, setActiveId] = React.useState(1);
+ const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
  watch("tags");
 
@@ -87,40 +110,55 @@ export function PostContent({
        />
       </>
      )}
-     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="tags" direction="horizontal">
-       {(provided: any, snapshot: any) => (
-        <div
-         className="d-flex flex-wrap gap-3 droppable"
-         ref={provided.innerRef}
-         {...provided.droppableProps}
-        >
-         {fields.map((_, index) => {
-          return (
-           <>
-            {action === "view" ? (
-             <Tag
-              name={getValues(`tags.${index}.name`)}
-              color={getValues(`tags.${index}.color`)}
-             />
-            ) : (
-             <EditTag
-              index={index}
-              register={register}
-              remove={remove}
-              getValues={getValues}
-              setValue={setValue}
-              onTagChange={onTagChange}
-             />
-            )}
-           </>
-          );
-         })}
-         {provided.placeholder}
-        </div>
-       )}
-      </Droppable>
-     </DragDropContext>
+     <DndContext
+      autoScroll={false}
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+     >
+      <SortableContext items={fields} strategy={horizontalListSortingStrategy}>
+       <div className="d-flex flex-wrap gap-3 droppable">
+        {fields.map((_, index) => {
+         return (
+          <>
+           {action === "view" ? (
+            <Tag
+             name={getValues(`tags.${index}.name`)}
+             color={getValues(`tags.${index}.color`)}
+            />
+           ) : (
+            <EditTag
+             name={index.toLocaleString()}
+             index={index}
+             register={register}
+             remove={remove}
+             getValues={getValues}
+             setValue={setValue}
+             onTagChange={onTagChange}
+            />
+           )}
+          </>
+         );
+        })}
+       </div>
+      </SortableContext>
+      <DragOverlay>
+       {activeId > -1 ? (
+        <EditTag
+         name={activeId.toLocaleString()}
+         index={activeId}
+         register={register}
+         remove={remove}
+         getValues={getValues}
+         setValue={setValue}
+         onTagChange={onTagChange}
+         style={{ opacity: "0.2" }}
+        />
+       ) : null}
+      </DragOverlay>
+     </DndContext>
+
      {action === "view" ? (
       <p className="edit-post__body">{getValues("body")}</p>
      ) : (

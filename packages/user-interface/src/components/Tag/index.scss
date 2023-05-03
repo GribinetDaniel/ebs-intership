@@ -38,10 +38,18 @@
   justify-content: center;
   cursor: pointer;
  }
+
+ &__draggable-icon {
+  opacity: 0.5;
+  position: absolute;
+  top: 13px;
+  left: -15px;
+ }
 }
 
 .draggable {
  top: auto !important;
  left: auto !important;
  width: auto !important;
+ margin-left: 15px;
 }
