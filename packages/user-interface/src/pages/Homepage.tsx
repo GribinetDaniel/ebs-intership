@@ -36,7 +36,10 @@ export function Homepage() {
       <NoFindPosts />
      ) : (
       <div className="home-page">
-       <div className="row justify-content-center" style={{ gap: "80px" }}>
+       <div
+        className="row justify-content-center"
+        style={{ gap: "50px", width: "100%" }}
+       >
         {filtredPosts?.map((post: Post) => (
          <PostCard {...post} />
         ))}

@@ -74,7 +74,11 @@ export function Account() {
      <Header />
      <div className="settings">
       <div className="settings__header">
-       <Button type="circle" onClick={() => navigate("/")}>
+       <Button
+        type="circle"
+        onClick={() => navigate("/")}
+        className="settings__button--back"
+       >
         <FontAwesomeIcon icon={faArrowLeft} size="xs" />
        </Button>
        Account Settings
@@ -154,18 +158,8 @@ export function Account() {
           />
          </div>
         </form>
-        <div style={{ textAlign: "right" }}>
-         <Button
-          type="primary"
-          style={{
-           width: "100px",
-           margin: "10px 0px",
-           position: "absolute",
-           bottom: "10px",
-           right: "400px",
-          }}
-          onClick={handleSubmit}
-         >
+        <div className="settings__button--save">
+         <Button type="primary" onClick={handleSubmit}>
           Save
          </Button>
         </div>

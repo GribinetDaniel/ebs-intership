@@ -75,6 +75,7 @@ export function EditTag({
      backgroundColor: getValues(`tags.${index}.color`),
      width: 7 + getValues(`tags.${index}.name`).length + "ch",
     }}
+    maxLength={15}
    />
    <div className="tag__delete-icon" onClick={() => remove(index)}>
     <FontAwesomeIcon icon={faX} size="xs" />

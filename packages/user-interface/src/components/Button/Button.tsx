@@ -6,6 +6,7 @@ interface ButtonProps {
  onClick?: (e: React.SyntheticEvent) => void;
  children: React.ReactNode;
  disabled?: boolean;
+ className?: string;
 }
 
 export function Button({
@@ -14,8 +15,9 @@ export function Button({
  style,
  children,
  disabled,
+ className,
 }: ButtonProps) {
- let className = "button";
+ className += " button";
  if (type) className += ` button--${type}`;
  if (disabled)
   children = (

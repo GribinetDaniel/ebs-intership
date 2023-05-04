@@ -13,6 +13,7 @@ type InputFormProps = {
  type?: string;
  style?: any;
  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+ maxLength?: number;
 };
 
 export function InputForm({
@@ -24,6 +25,7 @@ export function InputForm({
  disabled,
  style,
  type,
+ maxLength,
  onChange,
 }: InputFormProps) {
  let className = "input";
@@ -37,6 +39,7 @@ export function InputForm({
     style={style}
     type={type}
     onChange={onChange}
+    maxLength={maxLength}
    />
    {error && <ErrorMessage error={errorMessage} />}
   </>

@@ -44,7 +44,11 @@ export function DeletePostModal({ onClose }: DeletePostModalProps) {
     <Button type="secondary" onClick={onClose}>
      Close
     </Button>
-    <Button type="primary" onClick={deletePost}>
+    <Button
+     type="primary"
+     onClick={deletePost}
+     disabled={deleteMutation.isLoading}
+    >
      Delete
     </Button>
    </ModalFooter>

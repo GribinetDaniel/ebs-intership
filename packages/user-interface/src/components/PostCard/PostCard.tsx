@@ -22,18 +22,23 @@ export function PostCard(props: Post) {
   e.stopPropagation();
  };
 
+ const modifedBody =
+  props.body.length > 200 ? props.body.substring(0, 200) + "..." : props.body;
+
  return (
   <>
    {data && (
     <div className="post-card" onClick={() => navigate(`/posts/${props.id}`)}>
-     {props.tags && (
-      <div className="d-flex gap-3 flex-wrap " style={{ width: "90%" }}>
-       {props.tags.map(el => (
-        <Tag name={el.name} color={el.color} />
-       ))}
-      </div>
-     )}
-     <div className="post-card__title">{props.title}</div>
+     <div className="post-card__title">
+      {props.tags && (
+       <div className="d-flex gap-3 flex-wrap " style={{ width: "90%" }}>
+        {props.tags.map(el => (
+         <Tag name={el.name} color={el.color} />
+        ))}
+       </div>
+      )}
+      {props.title}
+     </div>
      {(user?.permission === "admin" ||
       (pathname === "/own-posts" && user?.id === props.userId)) && (
       <FontAwesomeIcon
@@ -43,7 +48,7 @@ export function PostCard(props: Post) {
       />
      )}
      <hr className="post-card__line" />
-     <div className="post-card__body">{props.body}</div>
+     <div className="post-card__body">{modifedBody}</div>
      <div className="post-card__footer">
       <div>
        <div className="post-card__label">Author</div>

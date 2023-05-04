@@ -52,7 +52,7 @@ export function PostContent({
   formState: { errors },
  } = useForm<Post>({ defaultValues: post });
 
- const { fields, append, remove, swap } = useFieldArray({
+ const { fields, append, remove, move } = useFieldArray({
   control,
   name: "tags",
  });
@@ -81,7 +81,7 @@ export function PostContent({
   const { active, over } = event;
 
   if (active.id !== over.id) {
-   swap(active.id, over.id);
+   move(active.id, over.id);
   }
 
   setActiveId(-1);
@@ -107,6 +107,7 @@ export function PostContent({
         required
         error={errors.title}
         errorMessage="Title is required"
+        maxLength={42}
        />
       </>
      )}
@@ -178,7 +179,7 @@ export function PostContent({
      {action === "edit" && (
       <Button
        type="secondary"
-       style={{ width: "100px" }}
+       className="edit-post__button--secondary"
        onClick={() => setShowModal(true)}
       >
        Delete
@@ -189,7 +190,7 @@ export function PostContent({
        <Button
         type="primary"
         onClick={addTag}
-        style={{ margin: "0 20px 0 0", width: "100px", padding: "10px" }}
+        style={{ margin: "0 20px 10px 0", width: "100px", padding: "10px" }}
        >
         Add a tag
        </Button>

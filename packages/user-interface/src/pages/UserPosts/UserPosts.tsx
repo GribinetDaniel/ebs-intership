@@ -58,7 +58,7 @@ export function UserPosts() {
         <NoFindPosts />
        ) : (
         <div className="home-page">
-         <div className="row justify-content-center" style={{ gap: "80px" }}>
+         <div className="row justify-content-center" style={{ gap: "50px" }}>
           {filtredPosts.map((post: Post) => (
            <PostCard {...post} />
           ))}
