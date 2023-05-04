@@ -23,7 +23,7 @@ function createUsers(lastId: number) {
   email: faker.internet.email(),
   password: faker.internet.password(),
   permission: faker.helpers.arrayElement(["admin", "user"]),
-  adress: {
+  address: {
    street: faker.address.street(),
    suite:
     faker.helpers.arrayElement(["Suite ", "Apt "]) +
@@ -42,6 +42,7 @@ function createUsers(lastId: number) {
    catchPhrase: faker.company.catchPhrase(),
    bs: faker.company.bs(),
   },
+  userImage: "000",
  }));
  return users;
 }

@@ -1,4 +1,4 @@
-interface Adress {
+interface Address {
  street: string;
  suite: string;
  city: string;
@@ -25,7 +25,7 @@ export interface User {
  password: string;
  permission: string;
  confirmPassword?: string;
- adress: Adress;
+ address: Address;
  phone: string;
  website: string;
  company: Company;
