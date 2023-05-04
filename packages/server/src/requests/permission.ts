@@ -7,50 +7,13 @@ import { body, check, validationResult } from "express-validator";
 const secret = process.env.SECRET!;
 const router = express.Router();
 
-// router.use('/users', (req, res, next) => {
-//   let token = req.headers.authorization!;
-//   let decoded = jwt.verify(token, secret) as Token;
-//   if (decoded.permission == 'admin') next();
-//   else res.status(403).json({ message: 'Acces denied' });
-// });
-
-router.patch(
- "/users/:id",
- //  body("email")
- //   .isEmail()
- //   .custom(async (value, { req }) => {
- //    let users = (await mainAxios.get("/users")).data;
- //    let isUse = users.find(
- //     (elem: User) => elem.email === value && elem.id != req.body.id
- //    );
- //    if (isUse) throw new Error("Email already in use");
- //    else return true;
- //   }),
- //  body("username").custom(async (value, { req }) => {
- //   let users = (await mainAxios.get("/users")).data;
- //   let isUse = users.find(
- //    (elem: User) => elem.username === value && elem.id != req.body.id
- //   );
- //   if (isUse) throw new Error("Username already in use");
- //   else return true;
- //  }),
- // body('permission').custom((value) => {
- //   if (value !== 'user' && value !== 'admin')
- //     throw new Error('Must be user or admin');
- //   else return true;
- // }),
- //  check("permission", "Permission is required").notEmpty(),
- //  check("name", "Name is required").notEmpty(),
- //  check("username", "Username is required").notEmpty(),
- //  check("email", "Email is required").notEmpty(),
- async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-   return res.status(400).json({ errors: errors.array() });
-  }
-  next();
+router.patch("/users/:id", async (req, res, next) => {
+ const errors = validationResult(req);
+ if (!errors.isEmpty()) {
+  return res.status(400).json({ errors: errors.array() });
  }
-);
+ next();
+});
 
 router.post(
  "/users",

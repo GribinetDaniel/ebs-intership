@@ -33,16 +33,10 @@ export function EditTag({
  name,
  style,
 }: EditTagProps) {
- const {
-  attributes,
-  isDragging,
-  listeners,
-  setNodeRef,
-  transform,
-  transition,
- } = useSortable({
-  id: name,
- });
+ const { attributes, listeners, setNodeRef, transform, transition } =
+  useSortable({
+   id: name,
+  });
 
  const styles = {
   transform: CSS.Transform.toString(transform),

@@ -10,7 +10,6 @@ import { ErrorPage } from "../../components/ErrorPage/ErrorPage";
 import { PlusButton } from "../../components/PlusButton";
 import { useNavigate } from "react-router-dom";
 import { SearchField } from "../../components/Input";
-import "./index.scss";
 import { NoFindPosts, NoPostsPage } from "../../components/ErrorPage";
 
 export function UserPosts() {

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { PostContent } from "../../components/PostContent";
 import { defaultPost, Post } from "../../types";
 import { isAxiosError } from "axios";
-import { SubmitHandler } from "react-hook-form";
 
 export function EditPost() {
  const navigate = useNavigate();
