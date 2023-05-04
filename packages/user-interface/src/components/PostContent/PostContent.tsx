@@ -52,7 +52,7 @@ export function PostContent({
   formState: { errors },
  } = useForm<Post>({ defaultValues: post });
 
- const { fields, append, remove, swap } = useFieldArray({
+ const { fields, append, remove, move } = useFieldArray({
   control,
   name: "tags",
  });
@@ -81,7 +81,7 @@ export function PostContent({
   const { active, over } = event;
 
   if (active.id !== over.id) {
-   swap(active.id, over.id);
+   move(active.id, over.id);
   }
 
   setActiveId(-1);
@@ -107,6 +107,7 @@ export function PostContent({
         required
         error={errors.title}
         errorMessage="Title is required"
+        maxLength={42}
        />
       </>
      )}

@@ -13,14 +13,14 @@ interface DeleteUserModalProps {
 export function DeleteUserModal({ user, onClose }: DeleteUserModalProps) {
  const queryClient = useQueryClient();
 
- const deleteMutaion = useMutation({
+ const deleteMutation = useMutation({
   mutationFn: (userId: number) => {
    return mainAxios.delete(`/users/${userId}`);
   },
  });
 
  const deleteUser = () => {
-  deleteMutaion.mutate(user.id!, {
+  deleteMutation.mutate(user.id!, {
    onSuccess: () => {
     queryClient.refetchQueries("users");
     onClose();
@@ -43,7 +43,11 @@ export function DeleteUserModal({ user, onClose }: DeleteUserModalProps) {
     <Button type="secondary" onClick={onClose}>
      Close
     </Button>
-    <Button type="primary" onClick={deleteUser}>
+    <Button
+     type="primary"
+     onClick={deleteUser}
+     disabled={deleteMutation.isLoading}
+    >
      Delete
     </Button>
    </ModalFooter>
