@@ -37,8 +37,7 @@ export function Login() {
   setNewUser({ ...newUser, [event.target.name]: event.target.value });
  };
 
- async function handleSubmit(event: React.SyntheticEvent) {
-  event.preventDefault();
+ function handleSubmit() {
   loginMutation.mutate(newUser, {
    onSuccess(data) {
     localStorage.setItem("token", data.data.token);

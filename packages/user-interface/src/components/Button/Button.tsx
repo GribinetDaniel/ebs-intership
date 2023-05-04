@@ -1,11 +1,12 @@
 import React from "react";
 import "./index.scss";
 interface ButtonProps {
- type: string;
+ type?: string;
  style?: any;
  onClick?: (e: React.SyntheticEvent) => void;
  children: React.ReactNode;
  disabled?: boolean;
+ className?: string;
 }
 
 export function Button({
@@ -14,8 +15,9 @@ export function Button({
  style,
  children,
  disabled,
+ className,
 }: ButtonProps) {
- let className = "button";
+ className += " button";
  if (type) className += ` button--${type}`;
  if (disabled)
   children = (
@@ -28,6 +30,7 @@ export function Button({
   );
  return (
   <button
+   type="button"
    className={className}
    style={style}
    onClick={onClick}

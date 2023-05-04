@@ -1,9 +1,49 @@
 .error-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 
-  &__image {
-    height: 700px;
+ &__image {
+  height: 700px;
+ }
+}
+
+.user-posts {
+ height: 100vh;
+ width: 100vw;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.no-posts {
+ h1 {
+  color: gray;
+  font-weight: bold;
+  margin-bottom: 20px;
+ }
+
+ p {
+  font-size: 25px;
+  color: #909090;
+  font-weight: 500;
+  margin: 0;
+  line-height: 30px;
+ }
+
+ text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+ .no-posts {
+  p,
+  h2 {
+   font-size: 20px;
+   line-height: normal;
   }
+  img {
+   height: 80%;
+   width: 80%;
+  }
+ }
 }

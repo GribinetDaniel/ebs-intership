@@ -67,4 +67,61 @@
   gap: 70px;
   margin-top: 30px;
  }
+
+ &__button--save {
+  width: 100px;
+  margin: 10px 0px;
+  position: absolute;
+  bottom: 0;
+  right: 28%;
+ }
+}
+
+@media only screen and (max-width: 900px) {
+ .settings {
+  width: 100%;
+  margin: 0;
+
+  &__header {
+   display: block;
+   text-align: center;
+   padding-top: 20px;
+   width: 100%;
+  }
+
+  &__description {
+   display: none;
+  }
+  &__button--back {
+   display: none;
+  }
+
+  &__body {
+   display: block;
+   height: auto;
+  }
+
+  &__left {
+   width: 100%;
+   box-shadow: none;
+   border-bottom: 1px solid #c5c5c5;
+   border-radius: 0px;
+  }
+  &__right {
+   margin-left: 0;
+   width: 100%;
+   padding-bottom: 100px;
+  }
+
+  &__row {
+   display: block;
+   margin-top: 0px;
+   line-height: 30px;
+  }
+
+  &__button--save {
+   bottom: -620px;
+   right: 70px;
+  }
+ }
 }

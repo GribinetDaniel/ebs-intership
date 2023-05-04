@@ -52,8 +52,7 @@ export function Register() {
   });
  };
 
- async function handleSubmit(event: React.SyntheticEvent) {
-  event.preventDefault();
+ async function handleSubmit() {
   if (currentStep === 0) {
    if (newUser.password === newUser.confirmPassword) next();
    else {

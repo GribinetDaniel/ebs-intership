@@ -19,18 +19,18 @@ router.post("/login", async (req, res) => {
    return element;
  });
 
-  if (!usernameResult)
-    res
-      .status(400)
-      .json({ errors: [{ param: 'username', msg: 'Inccorect Username' }] });
-  else if (result == undefined)
-    res
-      .status(400)
-      .json({ errors: [{ param: 'password', msg: 'Incorrect password' }] });
-  else {
-    let token = createToken(result);
-    res.json({ token });
-  }
+ if (!usernameResult)
+  res
+   .status(400)
+   .json({ errors: [{ param: "username", msg: "Inccorect Username" }] });
+ else if (result == undefined)
+  res
+   .status(400)
+   .json({ errors: [{ param: "password", msg: "Incorrect password" }] });
+ else {
+  let token = createToken(result);
+  res.json({ token });
+ }
 });
 
 router.post(

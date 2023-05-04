@@ -1,1 +1,1 @@
-export * from './PostPage';
+export * from "./PostPage";

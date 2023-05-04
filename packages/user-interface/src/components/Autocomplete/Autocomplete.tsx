@@ -51,7 +51,7 @@ export function Autocomplete({
     onChange={handleInput}
     placeholder={placeholder}
    />
-   {isOpen && city && (
+   {isOpen && (
     <div className="suggestions">
      {regions.map(region => (
       <>
