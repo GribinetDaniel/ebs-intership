@@ -1,0 +1,37 @@
+.header {
+ background-color: #48403f;
+ width: 100vw;
+}
+
+.navbar {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-right: 100px;
+}
+
+.logo {
+ display: flex;
+ align-items: center;
+ font-weight: bold;
+ font-size: 40px;
+ color: #f2675a;
+ cursor: default;
+ user-select: none;
+}
+
+.list {
+ display: flex;
+ gap: 80px;
+}
+
+.list_item {
+ list-style-type: none;
+ font-size: 20px;
+ color: #fff;
+}
+
+.list_item:hover {
+ color: #f2675a;
+ cursor: pointer;
+}
