@@ -14,7 +14,7 @@ export default function Posts({ posts }: PostsProps) {
  const indexOfFirstPost = indexOfLastPost - postsPerPage;
  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
  const numberOfPages = Math.ceil(posts.length / postsPerPage);
- console.log(currentPosts);
+
  return (
   <div
    style={{
