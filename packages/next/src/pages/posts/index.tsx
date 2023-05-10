@@ -3,6 +3,7 @@ import { PostCard } from "@/components/PostCard";
 import React from "react";
 import { Post } from "../../types";
 import Pagination from "@mui/material/Pagination";
+import Custom500 from "../500";
 
 interface PostsProps {
  posts: Array<Post>;
