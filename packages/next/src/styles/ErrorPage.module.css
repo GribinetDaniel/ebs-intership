@@ -1,0 +1,35 @@
+.error-page {
+ background-color: #fefefe;
+}
+
+.image {
+ display: flex;
+ justify-content: center;
+}
+
+.paragraph {
+ margin: 20px 0;
+ color: gray;
+ text-align: center;
+ font-size: 28px;
+}
+
+.button {
+ width: 150px;
+ margin: 20px 0;
+ padding: 0 20px;
+ height: 30px;
+ background-color: black;
+ color: #fff;
+ border-radius: 50px;
+ font-size: 18px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ transition: all 0.2s linear;
+}
+
+.button:hover {
+ outline-offset: 3px;
+ outline: 2px solid black;
+}

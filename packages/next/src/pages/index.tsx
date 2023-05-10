@@ -9,37 +9,40 @@ import {
  faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { Container } from "@/components/Container";
 
 export default function Home() {
  const router = useRouter();
 
  return (
   <div className={styles.homepage}>
-   <section className={styles.section__welcome}>
-    <div className={styles.section__welcome__left}>
-     <h2>Welcome to Mashabel!</h2>
-     <p>
-      a place where the passion for writing and creativity come together to
-      create interesting and inspiring blogs.{" "}
-     </p>
-     <button
-      className={styles.section__welcome__button}
-      onClick={() => router.push("/posts")}
-     >
-      Get Started
-      <FontAwesomeIcon icon={faArrowRight} />
-     </button>
-    </div>
-    <div className={styles.section__welcome__right}>
-     <Image
-      src="/images/2.png"
-      width={800}
-      height={600}
-      alt="Image"
-      quality={100}
-     />
-    </div>
-   </section>
+   <Container>
+    <section className={styles.section__welcome}>
+     <div className={styles.section__welcome__left}>
+      <h2>Welcome to Mashabel!</h2>
+      <p>
+       a place where the passion for writing and creativity come together to
+       create interesting and inspiring blogs.{" "}
+      </p>
+      <button
+       className={styles.section__welcome__button}
+       onClick={() => router.push("/posts")}
+      >
+       Get Started
+       <FontAwesomeIcon icon={faArrowRight} />
+      </button>
+     </div>
+     <div className={styles.section__welcome__right}>
+      <Image
+       src="/images/welcome.png"
+       width={750}
+       height={600}
+       alt="Image"
+       quality={100}
+      />
+     </div>
+    </section>
+   </Container>
    <section className={styles.section__facilities}>
     <div className={styles.section__facilities__description}>
      <h1>What you can find on our website</h1>

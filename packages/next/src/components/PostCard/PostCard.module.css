@@ -1,0 +1,33 @@
+.postCard {
+ position: relative;
+ margin-top: 40px;
+ border-radius: 50px;
+ width: 600px;
+ height: 400px;
+ cursor: default;
+ transition: all 0.4s ease;
+}
+
+.postCard:hover {
+ box-shadow: rgba(0, 0, 0, 0.25) 0px 45px;
+ box-shadow: rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.image {
+ width: 600px;
+ height: 400px;
+ border-radius: 50px;
+}
+
+.description {
+ position: absolute;
+ bottom: 0;
+ padding: 20px;
+ width: 100%;
+ height: 40%;
+ text-align: center;
+ background-color: rgba(255, 255, 255, 0.7);
+ text-overflow: hidden;
+ border-radius: 50px;
+ backdrop-filter: blur(20px);
+}
