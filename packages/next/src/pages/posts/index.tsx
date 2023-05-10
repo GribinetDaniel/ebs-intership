@@ -4,6 +4,7 @@ import React from "react";
 import { Post } from "../../types";
 import Pagination from "@mui/material/Pagination";
 import Custom500 from "../500";
+import { mainAxios } from "@/utils";
 
 interface PostsProps {
  posts: Array<Post>;
@@ -48,7 +49,6 @@ export default function Posts({ posts }: PostsProps) {
 }
 
 export async function getServerSideProps() {
- const res = await fetch("http://localhost:1234/posts");
- const data = await res.json();
- return { props: { posts: data } };
+ const res = (await mainAxios.get("/posts")).data;
+ return { props: { posts: res } };
 }

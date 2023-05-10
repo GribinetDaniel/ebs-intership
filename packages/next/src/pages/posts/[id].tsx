@@ -2,6 +2,7 @@ import React from "react";
 import { Post } from "@/types";
 import PostContent from "@/components/PostContent/PostContent";
 import Custom500 from "../500";
+import { mainAxios } from "@/utils";
 interface PostProps {
  post: Post;
 }
@@ -20,8 +21,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(params: any) {
- let url = "http://localhost:1234/posts/" + params.params.id;
- const res = await fetch(url);
- const post = await res.json();
- return { props: { post } };
+ const res = (await mainAxios.get(`/posts/${params.params.id}`)).data;
+ return { props: { post: res } };
 }
