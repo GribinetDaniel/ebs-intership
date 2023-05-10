@@ -1,3 +1,105 @@
-.main {
- background-color: orange;
+.homepage {
+ background-color: #fefefe;
+}
+.section__welcome {
+ margin-top: 50px;
+ display: flex;
+ height: 600px;
+}
+
+.section__welcome__left {
+ display: flex;
+ flex-direction: column;
+ width: 50%;
+ justify-content: center;
+ gap: 30px;
+}
+
+.section__welcome__left h2 {
+ font-size: 70px;
+ color: #f2675a;
+}
+
+.section__welcome__left p {
+ font-size: 30px;
+ color: gray;
+}
+
+.section__welcome__right {
+ width: 50%;
+}
+
+.section__welcome__button {
+ width: 30%;
+ height: 50px;
+ padding: 0 20px;
+ font-size: 18px;
+ color: #fff;
+ background-color: rgba(38, 35, 35);
+ border-radius: 50px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ transition: all 0.2s linear;
+}
+
+.section__welcome__button:hover {
+ outline-offset: 3px;
+ outline: 2px solid black;
+}
+.section__facilities {
+ position: relative;
+ margin-bottom: 30px;
+}
+
+.section__facilities h1 {
+ padding-top: 20px;
+ font-size: 35px;
+ text-align: center;
+ color: #f2675a;
+}
+
+.section__cards {
+ display: flex;
+ justify-content: space-around;
+}
+
+.section__card {
+ margin-top: 70px;
+ height: 350px;
+ width: 300px;
+ background-color: rgba(38, 35, 35);
+ border-radius: 30px;
+ transition: all 0.4s ease;
+ cursor: default;
+}
+
+.section__card:hover {
+ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.section__cardTitle {
+ color: #fff;
+ text-align: center;
+ padding-top: 20px;
+ font-size: 27px;
+}
+
+.section__cardDescription {
+ color: #f5f5f5;
+ padding: 50px 20px 0;
+ font-size: 18px;
+}
+
+.section__cardShape {
+ background-color: rgba(225, 215, 215, 0.7);
+ width: 30%;
+ margin-left: 35%;
+ margin-top: 20px;
+ height: 20%;
+ border-radius: 10px 35px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }

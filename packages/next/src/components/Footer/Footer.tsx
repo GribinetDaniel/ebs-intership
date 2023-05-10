@@ -22,7 +22,7 @@ export function Footer() {
        </li>
        <li className={styles.list_item}>
         <span>Tel: </span>
-        <span>+373014562</span>
+        <span>+37368014562</span>
        </li>
        <li className={styles.list_item}>
         <span>Address:</span>
