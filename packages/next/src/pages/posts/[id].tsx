@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function a() {
+export default function Post() {
  return <h1>A</h1>;
 }
