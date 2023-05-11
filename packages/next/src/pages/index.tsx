@@ -1,6 +1,5 @@
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
  faComments,
@@ -8,12 +7,10 @@ import {
  faUsers,
  faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Container } from "@/components/Container";
+import Link from "next/link";
 
 export default function Home() {
- const router = useRouter();
-
  return (
   <div className={styles.homepage}>
    <Container>
@@ -24,13 +21,12 @@ export default function Home() {
        a place where the passion for writing and creativity come together to
        create interesting and inspiring blogs.{" "}
       </p>
-      <button
-       className={styles.section__welcome__button}
-       onClick={() => router.push("/posts")}
-      >
-       Get Started
-       <FontAwesomeIcon icon={faArrowRight} />
-      </button>
+      <Link href="/posts">
+       <button className={styles.section__welcome__button}>
+        Get Started
+        <FontAwesomeIcon icon={faArrowRight} />
+       </button>
+      </Link>
      </div>
      <div className={styles.section__welcome__right}>
       <Image
