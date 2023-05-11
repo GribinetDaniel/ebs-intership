@@ -1,16 +1,25 @@
-import { Container } from "@/components/Container";
+"use client";
 import { PostCard } from "@/components/PostCard";
 import React from "react";
 import { Post } from "../../types";
 import Pagination from "@mui/material/Pagination";
-import Custom500 from "../500";
 import { mainAxios } from "@/utils";
+import Loading from "@/components/Loading/Loading";
 
-interface PostsProps {
- posts: Array<Post>;
-}
-export default function Posts({ posts }: PostsProps) {
+export default function Posts() {
  const [currentPage, setCurrentPage] = React.useState(1);
+ const [posts, setPosts] = React.useState<Array<Post>>();
+
+ React.useEffect(() => {
+  async function fetchData() {
+   const res = await mainAxios.get("/posts");
+   const data = await res.data;
+   setPosts(data);
+  }
+  fetchData();
+ }, []);
+
+ if (!posts) return <Loading />;
  const postsPerPage = 10;
  const indexOfLastPost = currentPage * postsPerPage;
  const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -46,9 +55,4 @@ export default function Posts({ posts }: PostsProps) {
    </div>
   </div>
  );
-}
-
-export async function getServerSideProps() {
- const res = (await mainAxios.get("/posts")).data;
- return { props: { posts: res } };
 }

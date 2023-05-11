@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+
 import Image from "next/image";
-export default function Custom500() {
+
+export default function GlobalError() {
  return (
   <div
    style={{ display: "flex", justifyContent: "center", alignItems: "center" }}

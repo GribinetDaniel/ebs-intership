@@ -1,13 +1,13 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import styles from "../styles/ErrorPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function Custom404() {
- const router = useRouter();
-
+export default function NotFound() {
  return (
   <>
    <div className={styles.image}>
@@ -18,10 +18,12 @@ export default function Custom404() {
     We suggest you back to home
    </p>
    <div style={{ display: "flex", justifyContent: "center" }}>
-    <button className={styles.button} onClick={() => router.push("/")}>
-     Home
-     <FontAwesomeIcon icon={faArrowRight} />
-    </button>
+    <Link href="/">
+     <button className={styles.button}>
+      Home
+      <FontAwesomeIcon icon={faArrowRight} />
+     </button>
+    </Link>
    </div>
   </>
  );

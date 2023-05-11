@@ -24,7 +24,10 @@ export default function Home() {
       <Link href="/posts">
        <button className={styles.section__welcome__button}>
         Get Started
-        <FontAwesomeIcon icon={faArrowRight} />
+        <FontAwesomeIcon
+         icon={faArrowRight}
+         style={{ width: "30px", height: "30px" }}
+        />
        </button>
       </Link>
      </div>
@@ -46,7 +49,10 @@ export default function Home() {
     <div className={styles.section__cards}>
      <div className={styles.section__card}>
       <div className={styles.section__cardShape}>
-       <FontAwesomeIcon icon={faComments} size="xl" />
+       <FontAwesomeIcon
+        icon={faComments}
+        style={{ width: "50px", height: "50px" }}
+       />
       </div>
       <h2 className={styles.section__cardTitle}>Variety of blogs</h2>
       <p className={styles.section__cardDescription}>
@@ -57,7 +63,10 @@ export default function Home() {
      </div>
      <div className={styles.section__card}>
       <div className={styles.section__cardShape}>
-       <FontAwesomeIcon icon={faUsers} size="xl" />
+       <FontAwesomeIcon
+        icon={faUsers}
+        style={{ width: "50px", height: "50px" }}
+       />
       </div>
       <h2 className={styles.section__cardTitle}>Friendly community</h2>
       <p className={styles.section__cardDescription}>
@@ -67,7 +76,10 @@ export default function Home() {
      </div>
      <div className={styles.section__card}>
       <div className={styles.section__cardShape}>
-       <FontAwesomeIcon icon={faLightbulb} size="xl" />
+       <FontAwesomeIcon
+        icon={faLightbulb}
+        style={{ width: "45px", height: "45px" }}
+       />
       </div>
       <h2 className={styles.section__cardTitle}>Inspiration place</h2>
       <p className={styles.section__cardDescription}>
