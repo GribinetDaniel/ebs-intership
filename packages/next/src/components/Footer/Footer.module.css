@@ -1,0 +1,52 @@
+.footer {
+ position: absolute;
+ width: 100%;
+ background-color: #48403f;
+}
+
+.items {
+ height: 100%;
+ display: flex;
+}
+
+.right {
+ height: 100%;
+ width: 50%;
+ margin-top: 20px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+}
+
+.right h2 {
+ color: #fff;
+ font-size: 30px;
+}
+
+.left {
+ height: 100%;
+ width: 50%;
+}
+
+.logo {
+ display: flex;
+ align-items: center;
+ font-weight: bold;
+ font-size: 40px;
+ color: #f2675a;
+ cursor: default;
+ user-select: none;
+}
+
+.list {
+ width: 40%;
+}
+.list_item {
+ list-style-type: none;
+ margin-top: 20px;
+ display: flex;
+ justify-content: space-between;
+ color: #c5c5c5;
+ font-size: 17px;
+}

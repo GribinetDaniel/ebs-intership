@@ -1,7 +1,7 @@
 export interface Post {
- userId: number;
  id: number;
+ userId: number;
  title: string;
  body: string;
- imageURL?: string;
+ imageURL: string;
 }
